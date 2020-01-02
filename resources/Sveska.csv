@@ -1,0 +1,580 @@
+#simptom;ime;godina;pol;rasa;ver
+retinal_detachment;blidness;0;musko;black;0.009
+retinal_detachment;blidness;0;zensko;black;0.005
+retinal_detachment;blidness;0;musko;hispanic;0.01
+retinal_detachment;blidness;0;zensko;hispanic;0.006
+retinal_detachment;blidness;0;musko;white;0.014
+retinal_detachment;blidness;0;zensko;white;0.008
+retinal_detachment;blidness;0;musko;other;0.013
+retinal_detachment;blidness;0;zensko;other;0.007
+retinal_detachment;blidness;1-4;musko;black;0
+retinal_detachment;blidness;1-4;zensko;black;0
+retinal_detachment;blidness;1-4;musko;hispanic;0
+retinal_detachment;blidness;1-4;zensko;hispanic;0
+retinal_detachment;blidness;1-4;musko;white;0
+retinal_detachment;blidness;1-4;zensko;white;0
+retinal_detachment;blidness;1-4;musko;other;0
+retinal_detachment;blidness;1-4;zensko;other;0
+retinal_detachment;blidness;5-14;musko;black;0.018
+retinal_detachment;blidness;5-14;zensko;black;0.009
+retinal_detachment;blidness;5-14;musko;hispanic;0.02
+retinal_detachment;blidness;5-14;zensko;hispanic;0.011
+retinal_detachment;blidness;5-14;musko;white;0.028
+retinal_detachment;blidness;5-14;zensko;white;0.015
+retinal_detachment;blidness;5-14;musko;other;0.026
+retinal_detachment;blidness;5-14;zensko;other;0.014
+retinal_detachment;blidness;15-29;musko;black;0.014
+retinal_detachment;blidness;15-29;zensko;black;0.007
+retinal_detachment;blidness;15-29;musko;hispanic;0.016
+retinal_detachment;blidness;15-29;zensko;hispanic;0.008
+retinal_detachment;blidness;15-29;musko;white;0.021
+retinal_detachment;blidness;15-29;zensko;white;0.011
+retinal_detachment;blidness;15-29;musko;other;0.02
+retinal_detachment;blidness;15-29;zensko;other;0.01
+retinal_detachment;blidness;30-44;musko;black;0.032
+retinal_detachment;blidness;30-44;zensko;black;0.017
+retinal_detachment;blidness;30-44;musko;hispanic;0.036
+retinal_detachment;blidness;30-44;zensko;hispanic;0.02
+retinal_detachment;blidness;30-44;musko;white;0.02
+retinal_detachment;blidness;30-44;zensko;white;0.027
+retinal_detachment;blidness;30-44;musko;other;0.045
+retinal_detachment;blidness;30-44;zensko;other;0.024
+retinal_detachment;blidness;45-59;musko;black;0.073
+retinal_detachment;blidness;45-59;zensko;black;0.04
+retinal_detachment;blidness;45-59;musko;hispanic;0.083
+retinal_detachment;blidness;45-59;zensko;hispanic;0.045
+retinal_detachment;blidness;45-59;musko;white;0.114
+retinal_detachment;blidness;45-59;zensko;white;0.061
+retinal_detachment;blidness;45-59;musko;other;0.104
+retinal_detachment;blidness;45-59;zensko;other;0.056
+retinal_detachment;blidness;60-74;musko;black;0.1
+retinal_detachment;blidness;60-74;zensko;black;0.05
+retinal_detachment;blidness;60-74;musko;hispanic;0.11
+retinal_detachment;blidness;60-74;zensko;hispanic;0.061
+retinal_detachment;blidness;60-74;musko;white;0.157
+retinal_detachment;blidness;60-74;zensko;white;0.085
+retinal_detachment;blidness;60-74;musko;other;0.143
+retinal_detachment;blidness;60-74;zensko;other;0.077
+retinal_detachment;blidness;75+;musko;black;0.055
+retinal_detachment;blidness;75+;zensko;black;0.03
+retinal_detachment;blidness;75+;musko;hispanic;0.062
+retinal_detachment;blidness;75+;zensko;hispanic;0.034
+retinal_detachment;blidness;75+;musko;white;0.086
+retinal_detachment;blidness;75+;zensko;white;0.046
+retinal_detachment;blidness;75+;musko;other;0.078
+retinal_detachment;blidness;75+;zensko;other;0.042
+optic_neuritis;blidness;0;musko;black;0
+optic_neuritis;blidness;0;zensko;black;0
+optic_neuritis;blidness;0;musko;hispanic;0
+optic_neuritis;blidness;0;zensko;hispanic;0
+optic_neuritis;blidness;0;musko;white;0
+optic_neuritis;blidness;0;zensko;white;0
+optic_neuritis;blidness;0;musko;other;0
+optic_neuritis;blidness;0;zensko;other;0
+optic_neuritis;blidness;1-4;musko;black;0
+optic_neuritis;blidness;1-4;zensko;black;0
+optic_neuritis;blidness;1-4;musko;hispanic;0
+optic_neuritis;blidness;1-4;zensko;hispanic;0
+optic_neuritis;blidness;1-4;musko;white;0
+optic_neuritis;blidness;1-4;zensko;white;0
+optic_neuritis;blidness;1-4;musko;other;0
+optic_neuritis;blidness;1-4;zensko;other;0
+optic_neuritis;blidness;5-14;musko;black;0.018
+optic_neuritis;blidness;5-14;zensko;black;0.027
+optic_neuritis;blidness;5-14;musko;hispanic;0.027
+optic_neuritis;blidness;5-14;zensko;hispanic;0.04
+optic_neuritis;blidness;5-14;musko;white;0.022
+optic_neuritis;blidness;5-14;zensko;white;0.034
+optic_neuritis;blidness;5-14;musko;other;0.025
+optic_neuritis;blidness;5-14;zensko;other;0.037
+optic_neuritis;blidness;15-29;musko;black;0.023
+optic_neuritis;blidness;15-29;zensko;black;0.038
+optic_neuritis;blidness;15-29;musko;hispanic;0.038
+optic_neuritis;blidness;15-29;zensko;hispanic;0.058
+optic_neuritis;blidness;15-29;musko;white;0.032
+optic_neuritis;blidness;15-29;zensko;white;0.048
+optic_neuritis;blidness;15-29;musko;other;0.035
+optic_neuritis;blidness;15-29;zensko;other;0.053
+optic_neuritis;blidness;30-44;musko;black;0.049
+optic_neuritis;blidness;30-44;zensko;black;0.073
+optic_neuritis;blidness;30-44;musko;hispanic;0.073
+optic_neuritis;blidness;30-44;zensko;hispanic;0.11
+optic_neuritis;blidness;30-44;musko;white;0.06
+optic_neuritis;blidness;30-44;zensko;white;0.091
+optic_neuritis;blidness;30-44;musko;other;0.067
+optic_neuritis;blidness;30-44;zensko;other;0.1
+optic_neuritis;blidness;45-59;musko;black;0.03
+optic_neuritis;blidness;45-59;zensko;black;0.05
+optic_neuritis;blidness;45-59;musko;hispanic;0.046
+optic_neuritis;blidness;45-59;zensko;hispanic;0.07
+optic_neuritis;blidness;45-59;musko;white;0.04
+optic_neuritis;blidness;45-59;zensko;white;0.058
+optic_neuritis;blidness;45-59;musko;other;0.042
+optic_neuritis;blidness;45-59;zensko;other;0.063
+optic_neuritis;blidness;60-74;musko;black;0.026
+optic_neuritis;blidness;60-74;zensko;black;0.038
+optic_neuritis;blidness;60-74;musko;hispanic;0.038
+optic_neuritis;blidness;60-74;zensko;hispanic;0.058
+optic_neuritis;blidness;60-74;musko;white;0.032
+optic_neuritis;blidness;60-74;zensko;white;0.048
+optic_neuritis;blidness;60-74;musko;other;0.035
+optic_neuritis;blidness;60-74;zensko;other;0.053
+optic_neuritis;blidness;75;musko;black;0
+optic_neuritis;blidness;75;zensko;black;0
+optic_neuritis;blidness;75;musko;hispanic;0
+optic_neuritis;blidness;75;zensko;hispanic;0
+optic_neuritis;blidness;75;musko;white;0
+optic_neuritis;blidness;75;zensko;white;0
+optic_neuritis;blidness;75;musko;other;0
+optic_neuritis;blidness;75;zensko;other;0
+macular_degeneration;blidness;0;musko;black;0
+macular_degeneration;blidness;0;zensko;black;0
+macular_degeneration;blidness;0;musko;hispanic;0
+macular_degeneration;blidness;0;zensko;hispanic;0
+macular_degeneration;blidness;0;musko;white;0
+macular_degeneration;blidness;0;zensko;white;0
+macular_degeneration;blidness;0;musko;other;0
+macular_degeneration;blidness;0;zensko;other;0
+macular_degeneration;blidness;1-4;musko;black;0.003
+macular_degeneration;blidness;1-4;zensko;black;0.003
+macular_degeneration;blidness;1-4;musko;hispanic;0.004
+macular_degeneration;blidness;1-4;zensko;hispanic;0.005
+macular_degeneration;blidness;1-4;musko;white;0.006
+macular_degeneration;blidness;1-4;zensko;white;0.008
+macular_degeneration;blidness;1-4;musko;other;0.004
+macular_degeneration;blidness;1-4;zensko;other;0.005
+macular_degeneration;blidness;5-14;musko;black;0
+macular_degeneration;blidness;5-14;zensko;black;0
+macular_degeneration;blidness;5-14;musko;hispanic;0
+macular_degeneration;blidness;5-14;zensko;hispanic;0
+macular_degeneration;blidness;5-14;musko;white;0
+macular_degeneration;blidness;5-14;zensko;white;0
+macular_degeneration;blidness;5-14;musko;other;0
+macular_degeneration;blidness;5-14;zensko;other;0
+macular_degeneration;blidness;15-29;musko;black;0.003
+macular_degeneration;blidness;15-29;zensko;black;0.003
+macular_degeneration;blidness;15-29;musko;hispanic;0.004
+macular_degeneration;blidness;15-29;zensko;hispanic;0.005
+macular_degeneration;blidness;15-29;musko;white;0.006
+macular_degeneration;blidness;15-29;zensko;white;0.008
+macular_degeneration;blidness;15-29;musko;other;0.004
+macular_degeneration;blidness;15-29;zensko;other;0.005
+macular_degeneration;blidness;30-44;musko;black;0.005
+macular_degeneration;blidness;30-44;zensko;black;0.007
+macular_degeneration;blidness;30-44;musko;hispanic;0.009
+macular_degeneration;blidness;30-44;zensko;hispanic;0.01
+macular_degeneration;blidness;30-44;musko;white;0.013
+macular_degeneration;blidness;30-44;zensko;white;0.016
+macular_degeneration;blidness;30-44;musko;other;0.009
+macular_degeneration;blidness;30-44;zensko;other;0.01
+macular_degeneration;blidness;45-59;musko;black;0.016
+macular_degeneration;blidness;45-59;zensko;black;0.02
+macular_degeneration;blidness;45-59;musko;hispanic;0.026
+macular_degeneration;blidness;45-59;zensko;hispanic;0.032
+macular_degeneration;blidness;45-59;musko;white;0.039
+macular_degeneration;blidness;45-59;zensko;white;0.047
+macular_degeneration;blidness;45-59;musko;other;0.026
+macular_degeneration;blidness;45-59;zensko;other;0.032
+macular_degeneration;blidness;60-74;musko;black;0.057
+macular_degeneration;blidness;60-74;zensko;black;0.07
+macular_degeneration;blidness;60-74;musko;hispanic;0.09
+macular_degeneration;blidness;60-74;zensko;hispanic;0.11
+macular_degeneration;blidness;60-74;musko;white;0.136
+macular_degeneration;blidness;60-74;zensko;white;0.166
+macular_degeneration;blidness;60-74;musko;other;0.09
+macular_degeneration;blidness;60-74;zensko;other;0.11
+macular_degeneration;blidness;75;musko;black;0.146
+macular_degeneration;blidness;75;zensko;black;0.178
+macular_degeneration;blidness;75;musko;hispanic;0.233
+macular_degeneration;blidness;75;zensko;hispanic;0.285
+macular_degeneration;blidness;75;musko;white;0.35
+macular_degeneration;blidness;75;zensko;white;0.427
+macular_degeneration;blidness;75;musko;other;0.233
+macular_degeneration;blidness;75;zensko;other;0.285
+cataract;blidness;0;musko;black;0
+cataract;blidness;0;zensko;black;0
+cataract;blidness;0;musko;hispanic;0
+cataract;blidness;0;zensko;hispanic;0
+cataract;blidness;0;musko;white;0
+cataract;blidness;0;zensko;white;0
+cataract;blidness;0;musko;other;0
+cataract;blidness;0;zensko;other;0
+cataract;blidness;1-4;musko;black;0
+cataract;blidness;1-4;zensko;black;0
+cataract;blidness;1-4;musko;hispanic;0
+cataract;blidness;1-4;zensko;hispanic;0
+cataract;blidness;1-4;musko;white;0
+cataract;blidness;1-4;zensko;white;0
+cataract;blidness;1-4;musko;other;0
+cataract;blidness;1-4;zensko;other;0
+cataract;blidness;5-14;musko;black;0.011
+cataract;blidness;5-14;zensko;black;0.011
+cataract;blidness;5-14;musko;hispanic;0.007
+cataract;blidness;5-14;zensko;hispanic;0.007
+cataract;blidness;5-14;musko;white;0.013
+cataract;blidness;5-14;zensko;white;0.013
+cataract;blidness;5-14;musko;other;0.014
+cataract;blidness;5-14;zensko;other;0.014
+cataract;blidness;15-29;musko;black;0
+cataract;blidness;15-29;zensko;black;0
+cataract;blidness;15-29;musko;hispanic;0
+cataract;blidness;15-29;zensko;hispanic;0
+cataract;blidness;15-29;musko;white;0
+cataract;blidness;15-29;zensko;white;0
+cataract;blidness;15-29;musko;other;0
+cataract;blidness;15-29;zensko;other;0
+cataract;blidness;30-44;musko;black;0.011
+cataract;blidness;30-44;zensko;black;0.011
+cataract;blidness;30-44;musko;hispanic;0.007
+cataract;blidness;30-44;zensko;hispanic;0.007
+cataract;blidness;30-44;musko;white;0.013
+cataract;blidness;30-44;zensko;white;0.013
+cataract;blidness;30-44;musko;other;0.014
+cataract;blidness;30-44;zensko;other;0.014
+cataract;blidness;45-59;musko;black;0.086
+cataract;blidness;45-59;zensko;black;0.086
+cataract;blidness;45-59;musko;hispanic;0.057
+cataract;blidness;45-59;zensko;hispanic;0.057
+cataract;blidness;45-59;musko;white;0.106
+cataract;blidness;45-59;zensko;white;0.106
+cataract;blidness;45-59;musko;other;0.115
+cataract;blidness;45-59;zensko;other;0.115
+cataract;blidness;60-74;musko;black;0.356
+cataract;blidness;60-74;zensko;black;0.356
+cataract;blidness;60-74;musko;hispanic;0.238
+cataract;blidness;60-74;zensko;hispanic;0.238
+cataract;blidness;60-74;musko;white;0.436
+cataract;blidness;60-74;zensko;white;0.436
+cataract;blidness;60-74;musko;other;0.475
+cataract;blidness;60-74;zensko;other;0.475
+cataract;blidness;75;musko;black;0.389
+cataract;blidness;75;zensko;black;0.289
+cataract;blidness;75;musko;hispanic;0.26
+cataract;blidness;75;zensko;hispanic;0.26
+cataract;blidness;75;musko;white;0.475
+cataract;blidness;75;zensko;white;0.475
+cataract;blidness;75;musko;other;0.518
+cataract;blidness;75;zensko;other;0.518
+chronic_glaucoma;blidness;0;musko;black;0.012
+chronic_glaucoma;blidness;0;zensko;black;0.012
+chronic_glaucoma;blidness;0;musko;hispanic;0.006
+chronic_glaucoma;blidness;0;zensko;hispanic;0.006
+chronic_glaucoma;blidness;0;musko;white;0.007
+chronic_glaucoma;blidness;0;zensko;white;0.007
+chronic_glaucoma;blidness;0;musko;other;0.011
+chronic_glaucoma;blidness;0;zensko;other;0.011
+chronic_glaucoma;blidness;1-4;musko;black;0
+chronic_glaucoma;blidness;1-4;zensko;black;0
+chronic_glaucoma;blidness;1-4;musko;hispanic;0
+chronic_glaucoma;blidness;1-4;zensko;hispanic;0
+chronic_glaucoma;blidness;1-4;musko;white;0
+chronic_glaucoma;blidness;1-4;zensko;white;0
+chronic_glaucoma;blidness;1-4;musko;other;0
+chronic_glaucoma;blidness;1-4;zensko;other;0
+chronic_glaucoma;blidness;5-14;musko;black;0.012
+chronic_glaucoma;blidness;5-14;zensko;black;0.012
+chronic_glaucoma;blidness;5-14;musko;hispanic;0.006
+chronic_glaucoma;blidness;5-14;zensko;hispanic;0.006
+chronic_glaucoma;blidness;5-14;musko;white;0.007
+chronic_glaucoma;blidness;5-14;zensko;white;0.007
+chronic_glaucoma;blidness;5-14;musko;other;0.011
+chronic_glaucoma;blidness;5-14;zensko;other;0.011
+chronic_glaucoma;blidness;15-29;musko;black;0.012
+chronic_glaucoma;blidness;15-29;zensko;black;0.012
+chronic_glaucoma;blidness;15-29;musko;hispanic;0.006
+chronic_glaucoma;blidness;15-29;zensko;hispanic;0.006
+chronic_glaucoma;blidness;15-29;musko;white;0.007
+chronic_glaucoma;blidness;15-29;zensko;white;0.007
+chronic_glaucoma;blidness;15-29;musko;other;0.011
+chronic_glaucoma;blidness;15-29;zensko;other;0.011
+chronic_glaucoma;blidness;30-44;musko;black;0.024
+chronic_glaucoma;blidness;30-44;zensko;black;0.024
+chronic_glaucoma;blidness;30-44;musko;hispanic;0.011
+chronic_glaucoma;blidness;30-44;zensko;hispanic;0.011
+chronic_glaucoma;blidness;30-44;musko;white;0.014
+chronic_glaucoma;blidness;30-44;zensko;white;0.014
+chronic_glaucoma;blidness;30-44;musko;other;0.022
+chronic_glaucoma;blidness;30-44;zensko;other;0.022
+chronic_glaucoma;blidness;45-59;musko;black;0.144
+chronic_glaucoma;blidness;45-59;zensko;black;0.144
+chronic_glaucoma;blidness;45-59;musko;hispanic;0.067
+chronic_glaucoma;blidness;45-59;zensko;hispanic;0.067
+chronic_glaucoma;blidness;45-59;musko;white;0.086
+chronic_glaucoma;blidness;45-59;zensko;white;0.086
+chronic_glaucoma;blidness;45-59;musko;other;0.134
+chronic_glaucoma;blidness;45-59;zensko;other;0.134
+chronic_glaucoma;blidness;60-74;musko;black;0.312
+chronic_glaucoma;blidness;60-74;zensko;black;0.312
+chronic_glaucoma;blidness;60-74;musko;hispanic;0.146
+chronic_glaucoma;blidness;60-74;zensko;hispanic;0.146
+chronic_glaucoma;blidness;60-74;musko;white;0.187
+chronic_glaucoma;blidness;60-74;zensko;white;0.187
+chronic_glaucoma;blidness;60-74;musko;other;0.291
+chronic_glaucoma;blidness;60-74;zensko;other;0.291
+chronic_glaucoma;blidness;75;musko;black;0.396
+chronic_glaucoma;blidness;75;zensko;black;0.396
+chronic_glaucoma;blidness;75;musko;hispanic;0.185
+chronic_glaucoma;blidness;75;zensko;hispanic;0.185
+chronic_glaucoma;blidness;75;musko;white;0.238
+chronic_glaucoma;blidness;75;zensko;white;0.238
+chronic_glaucoma;blidness;75;musko;other;0.37
+chronic_glaucoma;blidness;75;zensko;other;0.37
+cataract;double vision;0;musko;black;0
+cataract;double vision;0;zensko;black;0
+cataract;double vision;0;musko;hispanic;0
+cataract;double vision;0;zensko;hispanic;0
+cataract;double vision;0;musko;white;0
+cataract;double vision;0;zensko;white;0
+cataract;double vision;0;musko;other;0
+cataract;double vision;0;zensko;other;0
+cataract;double vision;1-4;musko;black;0
+cataract;double vision;1-4;zensko;black;0
+cataract;double vision;1-4;musko;hispanic;0
+cataract;double vision;1-4;zensko;hispanic;0
+cataract;double vision;1-4;musko;white;0
+cataract;double vision;1-4;zensko;white;0
+cataract;double vision;1-4;musko;other;0
+cataract;double vision;1-4;zensko;other;0
+cataract;double vision;5-14;musko;black;0.009
+cataract;double vision;5-14;zensko;black;0.009
+cataract;double vision;5-14;musko;hispanic;0.006
+cataract;double vision;5-14;zensko;hispanic;0.006
+cataract;double vision;5-14;musko;white;0.011
+cataract;double vision;5-14;zensko;white;0.011
+cataract;double vision;5-14;musko;other;0.012
+cataract;double vision;5-14;zensko;other;0.012
+cataract;double vision;30-44;musko;black;0.009
+cataract;double vision;30-44;zensko;black;0.009
+cataract;double vision;30-44;musko;hispanic;0.006
+cataract;double vision;30-44;zensko;hispanic;0.006
+cataract;double vision;30-44;musko;white;0.011
+cataract;double vision;30-44;zensko;white;0.011
+cataract;double vision;30-44;musko;other;0.012
+cataract;double vision;30-44;zensko;other;0.012
+cataract;double vision;15-29;musko;black;0
+cataract;double vision;15-29;zensko;black;0
+cataract;double vision;15-29;musko;hispanic;0
+cataract;double vision;15-29;zensko;hispanic;0
+cataract;double vision;15-29;musko;white;0
+cataract;double vision;15-29;zensko;white;0
+cataract;double vision;15-29;musko;other;0
+cataract;double vision;15-29;zensko;other;0
+cataract;double vision;45-59;musko;black;0.072
+cataract;double vision;45-59;zensko;black;0.072
+cataract;double vision;45-59;musko;hispanic;0.048
+cataract;double vision;45-59;zensko;hispanic;0.048
+cataract;double vision;45-59;musko;white;0.088
+cataract;double vision;45-59;zensko;white;0.088
+cataract;double vision;45-59;musko;other;0.096
+cataract;double vision;45-59;zensko;other;0.096
+cataract;double vision;60-74;musko;black;0.297
+cataract;double vision;60-74;zensko;black;0.297
+cataract;double vision;60-74;musko;hispanic;0.198
+cataract;double vision;60-74;zensko;hispanic;0.198
+cataract;double vision;60-74;musko;white;0.363
+cataract;double vision;60-74;zensko;white;0.363
+cataract;double vision;60-74;musko;other;0.396
+cataract;double vision;60-74;zensko;other;0.396
+cataract;double vision;75;musko;black;0.324
+cataract;double vision;75;zensko;black;0.324
+cataract;double vision;75;musko;hispanic;0.216
+cataract;double vision;75;zensko;hispanic;0.216
+cataract;double vision;75;musko;white;0.396
+cataract;double vision;75;zensko;white;0.396
+cataract;double vision;75;musko;other;0.432
+cataract;double vision;75;zensko;other;0.432
+eye_alignment_disorder;double vision;0;musko;black;0.148
+eye_alignment_disorder;double vision;0;zensko;black;0.098
+eye_alignment_disorder;double vision;0;musko;hispanic;0.222
+eye_alignment_disorder;double vision;0;zensko;hispanic;0.148
+eye_alignment_disorder;double vision;0;musko;white;0.166
+eye_alignment_disorder;double vision;0;zensko;white;0.111
+eye_alignment_disorder;double vision;0;musko;other;0.296
+eye_alignment_disorder;double vision;0;zensko;other;0.197
+eye_alignment_disorder;double vision;1-4;musko;black;0.343
+eye_alignment_disorder;double vision;1-4;zensko;black;0.228
+eye_alignment_disorder;double vision;1-4;musko;hispanic;0.514
+eye_alignment_disorder;double vision;1-4;zensko;hispanic;0.343
+eye_alignment_disorder;double vision;1-4;musko;white;0.265
+eye_alignment_disorder;double vision;1-4;zensko;white;0.257
+eye_alignment_disorder;double vision;1-4;musko;other;0.685
+eye_alignment_disorder;double vision;1-4;zensko;other;0.457
+eye_alignment_disorder;double vision;5-14;musko;black;0.269
+eye_alignment_disorder;double vision;5-14;zensko;black;0.18
+eye_alignment_disorder;double vision;5-14;musko;hispanic;0.403
+eye_alignment_disorder;double vision;5-14;zensko;hispanic;0.269
+eye_alignment_disorder;double vision;5-14;musko;white;0.302
+eye_alignment_disorder;double vision;5-14;zensko;white;0.202
+eye_alignment_disorder;double vision;5-14;musko;other;0.537
+eye_alignment_disorder;double vision;5-14;zensko;other;0.358
+eye_alignment_disorder;double vision;15-29;musko;black;0.027
+eye_alignment_disorder;double vision;15-29;zensko;black;0.018
+eye_alignment_disorder;double vision;15-29;musko;hispanic;0.04
+eye_alignment_disorder;double vision;15-29;zensko;hispanic;0.027
+eye_alignment_disorder;double vision;15-29;musko;white;0.03
+eye_alignment_disorder;double vision;15-29;zensko;white;0.02
+eye_alignment_disorder;double vision;15-29;musko;other;0.054
+eye_alignment_disorder;double vision;15-29;zensko;other;0.036
+eye_alignment_disorder;double vision;30-44;musko;black;0.013
+eye_alignment_disorder;double vision;30-44;zensko;black;0.009
+eye_alignment_disorder;double vision;30-44;musko;hispanic;0.02
+eye_alignment_disorder;double vision;30-44;zensko;hispanic;0.013
+eye_alignment_disorder;double vision;30-44;musko;white;0.015
+eye_alignment_disorder;double vision;30-44;zensko;white;0.01
+eye_alignment_disorder;double vision;30-44;musko;other;0.027
+eye_alignment_disorder;double vision;30-44;zensko;other;0.018
+eye_alignment_disorder;double vision;45-59;musko;black;0.02
+eye_alignment_disorder;double vision;45-59;zensko;black;0.013
+eye_alignment_disorder;double vision;45-59;musko;hispanic;0.03
+eye_alignment_disorder;double vision;45-59;zensko;hispanic;0.02
+eye_alignment_disorder;double vision;45-59;musko;white;0.023
+eye_alignment_disorder;double vision;45-59;zensko;white;0.015
+eye_alignment_disorder;double vision;45-59;musko;other;0.04
+eye_alignment_disorder;double vision;45-59;zensko;other;0.029
+eye_alignment_disorder;double vision;60-74;musko;black;0.034
+eye_alignment_disorder;double vision;60-74;zensko;black;0.022
+eye_alignment_disorder;double vision;60-74;musko;hispanic;0.05
+eye_alignment_disorder;double vision;60-74;zensko;hispanic;0.034
+eye_alignment_disorder;double vision;60-74;musko;white;0.038
+eye_alignment_disorder;double vision;60-74;zensko;white;0.025
+eye_alignment_disorder;double vision;60-74;musko;other;0.067
+eye_alignment_disorder;double vision;60-74;zensko;other;0.045
+eye_alignment_disorder;double vision;75;musko;black;0.02
+eye_alignment_disorder;double vision;75;zensko;black;0.013
+eye_alignment_disorder;double vision;75;musko;hispanic;0.03
+eye_alignment_disorder;double vision;75;zensko;hispanic;0.02
+eye_alignment_disorder;double vision;75;musko;white;0.023
+eye_alignment_disorder;double vision;75;zensko;white;0.015
+eye_alignment_disorder;double vision;75;musko;other;0.04
+eye_alignment_disorder;double vision;75;zensko;other;0.029
+macular_degeneration;double vision;0;musko;black;0
+macular_degeneration;double vision;0;zensko;black;0
+macular_degeneration;double vision;0;musko;hispanic;0
+macular_degeneration;double vision;0;zensko;hispanic;0
+macular_degeneration;double vision;0;musko;white;0
+macular_degeneration;double vision;0;zensko;white;0
+macular_degeneration;double vision;0;musko;other;0
+macular_degeneration;double vision;0;zensko;other;0
+macular_degeneration;double vision;1-4;musko;black;0.002
+macular_degeneration;double vision;1-4;zensko;black;0.002
+macular_degeneration;double vision;1-4;musko;hispanic;0.003
+macular_degeneration;double vision;1-4;zensko;hispanic;0.004
+macular_degeneration;double vision;1-4;musko;white;0.004
+macular_degeneration;double vision;1-4;zensko;white;0.005
+macular_degeneration;double vision;1-4;musko;other;0.003
+macular_degeneration;double vision;1-4;zensko;other;0.004
+macular_degeneration;double vision;5-14;musko;black;0
+macular_degeneration;double vision;5-14;zensko;black;0
+macular_degeneration;double vision;5-14;musko;hispanic;0
+macular_degeneration;double vision;5-14;zensko;hispanic;0
+macular_degeneration;double vision;5-14;musko;white;0
+macular_degeneration;double vision;5-14;zensko;white;0
+macular_degeneration;double vision;5-14;musko;other;0
+macular_degeneration;double vision;5-14;zensko;other;0
+macular_degeneration;double vision;15-29;musko;black;0.002
+macular_degeneration;double vision;15-29;zensko;black;0.002
+macular_degeneration;double vision;15-29;musko;hispanic;0.003
+macular_degeneration;double vision;15-29;zensko;hispanic;0.004
+macular_degeneration;double vision;15-29;musko;white;0.004
+macular_degeneration;double vision;15-29;zensko;white;0.005
+macular_degeneration;double vision;15-29;musko;other;0.003
+macular_degeneration;double vision;15-29;zensko;other;0.004
+macular_degeneration;double vision;30-44;musko;black;0.004
+macular_degeneration;double vision;30-44;zensko;black;0.004
+macular_degeneration;double vision;30-44;musko;hispanic;0.006
+macular_degeneration;double vision;30-44;zensko;hispanic;0.007
+macular_degeneration;double vision;30-44;musko;white;0.008
+macular_degeneration;double vision;30-44;zensko;white;0.01
+macular_degeneration;double vision;30-44;musko;other;0.006
+macular_degeneration;double vision;30-44;zensko;other;0.007
+macular_degeneration;double vision;45-59;musko;black;0.011
+macular_degeneration;double vision;45-59;zensko;black;0.013
+macular_degeneration;double vision;45-59;musko;hispanic;0.017
+macular_degeneration;double vision;45-59;zensko;hispanic;0.021
+macular_degeneration;double vision;45-59;musko;white;0.026
+macular_degeneration;double vision;45-59;zensko;white;0.032
+macular_degeneration;double vision;45-59;musko;other;0.017
+macular_degeneration;double vision;45-59;zensko;other;0.021
+macular_degeneration;double vision;60-74;musko;black;0.038
+macular_degeneration;double vision;60-74;zensko;black;0.046
+macular_degeneration;double vision;60-74;musko;hispanic;0.06
+macular_degeneration;double vision;60-74;zensko;hispanic;0.074
+macular_degeneration;double vision;60-74;musko;white;0.09
+macular_degeneration;double vision;60-74;zensko;white;0.11
+macular_degeneration;double vision;60-74;musko;other;0.06
+macular_degeneration;double vision;60-74;zensko;other;0.074
+macular_degeneration;double vision;75;musko;black;0.097
+macular_degeneration;double vision;75;zensko;black;0.119
+macular_degeneration;double vision;75;musko;hispanic;0.155
+macular_degeneration;double vision;75;zensko;hispanic;0.2
+macular_degeneration;double vision;75;musko;white;0.233
+macular_degeneration;double vision;75;zensko;white;0.285
+macular_degeneration;double vision;75;musko;other;0.155
+macular_degeneration;double vision;75;zensko;other;0.2
+chronic_glaucoma;double vision;0;musko;black;0.005
+chronic_glaucoma;double vision;0;zensko;black;0.005
+chronic_glaucoma;double vision;0;musko;hispanic;0.002
+chronic_glaucoma;double vision;0;zensko;hispanic;0.002
+chronic_glaucoma;double vision;0;musko;white;0.003
+chronic_glaucoma;double vision;0;zensko;white;0.003
+chronic_glaucoma;double vision;0;musko;other;0.004
+chronic_glaucoma;double vision;0;zensko;other;0.004
+chronic_glaucoma;double vision;1-4;musko;black;0
+chronic_glaucoma;double vision;1-4;zensko;black;0
+chronic_glaucoma;double vision;1-4;musko;hispanic;0
+chronic_glaucoma;double vision;1-4;zensko;hispanic;0
+chronic_glaucoma;double vision;1-4;musko;white;0
+chronic_glaucoma;double vision;1-4;zensko;white;0
+chronic_glaucoma;double vision;1-4;musko;other;0
+chronic_glaucoma;double vision;1-4;zensko;other;0
+chronic_glaucoma;double vision;5-14;musko;black;0.005
+chronic_glaucoma;double vision;5-14;zensko;black;0.005
+chronic_glaucoma;double vision;5-14;musko;hispanic;0.002
+chronic_glaucoma;double vision;5-14;zensko;hispanic;0.002
+chronic_glaucoma;double vision;5-14;musko;white;0.003
+chronic_glaucoma;double vision;5-14;zensko;white;0.003
+chronic_glaucoma;double vision;5-14;musko;other;0.004
+chronic_glaucoma;double vision;5-14;zensko;other;0.004
+chronic_glaucoma;double vision;15-29;musko;black;0.005
+chronic_glaucoma;double vision;15-29;zensko;black;0.005
+chronic_glaucoma;double vision;15-29;musko;hispanic;0.002
+chronic_glaucoma;double vision;15-29;zensko;hispanic;0.002
+chronic_glaucoma;double vision;15-29;musko;white;0.003
+chronic_glaucoma;double vision;15-29;zensko;white;0.003
+chronic_glaucoma;double vision;15-29;musko;other;0.004
+chronic_glaucoma;double vision;15-29;zensko;other;0.004
+chronic_glaucoma;double vision;30-44;musko;black;0.009
+chronic_glaucoma;double vision;30-44;zensko;black;0.009
+chronic_glaucoma;double vision;30-44;musko;hispanic;0.004
+chronic_glaucoma;double vision;30-44;zensko;hispanic;0.004
+chronic_glaucoma;double vision;30-44;musko;white;0.005
+chronic_glaucoma;double vision;30-44;zensko;white;0.005
+chronic_glaucoma;double vision;30-44;musko;other;0.008
+chronic_glaucoma;double vision;30-44;zensko;other;0.008
+chronic_glaucoma;double vision;45-59;musko;black;0.054
+chronic_glaucoma;double vision;45-59;zensko;black;0.054
+chronic_glaucoma;double vision;45-59;musko;hispanic;0.025
+chronic_glaucoma;double vision;45-59;zensko;hispanic;0.025
+chronic_glaucoma;double vision;45-59;musko;white;0.032
+chronic_glaucoma;double vision;45-59;zensko;white;0.032
+chronic_glaucoma;double vision;45-59;musko;other;0.05
+chronic_glaucoma;double vision;45-59;zensko;other;0.05
+chronic_glaucoma;double vision;60-74;musko;black;0.117
+chronic_glaucoma;double vision;60-74;zensko;black;0.117
+chronic_glaucoma;double vision;60-74;musko;hispanic;0.054
+chronic_glaucoma;double vision;60-74;zensko;hispanic;0.054
+chronic_glaucoma;double vision;60-74;musko;white;0.07
+chronic_glaucoma;double vision;60-74;zensko;white;0.07
+chronic_glaucoma;double vision;60-74;musko;other;0.109
+chronic_glaucoma;double vision;60-74;zensko;other;0.109
+chronic_glaucoma;double vision;75;musko;black;0.148
+chronic_glaucoma;double vision;75;zensko;black;0.148
+chronic_glaucoma;double vision;75;musko;hispanic;0.069
+chronic_glaucoma;double vision;75;zensko;hispanic;0.069
+chronic_glaucoma;double vision;75;musko;white;0.089
+chronic_glaucoma;double vision;75;zensko;white;0.089
+chronic_glaucoma;double vision;75;musko;other;0.139
+chronic_glaucoma;double vision;75;zensko;other;0.139
+
+
+
