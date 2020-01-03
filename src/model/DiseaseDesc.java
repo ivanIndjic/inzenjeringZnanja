@@ -1,6 +1,5 @@
 package model;
 
-import com.sun.jdi.Field;
 import example.MyApp;
 import ucm.gaia.jcolibri.cbrcore.Attribute;
 import ucm.gaia.jcolibri.cbrcore.CaseComponent;

@@ -67,6 +67,7 @@ public class CbrApplication implements StandardCBRApplication {
     public void cycle(CBRQuery query) throws ExecutionException {
 
         HashMap<String, HashMap<Integer,ArrayList<Double>>> mapaBolesi = new HashMap<>();
+        _caseBase.forgetCases(_caseBase.getCases());
         Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
         eval = SelectCases.selectTopKRR(eval, 8);
         String perc = "";

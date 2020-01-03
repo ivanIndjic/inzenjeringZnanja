@@ -14,6 +14,7 @@ public class Main extends JFrame{
 			UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 			MyApp m = MyApp.getInstance();
 		
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
