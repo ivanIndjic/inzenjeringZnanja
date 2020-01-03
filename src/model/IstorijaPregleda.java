@@ -2,11 +2,11 @@ package model;
 
 public class IstorijaPregleda {
 
-    private int idPregleda;
     public String simptomi;
     public String tretman;
-    private String dodatneNapomene;
     public String doktor;
+    private int idPregleda;
+    private String dodatneNapomene;
     private String datum;
     private String bolest;
 
@@ -58,11 +58,11 @@ public class IstorijaPregleda {
         this.bolest = bolest;
     }
 
-	public int getIdPregleda() {
-		return idPregleda;
-	}
+    public int getIdPregleda() {
+        return idPregleda;
+    }
 
-	public void setIdPregleda(int idPregleda) {
-		this.idPregleda = idPregleda;
-	}
+    public void setIdPregleda(int idPregleda) {
+        this.idPregleda = idPregleda;
+    }
 }

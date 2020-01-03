@@ -1,10 +1,7 @@
 package model;
 
-import example.MyApp;
 import ucm.gaia.jcolibri.cbrcore.Attribute;
 import ucm.gaia.jcolibri.cbrcore.CaseComponent;
-
-import javax.swing.*;
 
 public class DiseaseDesc implements CaseComponent {
 
@@ -14,16 +11,17 @@ public class DiseaseDesc implements CaseComponent {
     private String rasa;
     private String ime;
     private Integer id;
+
     public String getGodine() {
         return godine;
     }
 
-    public String toString() {
-        return "Rasa: " + this.getRasa() + " Godine: " + this.getGodine() + " Pol: " + this.getPol() + " Simptom: " + this.getSimptom() + " Ime:" + this.getIme() + "Id:"+this.getId();
-    }
-
     public void setGodine(String godine) {
         this.godine = godine;
+    }
+
+    public String toString() {
+        return "Rasa: " + this.getRasa() + " Godine: " + this.getGodine() + " Pol: " + this.getPol() + " Simptom: " + this.getSimptom() + " Ime:" + this.getIme() + "Id:" + this.getId();
     }
 
     public String getPol() {

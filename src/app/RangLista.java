@@ -1,4 +1,4 @@
-package example;
+package app;
 
 
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class RangLista {
 	            System.out.println("Key : " + entry.getKey() + " Value : "+ entry.getValue());
 	        }
 	    }
-	    
+
 	    public boolean proveraRazlikeVerovatnocaZaDaljaIspitivanja(Map<String, Float> map) {
 	    	boolean povratna=true;
 	    	Float vrednost1=0f;
@@ -80,14 +80,12 @@ public class RangLista {
 	    	if(vrednost1>vrednost2+0.3) {
 	    		povratna=false;
 	    	}
-	    	
-	    	
-	    	//System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA "+vrednost1+vrednost2);
+
 	    	return povratna;
 	    }
-	    
+
 	    public String prve2Naziv(Map<String, Float> map,Set<String> selektovani) {
-	    	
+
 	    	Set<String> ispis=new HashSet<String>();
 	    	ArrayList<String> prve2=new ArrayList<String>();
 	    	int brojac=0;
@@ -117,7 +115,7 @@ public class RangLista {
 	    			}
 	    			for(String ss:list) {
 	    				ispis.add(ss);
-	    			}	
+	    			}
 	    		}
 	    	 }
 	    	 String ispiss="";
@@ -131,12 +129,12 @@ public class RangLista {
 		 		ispiss=ispiss.substring(0, upitnik);
 		 		ispiss+="?";
 	    	}
-	    	
- 			
+
+
 	    	 return ispiss;
 	    }
-	    
-	    
+
+
 
 
 }

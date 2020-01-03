@@ -12,14 +12,19 @@ import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import ucm.gaia.jcolibri.method.retrieve.RetrievalResult;
 import ucm.gaia.jcolibri.method.retrieve.selection.SelectCases;
+import view.SelectSymptoms;
 
+import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CbrApplication implements StandardCBRApplication {
-    private float prag;
-    private int a = 0;
-    HashMap<String, Float> map = new HashMap<>();
-    public static HashMap<String, Map<String, Float>> mapp = new HashMap<String, Map<String, Float>>();
+    //bolest -- id-max verovatnoce za svaki cekirani simptom
+    public static HashMap<String, HashMap<Integer, ArrayList<Double>>> mapaBolesiMax = new HashMap<>();
+    //id --minimalna verovatnoca
+    //ako klikne 2 simptoma a u slucaju ima 3 da se taj 1 racuna kao da je promasen
+    public static HashMap<Integer, Double> idMin = new HashMap<>();
+    public static Map<String, Double> sortedFinalMap = new HashMap<>();
     Connector _connector;
     /**
      * Connector object
@@ -30,6 +35,60 @@ public class CbrApplication implements StandardCBRApplication {
      */
 
     NNConfig simConfig;
+
+    public static Map<String, Double> sortByValue(final Map<String, Double> map) {
+        return map.entrySet()
+                .stream()
+                .sorted((Map.Entry.<String, Double>comparingByValue().reversed()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+    }
+
+    public static float round(double number, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
+
+    public static String ispisivanjeVerovatnoca() {
+        String ispis = "";
+        String bolest = "";
+        int brojac = 0;
+        for (Map.Entry<String, Double> entry : sortedFinalMap.entrySet()) {
+            if (entry.getValue() != 0) {
+                bolest = entry.getKey();
+                bolest = bolest.substring(0, 1).toUpperCase() + bolest.substring(1);
+                bolest = bolest.replaceAll("_", " ");
+                ispis += bolest + " : " + round(entry.getValue() * 100, 2) + " %" + "\n";
+                //ispis+=bolest+"\n";
+                brojac++;
+            } //ovo gore da bi bilo na 2 decmalna
+            if (brojac >= 5) {
+                break;
+            }
+        }
+        return ispis;
+    }
+
+    public static int kategorisiGodine(int godine) {
+        if (godine < 1) {
+            return 1;
+        } else if (godine < 5) {
+            return 2;
+        } else if (godine < 15) {
+            return 3;
+        } else if (godine < 30) {
+            return 4;
+        } else if (godine < 45) {
+            return 5;
+        } else if (godine < 60) {
+            return 6;
+        } else if (godine < 75) {
+            return 7;
+        } else {
+            return 8;
+        }
+    }
 
     /**
      * KNN configuration
@@ -67,7 +126,6 @@ public class CbrApplication implements StandardCBRApplication {
     public void cycle(CBRQuery query) throws ExecutionException {
 
         HashMap<String, HashMap<Integer,ArrayList<Double>>> mapaBolesi = new HashMap<>();
-        _caseBase.forgetCases(_caseBase.getCases());
         Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
         eval = SelectCases.selectTopKRR(eval, 8);
         String perc = "";

@@ -1,13 +1,13 @@
 package Actions;
 
-import java.util.ArrayList;
-
 import model.Osoba;
 
+import java.util.ArrayList;
+
 public class CBReasoning {
-	
-	public void Do(Osoba o,ArrayList<String>simp) {
-		
-	}
+
+    public void Do(Osoba o, ArrayList<String> simp) {
+
+    }
 
 }
