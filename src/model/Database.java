@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BazaPodataka {
+public class Database {
 
     private HashMap<String, ArrayList<String>> bolesti = new HashMap<String, ArrayList<String>>();
 

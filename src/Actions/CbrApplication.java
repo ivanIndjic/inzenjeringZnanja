@@ -50,40 +50,53 @@ public class CbrApplication implements StandardCBRApplication {
         return bd.floatValue();
     }
 
-    public static String ispisivanjeVerovatnoca() {
-        String ispis = "";
-        String bolest = "";
-        int brojac = 0;
-        for (Map.Entry<String, Double> entry : sortedFinalMap.entrySet()) {
+    public static Map<String, Double> scalingOfSortedMap() {
+        Double sum = 0d;
+        for (String key : sortedFinalMap.keySet()) {
+            sum += sortedFinalMap.get(key);
+        }
+        Double scaleNum = 1 / sum;
+        HashMap<String, Double> mapOfScaledProbabilities = new HashMap<String, Double>();
+        for (String key : sortedFinalMap.keySet()) {
+            mapOfScaledProbabilities.put(key, sortedFinalMap.get(key) * scaleNum);
+        }
+        return mapOfScaledProbabilities;
+    }
+
+    public static String printOfProbabilitiesCBR() {
+        String print = "";
+        String disease = "";
+        int it = 0;
+        Map<String, Double> mapOfScaledProbabilities = scalingOfSortedMap();
+        for (Map.Entry<String, Double> entry : mapOfScaledProbabilities.entrySet()) {
             if (entry.getValue() != 0) {
-                bolest = entry.getKey();
-                bolest = bolest.substring(0, 1).toUpperCase() + bolest.substring(1);
-                bolest = bolest.replaceAll("_", " ");
-                ispis += bolest + " : " + round(entry.getValue() * 100, 2) + " %" + "\n";
-                //ispis+=bolest+"\n";
-                brojac++;
-            } //ovo gore da bi bilo na 2 decmalna
-            if (brojac >= 5) {
+                disease = entry.getKey();
+                disease = disease.substring(0, 1).toUpperCase() + disease.substring(1);
+                disease = disease.replaceAll("_", " ");
+                print += disease + " : " + round(entry.getValue() * 100, 2) + " %" + "\n";
+                it++;
+            }
+            if (it >= 5) {
                 break;
             }
         }
-        return ispis;
+        return print;
     }
 
-    public static int kategorisiGodine(int godine) {
-        if (godine < 1) {
+    public static int yearCategorization(int yearsOld) {
+        if (yearsOld < 1) {
             return 1;
-        } else if (godine < 5) {
+        } else if (yearsOld < 5) {
             return 2;
-        } else if (godine < 15) {
+        } else if (yearsOld < 15) {
             return 3;
-        } else if (godine < 30) {
+        } else if (yearsOld < 30) {
             return 4;
-        } else if (godine < 45) {
+        } else if (yearsOld < 45) {
             return 5;
-        } else if (godine < 60) {
+        } else if (yearsOld < 60) {
             return 6;
-        } else if (godine < 75) {
+        } else if (yearsOld < 75) {
             return 7;
         } else {
             return 8;
@@ -281,7 +294,7 @@ public class CbrApplication implements StandardCBRApplication {
                 recommender.preCycle();
                 CBRQuery query = new CBRQuery();
                 DiseaseDesc dd = new DiseaseDesc();
-                String godine = String.valueOf(kategorisiGodine(o.getGodine()));
+                String godine = String.valueOf(yearCategorization(o.getGodine()));
                 //  dd.setIme(simptomi.get(i));
                 dd.setGodine(godine);
                 dd.setPol(o.getPol());

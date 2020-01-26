@@ -14,16 +14,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import model.BazaPodataka;
+import model.Database;
 import view.SelectSymptoms;
 
-public class RangLista {
+public class RankingList {
 
 	 public static Map<String, Float> sortByComparator(Map<String, Float> unsortMap, final boolean order)
 	    {
-
 	        List<Entry<String, Float>> list = new LinkedList<Entry<String, Float>>(unsortMap.entrySet());
-
 	        // Sorting the list based on values
 	        Collections.sort(list, new Comparator<Entry<String, Float>>()
 	        {
@@ -37,18 +35,14 @@ public class RangLista {
 	                else
 	                {
 	                    return o2.getValue().compareTo(o1.getValue());
-
 	                }
 	            }
 	        });
-
-	        // Maintaining insertion order with the help of LinkedList
 	        Map<String, Float> sortedMap = new LinkedHashMap<String, Float>();
 	        for (Entry<String, Float> entry : list)
 	        {
 	            sortedMap.put(entry.getKey(), entry.getValue());
 	        }
-	       // printMap(sortedMap);
 	        return sortedMap;
 	    }
 
@@ -97,7 +91,7 @@ public class RangLista {
 		            	break;
 		            }
 		        }
-	    	 BazaPodataka bp=new BazaPodataka();
+	    	 Database bp=new Database();
 	    	 HashMap<String,ArrayList<String>> bolesti=bp.getBolesti();
 	    	 for(String jedna:prve2) {
 	    		if(bolesti.containsKey(jedna)) {
