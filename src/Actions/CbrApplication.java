@@ -125,40 +125,40 @@ public class CbrApplication implements StandardCBRApplication {
 
     public void cycle(CBRQuery query) throws ExecutionException {
 
-        HashMap<String, HashMap<Integer,ArrayList<Double>>> mapaBolesi = new HashMap<>();
+        HashMap<String, HashMap<Integer, ArrayList<Double>>> mapaBolesi = new HashMap<>();
         Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
         eval = SelectCases.selectTopKRR(eval, 8);
         String perc = "";
         String disea = "";
-        Integer id=0;
+        Integer id = 0;
         System.out.println("Retrieved cases:");
         for (RetrievalResult nse : eval) {
             perc = String.valueOf(nse.getEval());
             String[] split = nse.get_case().getDescription().toString().split(":");
             disea = split[split.length - 2];
-            disea=disea.substring(0,disea.length()-2);
+            disea = disea.substring(0, disea.length() - 2);
             id = Integer.parseInt(split[split.length - 1]);
             if (mapaBolesi.containsKey(disea)) {
-                HashMap<Integer,ArrayList<Double>> idVerovatnoce= mapaBolesi.get(disea);
-                if(idVerovatnoce.containsKey(id)){
-                    ArrayList<Double> listaVerovatnoca=idVerovatnoce.get(id);
+                HashMap<Integer, ArrayList<Double>> idVerovatnoce = mapaBolesi.get(disea);
+                if (idVerovatnoce.containsKey(id)) {
+                    ArrayList<Double> listaVerovatnoca = idVerovatnoce.get(id);
                     listaVerovatnoca.add(nse.getEval());
-                    idVerovatnoce.put(id,listaVerovatnoca);
-                    mapaBolesi.put(disea,idVerovatnoce);
-                }else {
+                    idVerovatnoce.put(id, listaVerovatnoca);
+                    mapaBolesi.put(disea, idVerovatnoce);
+                } else {
                     ArrayList<Double> listaVerovatnoca = new ArrayList<>();
                     listaVerovatnoca.add(nse.getEval());
-                    idVerovatnoce.put(id,listaVerovatnoca);
-                    mapaBolesi.put(disea,idVerovatnoce);
+                    idVerovatnoce.put(id, listaVerovatnoca);
+                    mapaBolesi.put(disea, idVerovatnoce);
                 }
             } else {
-                HashMap<Integer,ArrayList<Double>> idVerovatnoce=new HashMap<>();
+                HashMap<Integer, ArrayList<Double>> idVerovatnoce = new HashMap<>();
                 ArrayList<Double> listaVerovatnoca = new ArrayList<>();
                 listaVerovatnoca.add(nse.getEval());
-                idVerovatnoce.put(id,listaVerovatnoca);
+                idVerovatnoce.put(id, listaVerovatnoca);
                 mapaBolesi.put(disea, idVerovatnoce);
             }
-            System.out.println(disea + " ID "+id +" "+ perc);
+            System.out.println(disea + " ID " + id + " " + perc);
 
 //            String zasplit = nse.get_case().getDescription() + ";" + nse.getEval();
 //            String[] values = zasplit.split(";");
@@ -182,21 +182,21 @@ public class CbrApplication implements StandardCBRApplication {
 
 
         }
-        HashMap<String,HashMap<Integer,Double>> mapaBolestIdSumaVrv=new HashMap<>();
+        HashMap<String, HashMap<Integer, Double>> mapaBolestIdSumaVrv = new HashMap<>();
         for (String bolest : mapaBolesi.keySet()) {
-            HashMap<Integer,ArrayList<Double>> idVrvLista = mapaBolesi.get(bolest);
-            HashMap<Integer,Double> idVrv = new HashMap<>();
-            for(Integer idBol : idVrvLista.keySet()){
-                ArrayList<Double> vrvLista=idVrvLista.get(idBol);
-                Double sumaVerovatnoca=0d;
-                for(Double vrv : vrvLista){
-                    sumaVerovatnoca+=vrv;
+            HashMap<Integer, ArrayList<Double>> idVrvLista = mapaBolesi.get(bolest);
+            HashMap<Integer, Double> idVrv = new HashMap<>();
+            for (Integer idBol : idVrvLista.keySet()) {
+                ArrayList<Double> vrvLista = idVrvLista.get(idBol);
+                Double sumaVerovatnoca = 0d;
+                for (Double vrv : vrvLista) {
+                    sumaVerovatnoca += vrv;
                 }
-                idVrv.put(idBol,sumaVerovatnoca/vrvLista.size());
+                idVrv.put(idBol, sumaVerovatnoca / vrvLista.size());
             }
-            mapaBolestIdSumaVrv.put(bolest,idVrv);
+            mapaBolestIdSumaVrv.put(bolest, idVrv);
         }
-        System.out.println("MAPA "+mapaBolestIdSumaVrv);
+        System.out.println("MAPA " + mapaBolestIdSumaVrv);
     }
 
     public void postCycle() throws ExecutionException {
@@ -215,7 +215,7 @@ public class CbrApplication implements StandardCBRApplication {
         Integer duzina = simptomi.size();
         StandardCBRApplication recommender = null;
         for (int i = 0; i < simptomi.size(); i++) {
-            System.out.println("SIMPTOMI "+simptomi.get(i));
+            System.out.println("SIMPTOMI " + simptomi.get(i));
             try {
                 recommender = new CbrApplication();
                 recommender.configure();
@@ -237,6 +237,30 @@ public class CbrApplication implements StandardCBRApplication {
             }
 
         }
+    }
+
+    public static boolean proveraRazlikeVerovatnocaZaDaljaIspitivanjaDouble(Map<String, Double> map) {
+        boolean povratna = true;
+        Double vrednost1 = 0d;
+        Double vrednost2 = 0.0d;
+        int brojac = 0;
+        for (Map.Entry<String, Double> entry : map.entrySet()) {
+            if (brojac == 0) {
+                SelectSymptoms.bolest1 = entry.getKey();
+                vrednost1 = entry.getValue();
+            } else if (brojac == 1) {
+                SelectSymptoms.bolest2 = entry.getKey();
+                vrednost2 = entry.getValue();
+            } else if (brojac == 2) {
+                SelectSymptoms.bolest3 = entry.getKey();
+            }
+            brojac++;
+        }
+        if (vrednost1 > vrednost2 + 0.3) {
+            povratna = false;
+        }
+
+        return povratna;
     }
 
 }

@@ -89,7 +89,7 @@ public class AddData {
 
                     Connection conn;
                     try {
-                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
+                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "root");
 
                         String sql2 = "insert into IP (JMBG,Simptomi,Tretman,Doktor,Datum,DN) values (?, ?, ?, ?, ?, ?)";
                         PreparedStatement pstmt2 = conn.prepareStatement(sql2);

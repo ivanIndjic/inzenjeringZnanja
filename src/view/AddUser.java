@@ -180,7 +180,7 @@ public class AddUser {
                 } else {
                     try {
                         //otvaranje konekcije
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "password");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "root");
                         String poll = "";
                         String ss = "";
                         if (b1.isSelected())
