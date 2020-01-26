@@ -1,8 +1,8 @@
 package view;
 
 import Actions.CbrApplication;
-import app.RacunanjeTopBolesti;
-import app.RangLista;
+import app.CalculationOfTopDisease;
+import app.RankingList;
 import model.Osoba;
 import unbbayes.io.BaseIO;
 import unbbayes.io.NetIO;
@@ -166,7 +166,7 @@ public class SelectSymptoms extends JFrame {
                     // TODO Auto-generated method stub
                     if(rbr) {
                         mainFrame.dispose();
-                        DaljaIspitivanja di = new DaljaIspitivanja(o, bolest1, bolest2, bolest3);
+                        FurtherTesting di = new FurtherTesting(o, bolest1, bolest2, bolest3);
                     }else{
 
                     }
@@ -364,7 +364,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("diminished_vision", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -377,7 +377,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("eye_redness", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -390,7 +390,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("pain_in_eye", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -403,7 +403,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("lacrimation", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -416,7 +416,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("double_vision", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -429,7 +429,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("swollen_eye", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -442,7 +442,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("foreign_body_sensation_in_eye", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -455,7 +455,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("cloudy_eye", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -468,7 +468,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("blidness", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -481,7 +481,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("spots_or_clouds_in_vision", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -494,7 +494,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("eye_burns_or_stings", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -507,7 +507,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("white_discharge_from_eye", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -520,7 +520,7 @@ public class SelectSymptoms extends JFrame {
                                 for (int i = 0; i < node.getStatesSize(); i++) {
                                     map.put(node.getStateAt(i), ((ProbabilisticNode) node).getMarginalAt(i));
                                 }
-                                Map<String, Float> rang = RangLista.sortByComparator(map, false);
+                                Map<String, Float> rang = RankingList.sortByComparator(map, false);
                                 HashMap<String, Map<String, Float>> simptomLista = new HashMap<String, Map<String, Float>>();
                                 simptomLista.put("itchiness_of_eye", rang); //hash mapa simptom / rang lista
                                 sveRangListe.add(simptomLista);
@@ -533,22 +533,22 @@ public class SelectSymptoms extends JFrame {
                     for (HashMap<String, Map<String, Float>> mapa : sveRangListe) {
                         for (String simptom : mapa.keySet()) {
                             System.out.println(simptom + "/n");
-                            RangLista.printMap(mapa.get(simptom));
+                            RankingList.printMap(mapa.get(simptom));
                         }
                     }
                     System.out.println("-----------------------------");
-                    RacunanjeTopBolesti racunanje = new RacunanjeTopBolesti(sveRangListe);
-                    HashMap<String, Float> izracunate = racunanje.racunanje();
-                    Map<String, Float> sortirane = RangLista.sortByComparator(izracunate, false);
-                    RangLista.printMap(sortirane);
-                    konacneVrv.setText(racunanje.ispisivanjeVerovatnoca(sortirane));
+                    CalculationOfTopDisease calculationTop = new CalculationOfTopDisease(sveRangListe);
+                    HashMap<String, Float> calculatedMap = calculationTop.calculation();
+                    Map<String, Float> sortedMap = RankingList.sortByComparator(calculatedMap, false);
+                    RankingList.printMap(sortedMap);
+                    konacneVrv.setText(calculationTop.printOfProbabilitiesRBR(sortedMap));
 
                     ///////////////////////////////////////////////////////////////////////////
 
 
-                    RangLista rg = new RangLista();
-                    predlog.setText(rg.prve2Naziv(sortirane, selektovaniSimptomi));
-                    boolean daljaIspBol = rg.proveraRazlikeVerovatnocaZaDaljaIspitivanja(sortirane);
+                    RankingList rg = new RankingList();
+                    predlog.setText(rg.prve2Naziv(sortedMap, selektovaniSimptomi));
+                    boolean daljaIspBol = rg.proveraRazlikeVerovatnocaZaDaljaIspitivanja(sortedMap);
                     if (daljaIspBol == true) {
                         daljaIsBut.setVisible(true);
                         daljeIspitivanja.setVisible(true);
@@ -598,8 +598,8 @@ public class SelectSymptoms extends JFrame {
                     CbrApplication a = new CbrApplication();
                     a.mainS(o, simpto);
 
-                    konacneVrv.setText(CbrApplication.ispisivanjeVerovatnoca());
-                    RangLista rg = new RangLista();
+                    konacneVrv.setText(CbrApplication.printOfProbabilitiesCBR());
+                    RankingList rg = new RankingList();
                     boolean daljaIspBol = CbrApplication.proveraRazlikeVerovatnocaZaDaljaIspitivanjaDouble(CbrApplication.sortedFinalMap);
                     if (daljaIspBol == true) {
                         daljaIsBut.setVisible(true);

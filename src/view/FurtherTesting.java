@@ -5,10 +5,10 @@ import model.Osoba;
 
 import javax.swing.*;
 
-public class DaljaIspitivanja {
+public class FurtherTesting {
     private JFrame mainFrame = new JFrame("Ophthalmology");
 
-    public DaljaIspitivanja(Osoba o, String bolest1, String bolest2, String bolest3) {
+    public FurtherTesting(Osoba o, String bolest1, String bolest2, String bolest3) {
 
 
         DaljaIspitivanjaProlog dp = new DaljaIspitivanjaProlog(o, bolest1, bolest2, bolest3);

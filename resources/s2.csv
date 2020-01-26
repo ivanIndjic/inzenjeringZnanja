@@ -1,4 +1,4 @@
-#simptom;ime;godina;pol;rasa;id
+#simptom;ime;godina;pol;rasa;id;terapija;dalja_ispitivanja
 Bolest1;lacrimation,Blindness,swollen eye;2;Male;Black;1
 Bolest2;lacrimation,Blindness;3;Male;Black;2
 Bolest1;Blindness;1;Male;Black;3
