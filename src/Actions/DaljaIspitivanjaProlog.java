@@ -1,5 +1,6 @@
 package Actions;
 
+import app.RankingList;
 import com.ugos.jiprolog.engine.JIPEngine;
 import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPTerm;
@@ -13,18 +14,32 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DaljaIspitivanjaProlog {
+    public Map<String, Float> sortedMapRBR = new HashMap<>();
     public String bolest1 = "";
     public String bolest2 = "";
     public String bolest3 = "";
     public Osoba korisnik = new Osoba();
 
-    public DaljaIspitivanjaProlog(Osoba korisnik, String bolest1, String bolest2, String bolest3) {
-        this.bolest1 = bolest1;
-        this.bolest2 = bolest2;
-        this.bolest3 = bolest3;
+    public DaljaIspitivanjaProlog(Osoba korisnik, Map<String, Float> sortedMapRBR) {
+        this.sortedMapRBR = sortedMapRBR;
+        int it = 1;
+        for (String key : sortedMapRBR.keySet()) {
+            if (it == 1) {
+                bolest1 = key;
+            } else if (it == 2) {
+                bolest2 = key;
+            } else if (it == 3) {
+                bolest3 = key;
+            } else {
+                break;
+            }
+            it++;
+        }
         this.korisnik = korisnik;
     }
 
@@ -129,6 +144,18 @@ public class DaljaIspitivanjaProlog {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 vr.setVisible(true);
+                System.out.println("PROLOG SORTED " + sortedMapRBR);
+                Float sum = 0f;
+                for (String key : sortedMapRBR.keySet()) {
+                    sum += sortedMapRBR.get(key);
+                }
+                Float scaleNum = 1 / sum;
+                Map<String, Float> mapOfScaledProbabilities = new HashMap<String, Float>();
+                for (String key : sortedMapRBR.keySet()) {
+                    mapOfScaledProbabilities.put(key, sortedMapRBR.get(key) * scaleNum);
+                }
+                mapOfScaledProbabilities = RankingList.sortByComparator(mapOfScaledProbabilities, false);
+                konacneVrv.setText(printProbabilities(mapOfScaledProbabilities));
 
             }
         });
@@ -137,10 +164,35 @@ public class DaljaIspitivanjaProlog {
         JScrollPane scrollPane = new JScrollPane(dodatak);
         ceo.add(scrollPane, BorderLayout.CENTER);
         vr.setVisible(false);
-
         ceo.add(vr, BorderLayout.EAST);
 
         return ceo;
+    }
+
+    public String printProbabilities(Map<String, Float> map) {
+        String print = "";
+        String disease = "";
+        int it = 0;
+        for (Map.Entry<String, Float> entry : map.entrySet()) {
+            if (entry.getValue() != 0) {
+                //Da bi bilo na 2 decmalna
+                disease = entry.getKey();
+                disease = disease.substring(0, 1).toUpperCase() + disease.substring(1);
+                disease = disease.replaceAll("_", " ");
+                print += disease + " : " + round(entry.getValue() * 100, 2) + " %" + "\n";
+                it++;
+            }
+            if (it >= 3) { //maximalno 5 bolesti se ispisuje
+                break;
+            }
+        }
+        return print;
+    }
+
+    public static float round(float number, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
     }
 
     public JPanel getConj() {
@@ -154,8 +206,49 @@ public class DaljaIspitivanjaProlog {
         pitanjePan.add(inf);
         pitanjePan.add(che);
         pitanjePan.add(al);
+
+        inf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (inf.isSelected()) {
+                    Float probability = sortedMapRBR.get("conjunctivitis");
+                    sortedMapRBR.put("conjunctivitis", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("conjunctivitis");
+                    sortedMapRBR.put("conjunctivitis", (probability - 0.033f));
+                }
+            }
+        });
+
+        che.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (che.isSelected()) {
+                    Float probability = sortedMapRBR.get("conjunctivitis");
+                    sortedMapRBR.put("conjunctivitis", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("conjunctivitis");
+                    sortedMapRBR.put("conjunctivitis", (probability - 0.033f));
+                }
+            }
+        });
+
+        al.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (al.isSelected()) {
+                    Float probability = sortedMapRBR.get("conjunctivitis");
+                    sortedMapRBR.put("conjunctivitis", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("conjunctivitis");
+                    sortedMapRBR.put("conjunctivitis", (probability - 0.033f));
+                }
+            }
+        });
+
         return pitanjePan;
     }
+
 
     public JPanel getRetDet() {
         JPanel pitanjePan = new JPanel();
@@ -166,6 +259,24 @@ public class DaljaIspitivanjaProlog {
         ButtonGroup bg = new ButtonGroup();
         bg.add(da);
         bg.add(ne);
+        ne.setSelected(true);
+
+        da.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Float probability = sortedMapRBR.get("retinal_detachment");
+                sortedMapRBR.put("retinal_detachment", (probability + 0.05f));
+            }
+        });
+
+        ne.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Float probability = sortedMapRBR.get("retinal_detachment");
+                sortedMapRBR.put("retinal_detachment", (probability - 0.05f));
+            }
+        });
+
         pitanjePan.add(pitanje);
         pitanjePan.add(da);
         pitanjePan.add(ne);
@@ -179,6 +290,46 @@ public class DaljaIspitivanjaProlog {
         JCheckBox inf = new JCheckBox("Multiple sclerosis");
         JCheckBox che = new JCheckBox("Been using drugs lately");
         JCheckBox al = new JCheckBox("Auto-immune disorders");
+
+        inf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (inf.isSelected()) {
+                    Float probability = sortedMapRBR.get("optic_neuritis");
+                    sortedMapRBR.put("optic_neuritis", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("optic_neuritis");
+                    sortedMapRBR.put("optic_neuritis", (probability - 0.033f));
+                }
+            }
+        });
+
+        che.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (che.isSelected()) {
+                    Float probability = sortedMapRBR.get("optic_neuritis");
+                    sortedMapRBR.put("optic_neuritis", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("optic_neuritis");
+                    sortedMapRBR.put("optic_neuritis", (probability - 0.033f));
+                }
+            }
+        });
+
+        al.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (al.isSelected()) {
+                    Float probability = sortedMapRBR.get("optic_neuritis");
+                    sortedMapRBR.put("optic_neuritis", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("optic_neuritis");
+                    sortedMapRBR.put("optic_neuritis", (probability - 0.033f));
+                }
+            }
+        });
+
         pitanjePan.add(pitanje);
         pitanjePan.add(inf);
         pitanjePan.add(che);
@@ -192,6 +343,33 @@ public class DaljaIspitivanjaProlog {
         JLabel pitanje = new JLabel(" Does your patient have? ");
         JCheckBox inf = new JCheckBox("High blood pressure");
         JCheckBox che = new JCheckBox("Bleeding disorders");
+
+        inf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (inf.isSelected()) {
+                    Float probability = sortedMapRBR.get("subconjunctival_hemorrhage");
+                    sortedMapRBR.put("subconjunctival_hemorrhage", (probability + 0.05f));
+                } else {
+                    Float probability = sortedMapRBR.get("subconjunctival_hemorrhage");
+                    sortedMapRBR.put("subconjunctival_hemorrhage", (probability - 0.05f));
+                }
+            }
+        });
+
+        che.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (che.isSelected()) {
+                    Float probability = sortedMapRBR.get("subconjunctival_hemorrhage");
+                    sortedMapRBR.put("subconjunctival_hemorrhage", (probability + 0.05f));
+                } else {
+                    Float probability = sortedMapRBR.get("subconjunctival_hemorrhage");
+                    sortedMapRBR.put("subconjunctival_hemorrhage", (probability - 0.05f));
+                }
+            }
+        });
+
         pitanjePan.add(pitanje);
         pitanjePan.add(inf);
         pitanjePan.add(che);
@@ -204,6 +382,31 @@ public class DaljaIspitivanjaProlog {
         JLabel pitanje = new JLabel(" Does your patient have? ");
         JCheckBox inf = new JCheckBox("Infection of the eyeball");
         JCheckBox al = new JCheckBox("Auto-immune disorders");
+        inf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (inf.isSelected()) {
+                    Float probability = sortedMapRBR.get("iridocyclitis");
+                    sortedMapRBR.put("iridocyclitis", (probability + 0.05f));
+                } else {
+                    Float probability = sortedMapRBR.get("iridocyclitis");
+                    sortedMapRBR.put("iridocyclitis", (probability - 0.05f));
+                }
+            }
+        });
+
+        al.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (al.isSelected()) {
+                    Float probability = sortedMapRBR.get("iridocyclitis");
+                    sortedMapRBR.put("iridocyclitis", (probability + 0.05f));
+                } else {
+                    Float probability = sortedMapRBR.get("iridocyclitis");
+                    sortedMapRBR.put("iridocyclitis", (probability - 0.05f));
+                }
+            }
+        });
         pitanjePan.add(pitanje);
         pitanjePan.add(inf);
         pitanjePan.add(al);
@@ -221,6 +424,21 @@ public class DaljaIspitivanjaProlog {
             ButtonGroup bg = new ButtonGroup();
             bg.add(da);
             bg.add(ne);
+            da.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    Float probability = sortedMapRBR.get("cataract");
+                    sortedMapRBR.put("retinal_detachment", (probability + 0.05f));
+                }
+            });
+
+            ne.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    Float probability = sortedMapRBR.get("cataract");
+                    sortedMapRBR.put("retinal_detachment", (probability - 0.05f));
+                }
+            });
             pitanjePan.add(pitanje);
             pitanjePan.add(da);
             pitanjePan.add(ne);
@@ -229,6 +447,44 @@ public class DaljaIspitivanjaProlog {
         JCheckBox dia = new JCheckBox("Diabetic");
         JCheckBox ste = new JCheckBox("Steroid user");
         JCheckBox smo = new JCheckBox("Smoker");
+        dia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (dia.isSelected()) {
+                    Float probability = sortedMapRBR.get("cataract");
+                    sortedMapRBR.put("cataract", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("cataract");
+                    sortedMapRBR.put("cataract", (probability - 0.033f));
+                }
+            }
+        });
+
+        ste.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (ste.isSelected()) {
+                    Float probability = sortedMapRBR.get("cataract");
+                    sortedMapRBR.put("cataract", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("cataract");
+                    sortedMapRBR.put("cataract", (probability - 0.033f));
+                }
+            }
+        });
+
+        smo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (smo.isSelected()) {
+                    Float probability = sortedMapRBR.get("cataract");
+                    sortedMapRBR.put("cataract", (probability + 0.033f));
+                } else {
+                    Float probability = sortedMapRBR.get("cataract");
+                    sortedMapRBR.put("cataract", (probability - 0.033f));
+                }
+            }
+        });
         pitanjePan.add(pitanje2);
         pitanjePan.add(dia);
         pitanjePan.add(ste);

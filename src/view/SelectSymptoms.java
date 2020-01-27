@@ -26,10 +26,11 @@ import java.util.List;
 import java.util.*;
 
 public class SelectSymptoms extends JFrame {
+    public Map<String, Float> sortedMapRBR = new HashMap<>();
     public static String bolest1 = "";
     public static String bolest2 = "";
     public static String bolest3 = "";
-    public static boolean rbr=true;
+    public static boolean rbr = true;
     String navedeniSimptomi = "";
     ArrayList<String> simpto = new ArrayList<>();
     private JFrame mainFrame = new JFrame("Ophthalmology");
@@ -164,10 +165,10 @@ public class SelectSymptoms extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     // TODO Auto-generated method stub
-                    if(rbr) {
+                    if (rbr) {
                         mainFrame.dispose();
-                        FurtherTesting di = new FurtherTesting(o, bolest1, bolest2, bolest3);
-                    }else{
+                        FurtherTesting di = new FurtherTesting(o, sortedMapRBR,jmbg);
+                    } else {
 
                     }
                 }
@@ -353,7 +354,7 @@ public class SelectSymptoms extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     // TODO Auto-generated method stub
-                    rbr=true;
+                    rbr = true;
                     Set<String> selektovaniSimptomi = new HashSet<String>();
                     sveRangListe = new ArrayList<>();
                     for (Node node : nodeList) {
@@ -539,16 +540,16 @@ public class SelectSymptoms extends JFrame {
                     System.out.println("-----------------------------");
                     CalculationOfTopDisease calculationTop = new CalculationOfTopDisease(sveRangListe);
                     HashMap<String, Float> calculatedMap = calculationTop.calculation();
-                    Map<String, Float> sortedMap = RankingList.sortByComparator(calculatedMap, false);
-                    RankingList.printMap(sortedMap);
-                    konacneVrv.setText(calculationTop.printOfProbabilitiesRBR(sortedMap));
+                    sortedMapRBR = RankingList.sortByComparator(calculatedMap, false);
+                    RankingList.printMap(sortedMapRBR);
+                    konacneVrv.setText(calculationTop.printOfProbabilitiesRBR(sortedMapRBR));
 
                     ///////////////////////////////////////////////////////////////////////////
 
 
                     RankingList rg = new RankingList();
-                    predlog.setText(rg.prve2Naziv(sortedMap, selektovaniSimptomi));
-                    boolean daljaIspBol = rg.proveraRazlikeVerovatnocaZaDaljaIspitivanja(sortedMap);
+                    predlog.setText(rg.prve2Naziv(sortedMapRBR, selektovaniSimptomi));
+                    boolean daljaIspBol = rg.proveraRazlikeVerovatnocaZaDaljaIspitivanja(sortedMapRBR);
                     if (daljaIspBol == true) {
                         daljaIsBut.setVisible(true);
                         daljeIspitivanja.setVisible(true);
@@ -566,7 +567,7 @@ public class SelectSymptoms extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
-                    rbr=false;
+                    rbr = false;
                     simpto = new ArrayList<String>();
                     if (dim_vi.isSelected())
                         simpto.add("diminished vision");
@@ -684,8 +685,8 @@ public class SelectSymptoms extends JFrame {
             Image image = water.getImage(); // transform it
             Image newimg = image.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
             water = new ImageIcon(newimg);
-            JButton bbb = new JButton("Back", water);
-            bbb.addActionListener(new ActionListener() {
+            JButton back = new JButton("Back", water);
+            back.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -707,7 +708,7 @@ public class SelectSymptoms extends JFrame {
             proba.add(tug, BorderLayout.NORTH);
             proba.add(pr, BorderLayout.SOUTH);
             mainPanel.add(proba, BorderLayout.CENTER);
-            mainPanel.add(bbb, BorderLayout.SOUTH);
+            mainPanel.add(back, BorderLayout.SOUTH);
             mainFrame.add(mainPanel);
             mainFrame.setSize(800, 700);
         } catch (LoadException e1) {

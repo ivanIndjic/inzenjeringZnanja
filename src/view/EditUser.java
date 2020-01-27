@@ -25,11 +25,9 @@ public class EditUser {
 
         JButton odustani = new JButton("Cancel");
         JButton sacuvaj = new JButton("Save");
-        JButton novo = new JButton("History");
         JPanel dug = new JPanel();
         dug.setLayout(new FlowLayout());
 
-        dug.add(novo);
         dug.add(odustani);
         dug.add(sacuvaj);
         JPanel dugmici = new JPanel();
@@ -226,22 +224,6 @@ public class EditUser {
                 }
             }
 
-        });
-
-
-        novo.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                IstorijaPregledaView iw = new IstorijaPregledaView();
-                try {
-                    iw.nacrtaj(jmbgT.getText());
-                } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
         });
 
         odustani.addActionListener(new ActionListener() {

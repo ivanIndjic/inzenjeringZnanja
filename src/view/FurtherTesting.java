@@ -4,16 +4,34 @@ import Actions.DaljaIspitivanjaProlog;
 import model.Osoba;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Map;
 
 public class FurtherTesting {
     private JFrame mainFrame = new JFrame("Ophthalmology");
 
-    public FurtherTesting(Osoba o, String bolest1, String bolest2, String bolest3) {
+    public FurtherTesting(Osoba o, Map<String, Float> sortedMapRBR,String jmbg) {
 
 
-        DaljaIspitivanjaProlog dp = new DaljaIspitivanjaProlog(o, bolest1, bolest2, bolest3);
+        DaljaIspitivanjaProlog dp = new DaljaIspitivanjaProlog(o, sortedMapRBR);
         mainFrame.add(dp.preporucenaDaljaIsp());
 
+        ImageIcon water = new ImageIcon("./eyeIcon.png");
+        Image image = water.getImage(); // transform it
+        Image newimg = image.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        water = new ImageIcon(newimg);
+        JButton back = new JButton("Back", water);
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                mainFrame.dispose();
+                SelectSymptoms selectSymptoms=new SelectSymptoms(o,jmbg);
+            }
+        });
+        mainFrame.add(back, BorderLayout.SOUTH);
 
         mainFrame.setSize(800, 600);
         mainFrame.setLocationRelativeTo(null);

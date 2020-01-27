@@ -5,7 +5,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.*;
+import java.util.Vector;
 
 public class IstorijaPregledaView {
     private JFrame mainFr = new JFrame("Oftalmology");
@@ -43,6 +46,44 @@ public class IstorijaPregledaView {
         PreparedStatement st = conn.prepareStatement(sql);
         DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
         JTable table = new JTable(dtm);
+        table.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    JTable target = (JTable) e.getSource();
+                    int row = target.getSelectedRow();
+                    Vector<String> selectedRow = (Vector<String>) ((DefaultTableModel) table.getModel()).getDataVector().elementAt(table.getSelectedRow());
+                    System.out.println(selectedRow);
+                    int sel = table.getSelectedRow();
+
+                    String symptoms = (String) table.getValueAt(sel, getColumnByName(table, "Symptom"));
+                    String treatment = (String) table.getValueAt(sel, getColumnByName(table, "Treatment"));
+                    String doctor = (String) table.getValueAt(sel, getColumnByName(table, "Doctor"));
+                    String date = (String) table.getValueAt(sel, getColumnByName(table, "Date"));
+                    ConcreteMedicalRecord cmr = new ConcreteMedicalRecord(symptoms, treatment, doctor, date);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
         mainFr.setLayout(new BorderLayout());
         ResultSet rs = st.executeQuery(sql);
         while (rs.next()) {
@@ -67,6 +108,12 @@ public class IstorijaPregledaView {
 
         mainFr.setVisible(true);
 
+    }
 
+    private int getColumnByName(JTable table, String name) {
+        for (int i = 0; i < table.getColumnCount(); ++i)
+            if (table.getColumnName(i).equals(name))
+                return i;
+        return -1;
     }
 }
