@@ -290,7 +290,6 @@ public class DaljaIspitivanjaProlog {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Float probability = sortedMapRBR.get("retinal_detachment");
-                sortedMapRBR.put("retinal_detachment", (probability + 0.05f));
                 boolean found = false;
                 for (String note : notes) {
                     if (note.equals("prior eye surgery")) {
@@ -299,6 +298,7 @@ public class DaljaIspitivanjaProlog {
                     }
                 }
                 if (found == false) {
+                    sortedMapRBR.put("retinal_detachment", (probability + 0.05f));
                     notes.add("prior eye surgery");
                 }
             }
@@ -308,10 +308,10 @@ public class DaljaIspitivanjaProlog {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Float probability = sortedMapRBR.get("retinal_detachment");
-                sortedMapRBR.put("retinal_detachment", (probability - 0.05f));
                 for (String note : notes) {
                     if (note.equals("prior eye surgery")) {
                         notes.remove("prior eye surgery");
+                        sortedMapRBR.put("retinal_detachment", (probability - 0.05f));
                         break;
                     }
                 }
@@ -518,7 +518,6 @@ public class DaljaIspitivanjaProlog {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     Float probability = sortedMapRBR.get("cataract");
-                    sortedMapRBR.put("retinal_detachment", (probability + 0.05f));
                     boolean found = false;
                     for (String note : notes) {
                         if (note.equals("metabolic abnormality")) {
@@ -527,6 +526,7 @@ public class DaljaIspitivanjaProlog {
                         }
                     }
                     if (found == true) {
+                        sortedMapRBR.put("retinal_detachment", (probability + 0.05f));
                         notes.add("metabolic abnormality");
                     }
                 }
@@ -536,9 +536,9 @@ public class DaljaIspitivanjaProlog {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     Float probability = sortedMapRBR.get("cataract");
-                    sortedMapRBR.put("retinal_detachment", (probability - 0.05f));
                     for (String note : notes) {
                         if (note.equals("metabolic abnormality")) {
+                            sortedMapRBR.put("retinal_detachment", (probability - 0.05f));
                             notes.remove("metabolic abnormality");
                             break;
                         }
