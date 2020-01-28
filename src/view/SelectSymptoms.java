@@ -26,11 +26,11 @@ import java.util.List;
 import java.util.*;
 
 public class SelectSymptoms extends JFrame {
-    public Map<String, Float> sortedMapRBR = new HashMap<>();
     public static String bolest1 = "";
     public static String bolest2 = "";
     public static String bolest3 = "";
     public static boolean rbr = true;
+    public Map<String, Float> sortedMapRBR = new HashMap<>();
     String navedeniSimptomi = "";
     ArrayList<String> simpto = new ArrayList<>();
     private JFrame mainFrame = new JFrame("Ophthalmology");
@@ -167,7 +167,7 @@ public class SelectSymptoms extends JFrame {
                     // TODO Auto-generated method stub
                     if (rbr) {
                         mainFrame.dispose();
-                        FurtherTesting di = new FurtherTesting(o, sortedMapRBR,jmbg);
+                        FurtherTesting di = new FurtherTesting(o, sortedMapRBR, jmbg);
                     } else {
 
                     }

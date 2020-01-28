@@ -12,7 +12,7 @@ import java.util.Map;
 public class FurtherTesting {
     private JFrame mainFrame = new JFrame("Ophthalmology");
 
-    public FurtherTesting(Osoba o, Map<String, Float> sortedMapRBR,String jmbg) {
+    public FurtherTesting(Osoba o, Map<String, Float> sortedMapRBR, String jmbg) {
 
 
         DaljaIspitivanjaProlog dp = new DaljaIspitivanjaProlog(o, sortedMapRBR);
@@ -28,7 +28,7 @@ public class FurtherTesting {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 mainFrame.dispose();
-                SelectSymptoms selectSymptoms=new SelectSymptoms(o,jmbg);
+                SelectSymptoms selectSymptoms = new SelectSymptoms(o, jmbg);
             }
         });
         mainFrame.add(back, BorderLayout.SOUTH);

@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class DaljaIspitivanjaProlog {
     public String bolest2 = "";
     public String bolest3 = "";
     public Osoba korisnik = new Osoba();
+    public ArrayList<String> notes = new ArrayList<>();
 
     public DaljaIspitivanjaProlog(Osoba korisnik, Map<String, Float> sortedMapRBR) {
         this.sortedMapRBR = sortedMapRBR;
@@ -41,6 +43,12 @@ public class DaljaIspitivanjaProlog {
             it++;
         }
         this.korisnik = korisnik;
+    }
+
+    public static float round(float number, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
     }
 
     public JPanel preporucenaDaljaIsp() {
@@ -189,12 +197,6 @@ public class DaljaIspitivanjaProlog {
         return print;
     }
 
-    public static float round(float number, int decimalPlace) {
-        BigDecimal bd = new BigDecimal(number);
-        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-        return bd.floatValue();
-    }
-
     public JPanel getConj() {
         JPanel pitanjePan = new JPanel();
         pitanjePan.setLayout(new BoxLayout(pitanjePan, BoxLayout.Y_AXIS));
@@ -213,9 +215,16 @@ public class DaljaIspitivanjaProlog {
                 if (inf.isSelected()) {
                     Float probability = sortedMapRBR.get("conjunctivitis");
                     sortedMapRBR.put("conjunctivitis", (probability + 0.033f));
+                    notes.add("bacterial infections");
                 } else {
                     Float probability = sortedMapRBR.get("conjunctivitis");
                     sortedMapRBR.put("conjunctivitis", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("bacterial infections")) {
+                            notes.remove("bacterial infections");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -226,9 +235,17 @@ public class DaljaIspitivanjaProlog {
                 if (che.isSelected()) {
                     Float probability = sortedMapRBR.get("conjunctivitis");
                     sortedMapRBR.put("conjunctivitis", (probability + 0.033f));
+                    notes.add("chemical irritants");
+
                 } else {
                     Float probability = sortedMapRBR.get("conjunctivitis");
                     sortedMapRBR.put("conjunctivitis", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("chemical irritants")) {
+                            notes.remove("chemical irritants");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -239,9 +256,16 @@ public class DaljaIspitivanjaProlog {
                 if (al.isSelected()) {
                     Float probability = sortedMapRBR.get("conjunctivitis");
                     sortedMapRBR.put("conjunctivitis", (probability + 0.033f));
+                    notes.add("allergies");
                 } else {
                     Float probability = sortedMapRBR.get("conjunctivitis");
                     sortedMapRBR.put("conjunctivitis", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("allergies")) {
+                            notes.remove("allergies");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -266,6 +290,16 @@ public class DaljaIspitivanjaProlog {
             public void actionPerformed(ActionEvent actionEvent) {
                 Float probability = sortedMapRBR.get("retinal_detachment");
                 sortedMapRBR.put("retinal_detachment", (probability + 0.05f));
+                boolean found = false;
+                for (String note : notes) {
+                    if (note.equals("prior eye surgery")) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == false) {
+                    notes.add("prior eye surgery");
+                }
             }
         });
 
@@ -274,6 +308,12 @@ public class DaljaIspitivanjaProlog {
             public void actionPerformed(ActionEvent actionEvent) {
                 Float probability = sortedMapRBR.get("retinal_detachment");
                 sortedMapRBR.put("retinal_detachment", (probability - 0.05f));
+                for (String note : notes) {
+                    if (note.equals("prior eye surgery")) {
+                        notes.remove("prior eye surgery");
+                        break;
+                    }
+                }
             }
         });
 
@@ -297,9 +337,16 @@ public class DaljaIspitivanjaProlog {
                 if (inf.isSelected()) {
                     Float probability = sortedMapRBR.get("optic_neuritis");
                     sortedMapRBR.put("optic_neuritis", (probability + 0.033f));
+                    notes.add("multiple sclerosis");
                 } else {
                     Float probability = sortedMapRBR.get("optic_neuritis");
                     sortedMapRBR.put("optic_neuritis", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("multiple sclerosis")) {
+                            notes.remove("multiple sclerosis");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -310,9 +357,16 @@ public class DaljaIspitivanjaProlog {
                 if (che.isSelected()) {
                     Float probability = sortedMapRBR.get("optic_neuritis");
                     sortedMapRBR.put("optic_neuritis", (probability + 0.033f));
+                    notes.add("using drugs lately");
                 } else {
                     Float probability = sortedMapRBR.get("optic_neuritis");
                     sortedMapRBR.put("optic_neuritis", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("using drugs lately")) {
+                            notes.remove("using drugs lately");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -323,9 +377,16 @@ public class DaljaIspitivanjaProlog {
                 if (al.isSelected()) {
                     Float probability = sortedMapRBR.get("optic_neuritis");
                     sortedMapRBR.put("optic_neuritis", (probability + 0.033f));
+                    notes.add("auto-immune disorders");
                 } else {
                     Float probability = sortedMapRBR.get("optic_neuritis");
                     sortedMapRBR.put("optic_neuritis", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("auto-immune disorders")) {
+                            notes.remove("auto-immune disorders");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -350,9 +411,16 @@ public class DaljaIspitivanjaProlog {
                 if (inf.isSelected()) {
                     Float probability = sortedMapRBR.get("subconjunctival_hemorrhage");
                     sortedMapRBR.put("subconjunctival_hemorrhage", (probability + 0.05f));
+                    notes.add("high blood pressure");
                 } else {
                     Float probability = sortedMapRBR.get("subconjunctival_hemorrhage");
                     sortedMapRBR.put("subconjunctival_hemorrhage", (probability - 0.05f));
+                    for (String note : notes) {
+                        if (note.equals("high blood pressure")) {
+                            notes.remove("high blood pressure");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -363,9 +431,16 @@ public class DaljaIspitivanjaProlog {
                 if (che.isSelected()) {
                     Float probability = sortedMapRBR.get("subconjunctival_hemorrhage");
                     sortedMapRBR.put("subconjunctival_hemorrhage", (probability + 0.05f));
+                    notes.add("bleeding disorders");
                 } else {
                     Float probability = sortedMapRBR.get("subconjunctival_hemorrhage");
                     sortedMapRBR.put("subconjunctival_hemorrhage", (probability - 0.05f));
+                    for (String note : notes) {
+                        if (note.equals("bleeding disorders")) {
+                            notes.remove("bleeding disorders");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -388,9 +463,16 @@ public class DaljaIspitivanjaProlog {
                 if (inf.isSelected()) {
                     Float probability = sortedMapRBR.get("iridocyclitis");
                     sortedMapRBR.put("iridocyclitis", (probability + 0.05f));
+                    notes.add("infection of the eyeball");
                 } else {
                     Float probability = sortedMapRBR.get("iridocyclitis");
                     sortedMapRBR.put("iridocyclitis", (probability - 0.05f));
+                    for (String note : notes) {
+                        if (note.equals("infection of the eyeball")) {
+                            notes.remove("infection of the eyeball");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -401,9 +483,16 @@ public class DaljaIspitivanjaProlog {
                 if (al.isSelected()) {
                     Float probability = sortedMapRBR.get("iridocyclitis");
                     sortedMapRBR.put("iridocyclitis", (probability + 0.05f));
+                    notes.add("auto-immune disorders");
                 } else {
                     Float probability = sortedMapRBR.get("iridocyclitis");
                     sortedMapRBR.put("iridocyclitis", (probability - 0.05f));
+                    for (String note : notes) {
+                        if (note.equals("auto-immune disorders")) {
+                            notes.remove("auto-immune disorders");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -429,6 +518,16 @@ public class DaljaIspitivanjaProlog {
                 public void actionPerformed(ActionEvent actionEvent) {
                     Float probability = sortedMapRBR.get("cataract");
                     sortedMapRBR.put("retinal_detachment", (probability + 0.05f));
+                    boolean found = false;
+                    for (String note : notes) {
+                        if (note.equals("metabolic abnormality")) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == true) {
+                        notes.add("metabolic abnormality");
+                    }
                 }
             });
 
@@ -437,6 +536,12 @@ public class DaljaIspitivanjaProlog {
                 public void actionPerformed(ActionEvent actionEvent) {
                     Float probability = sortedMapRBR.get("cataract");
                     sortedMapRBR.put("retinal_detachment", (probability - 0.05f));
+                    for (String note : notes) {
+                        if (note.equals("metabolic abnormality")) {
+                            notes.remove("metabolic abnormality");
+                            break;
+                        }
+                    }
                 }
             });
             pitanjePan.add(pitanje);
@@ -453,9 +558,16 @@ public class DaljaIspitivanjaProlog {
                 if (dia.isSelected()) {
                     Float probability = sortedMapRBR.get("cataract");
                     sortedMapRBR.put("cataract", (probability + 0.033f));
+                    notes.add("diabetic");
                 } else {
                     Float probability = sortedMapRBR.get("cataract");
                     sortedMapRBR.put("cataract", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("diabetic")) {
+                            notes.remove("diabetic");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -466,9 +578,16 @@ public class DaljaIspitivanjaProlog {
                 if (ste.isSelected()) {
                     Float probability = sortedMapRBR.get("cataract");
                     sortedMapRBR.put("cataract", (probability + 0.033f));
+                    notes.add("steroid user");
                 } else {
                     Float probability = sortedMapRBR.get("cataract");
                     sortedMapRBR.put("cataract", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("steroid user")) {
+                            notes.remove("steroid user");
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -479,9 +598,16 @@ public class DaljaIspitivanjaProlog {
                 if (smo.isSelected()) {
                     Float probability = sortedMapRBR.get("cataract");
                     sortedMapRBR.put("cataract", (probability + 0.033f));
+                    notes.add("smoker");
                 } else {
                     Float probability = sortedMapRBR.get("cataract");
                     sortedMapRBR.put("cataract", (probability - 0.033f));
+                    for (String note : notes) {
+                        if (note.equals("smoker")) {
+                            notes.remove("smoker");
+                            break;
+                        }
+                    }
                 }
             }
         });

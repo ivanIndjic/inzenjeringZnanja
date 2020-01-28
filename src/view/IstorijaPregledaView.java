@@ -33,9 +33,9 @@ public class IstorijaPregledaView {
             }
         });
         String[] columnNames = {
-                "Symptom", "Treatment", "Doctor", "Date"
-
+                "Symptom", "Treatment", "Doctor", "Date", "Disease", "IdPregleda", "DN"
         };
+
 
         String sql = "SELECT * FROM IP WHERE JMBG='" + jmbg + "'";
 
@@ -46,6 +46,15 @@ public class IstorijaPregledaView {
         PreparedStatement st = conn.prepareStatement(sql);
         DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
         JTable table = new JTable(dtm);
+        table.getColumnModel().getColumn(5).setWidth(0);
+        table.getColumnModel().getColumn(5).setMinWidth(0);
+        table.getColumnModel().getColumn(5).setMaxWidth(0);
+        table.getColumnModel().getColumn(0).setWidth(0);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.getColumnModel().getColumn(6).setWidth(0);
+        table.getColumnModel().getColumn(6).setMinWidth(0);
+        table.getColumnModel().getColumn(6).setMaxWidth(0);
         table.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -60,7 +69,12 @@ public class IstorijaPregledaView {
                     String treatment = (String) table.getValueAt(sel, getColumnByName(table, "Treatment"));
                     String doctor = (String) table.getValueAt(sel, getColumnByName(table, "Doctor"));
                     String date = (String) table.getValueAt(sel, getColumnByName(table, "Date"));
-                    ConcreteMedicalRecord cmr = new ConcreteMedicalRecord(symptoms, treatment, doctor, date);
+                    String disease = (String) table.getValueAt(sel, getColumnByName(table, "Disease"));
+                    String id = (String) table.getValueAt(sel, getColumnByName(table, "IdPregleda"));
+                    String notes = (String) table.getValueAt(sel, getColumnByName(table, "DN"));
+
+                    ConcreteMedicalRecord cmr = new ConcreteMedicalRecord(symptoms, treatment, doctor, date, disease, notes, id);
+                    mainFr.dispose();
                 }
             }
 
@@ -91,9 +105,11 @@ public class IstorijaPregledaView {
             String e = rs.getString("Tretman");
             String f = rs.getString("Doktor");
             String c = rs.getString("Datum");
+            String b = rs.getString("Disease");
+            String i = rs.getString("IdPregleda");
+            String a = rs.getString("DN");
 
-
-            dtm.addRow(new Object[]{d, e, f, c});
+            dtm.addRow(new Object[]{d, e, f, c, b, i, a});
         }
         JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);

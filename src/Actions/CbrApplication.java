@@ -103,6 +103,30 @@ public class CbrApplication implements StandardCBRApplication {
         }
     }
 
+    public static boolean proveraRazlikeVerovatnocaZaDaljaIspitivanjaDouble(Map<String, Double> map) {
+        boolean povratna = true;
+        Double vrednost1 = 0d;
+        Double vrednost2 = 0.0d;
+        int brojac = 0;
+        for (Map.Entry<String, Double> entry : map.entrySet()) {
+            if (brojac == 0) {
+                SelectSymptoms.bolest1 = entry.getKey();
+                vrednost1 = entry.getValue();
+            } else if (brojac == 1) {
+                SelectSymptoms.bolest2 = entry.getKey();
+                vrednost2 = entry.getValue();
+            } else if (brojac == 2) {
+                SelectSymptoms.bolest3 = entry.getKey();
+            }
+            brojac++;
+        }
+        if (vrednost1 > vrednost2 + 0.3) {
+            povratna = false;
+        }
+
+        return povratna;
+    }
+
     /**
      * KNN configuration
      */
@@ -309,30 +333,6 @@ public class CbrApplication implements StandardCBRApplication {
             }
 
         }
-    }
-
-    public static boolean proveraRazlikeVerovatnocaZaDaljaIspitivanjaDouble(Map<String, Double> map) {
-        boolean povratna = true;
-        Double vrednost1 = 0d;
-        Double vrednost2 = 0.0d;
-        int brojac = 0;
-        for (Map.Entry<String, Double> entry : map.entrySet()) {
-            if (brojac == 0) {
-                SelectSymptoms.bolest1 = entry.getKey();
-                vrednost1 = entry.getValue();
-            } else if (brojac == 1) {
-                SelectSymptoms.bolest2 = entry.getKey();
-                vrednost2 = entry.getValue();
-            } else if (brojac == 2) {
-                SelectSymptoms.bolest3 = entry.getKey();
-            }
-            brojac++;
-        }
-        if (vrednost1 > vrednost2 + 0.3) {
-            povratna = false;
-        }
-
-        return povratna;
     }
 
 }

@@ -33,18 +33,28 @@ public class AddData {
         p3.setLayout(new FlowLayout());
         JPanel p4 = new JPanel();
         p4.setLayout(new FlowLayout());
+        JPanel p5 = new JPanel();
+        p5.setLayout(new FlowLayout());
         JLabel nb = new JLabel("Symptoms:             ");
         JTextArea nbT = new JTextArea();
         nbT.setText(navedeniSimptomi);
         nbT.setPreferredSize(new Dimension(400, 50));
+        nbT.setLineWrap(true);
 
         JLabel tr = new JLabel("Tretment:                ");
         JTextArea trT = new JTextArea();
         trT.setPreferredSize(new Dimension(400, 50));
+        trT.setLineWrap(true);
 
         JLabel dn = new JLabel("Additional notes:      ");
         JTextArea dnT = new JTextArea();
+        dnT.setLineWrap(true);
         dnT.setPreferredSize(new Dimension(400, 250));
+
+        JLabel disease = new JLabel("Diagnosis:              ");
+        JTextArea diseaseT = new JTextArea();
+        diseaseT.setPreferredSize(new Dimension(400, 30));
+        diseaseT.setLineWrap(true);
 
         JLabel dok = new JLabel("Doctor:                    ");
         String[] dokNiz = {"Nema", "Srdjan", "Milica", "Ivan", "Nina"};
@@ -56,6 +66,8 @@ public class AddData {
         p2.add(trT);
         p3.add(dn);
         p3.add(dnT);
+        p5.add(disease);
+        p5.add(diseaseT);
         p4.add(dok);
         p4.add(doktori);
 
@@ -86,12 +98,13 @@ public class AddData {
                     ip.setDodatneNapomene(dnT.getText());
                     ip.setDoktor((String) doktori.getSelectedItem());
                     ip.setTretman(trT.getText());
+                    ip.setBolest(diseaseT.getText());
 
                     Connection conn;
                     try {
                         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
 
-                        String sql2 = "insert into IP (JMBG,Simptomi,Tretman,Doktor,Datum,DN) values (?, ?, ?, ?, ?, ?)";
+                        String sql2 = "insert into IP (JMBG,Simptomi,Tretman,Doktor,Datum,DN,Disease) values (?, ?, ?, ?, ?, ?, ?)";
                         PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                         pstmt2.setString(1, jmbg);
                         pstmt2.setString(2, ip.getSimptomi());
@@ -99,6 +112,8 @@ public class AddData {
                         pstmt2.setString(4, ip.getDoktor());
                         pstmt2.setString(5, ip.getDatum());
                         pstmt2.setString(6, ip.getDodatneNapomene());
+                        pstmt2.setString(7, ip.getBolest());
+
 
                         int updated2 = pstmt2.executeUpdate();
                     } catch (SQLException e1) {
@@ -129,6 +144,7 @@ public class AddData {
         main.add(p1);
         main.add(p2);
         main.add(p3);
+        main.add(p5);
         main.add(p4);
         main.add(pan);
         mainF.setSize(800, 560);

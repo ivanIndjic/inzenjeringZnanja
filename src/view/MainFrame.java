@@ -185,7 +185,7 @@ public class MainFrame extends JFrame {
         java.awt.Image historyIm2 = historyIm.getImage(); // transform it
         java.awt.Image historyF2 = historyIm2.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         historyIm = new ImageIcon(historyF2);
-        JButton karton = new JButton("Medical records",historyIm);
+        JButton karton = new JButton("Medical records", historyIm);
 
         karton.addActionListener(new ActionListener() {
 

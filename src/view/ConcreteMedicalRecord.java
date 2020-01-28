@@ -4,17 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class ConcreteMedicalRecord {
     public JFrame mainF = new JFrame("Medical record");
 
-    public ConcreteMedicalRecord(String symptoms, String treatment, String doctor, String date) {
+    public ConcreteMedicalRecord(String symptoms, String treatment, String doctor, String date, String diagnosis, String notes, String id) {
         JPanel main = new JPanel();
-        ImageIcon water = new ImageIcon("./eyeIcon.png");
-        Image image = water.getImage(); // transform it
-        Image newimg = image.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        water = new ImageIcon(newimg);
-        JButton canc = new JButton("Exit",water);
+
+        JButton canc = new JButton("Cancel");
+        JButton done = new JButton("Done");
+
         JPanel pan = new JPanel();
         pan.setLayout(new FlowLayout());
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
@@ -28,30 +30,39 @@ public class ConcreteMedicalRecord {
         p4.setLayout(new FlowLayout());
         JPanel p5 = new JPanel();
         p5.setLayout(new FlowLayout());
+        JPanel p6 = new JPanel();
+        p6.setLayout(new FlowLayout());
         JLabel nb = new JLabel("Symptoms:             ");
         JTextArea nbT = new JTextArea();
         nbT.setText(symptoms);
-        nbT.setEditable(false);
         nbT.setPreferredSize(new Dimension(400, 50));
+        nbT.setLineWrap(true);
 
         JLabel tr = new JLabel("Tretment:                ");
         JTextArea trT = new JTextArea();
+        trT.setLineWrap(true);
         trT.setPreferredSize(new Dimension(400, 50));
         trT.setText(treatment);
-        trT.setEditable(false);
-        JLabel dn = new JLabel("Additional notes:      ");
-        JTextArea dnT = new JTextArea();
+        JLabel dn = new JLabel("Additional notes:     ");
+        JTextArea dnT = new JTextArea(notes);
+        dnT.setLineWrap(true);
         dnT.setPreferredSize(new Dimension(400, 250));
-        dnT.setEditable(false);
         //////////////ovde iz onog selektovanog sa reload probabilities!!!!!!!!!!!!!!!!
         JLabel dok = new JLabel("Doctor:                    ");
         JTextArea doktor = new JTextArea(doctor);
         doktor.setEditable(false);
-        JLabel datum = new JLabel("Date");
+        JLabel datum = new JLabel("Date:                     ");
         JTextArea datumT = new JTextArea(date);
+        datumT.setPreferredSize(new Dimension(400, 30));
         datumT.setEditable(false);
+        JLabel disease = new JLabel("Diagnosis:              ");
+        JTextArea diseaseT = new JTextArea(diagnosis);
+        diseaseT.setPreferredSize(new Dimension(400, 30));
+        diseaseT.setLineWrap(true);
         p5.add(datum);
         p5.add(datumT);
+        p6.add(disease);
+        p6.add(diseaseT);
         p1.add(nb);
         p1.add(nbT);
         p2.add(tr);
@@ -65,6 +76,7 @@ public class ConcreteMedicalRecord {
         JLabel lab2 = new JLabel("                   ");
         pan.add(lab1);
         pan.add(canc);
+        pan.add(done);
 
         main.add(lab1);
         main.add(lab2);
@@ -78,7 +90,30 @@ public class ConcreteMedicalRecord {
             }
         });
 
+
+        done.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    //otvaranje konekcije
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
+
+                    String sql = "update IP set Simptomi='" + nbT.getText() + "',Tretman='" + trT.getText() + "',Doktor='" + doktor.getText() + "',Datum='" + datumT.getText() + "',DN='" + dnT.getText() + "',Disease='" + diseaseT.getText() + "' where IdPregleda='" + id + "'";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    int updated = pstmt.executeUpdate();
+
+                    pstmt.close();
+
+                    mainF.dispose();
+
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+            }
+        });
+
         main.add(p5);
+        main.add(p6);
         main.add(p1);
         main.add(p2);
         main.add(p3);
