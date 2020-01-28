@@ -25,9 +25,10 @@ public class DaljaIspitivanjaProlog {
     public String bolest2 = "";
     public String bolest3 = "";
     public Osoba korisnik = new Osoba();
-    public ArrayList<String> notes = new ArrayList<>();
+    public static ArrayList<String> notes = new ArrayList<>();
 
     public DaljaIspitivanjaProlog(Osoba korisnik, Map<String, Float> sortedMapRBR) {
+        notes = new ArrayList<>();
         this.sortedMapRBR = sortedMapRBR;
         int it = 1;
         for (String key : sortedMapRBR.keySet()) {

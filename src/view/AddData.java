@@ -1,5 +1,6 @@
 package view;
 
+import Actions.DaljaIspitivanjaProlog;
 import model.IstorijaPregleda;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class AddData {
 
     public JFrame mainF = new JFrame("Oftalmology");
     private IstorijaPregleda ip = new IstorijaPregleda();
+    private String notes="";
 
     public AddData(String navedeniSimptomi, String jmbg) {
         JPanel main = new JPanel();
@@ -47,7 +49,16 @@ public class AddData {
         trT.setLineWrap(true);
 
         JLabel dn = new JLabel("Additional notes:      ");
-        JTextArea dnT = new JTextArea();
+        for (String note : DaljaIspitivanjaProlog.notes) {
+            notes += note;
+            notes += ", ";
+        }
+        try {
+            notes = notes.substring(0, notes.length() - 2);
+            System.out.println(notes);
+        } catch (Exception e) {
+        }
+        JTextArea dnT = new JTextArea(notes);
         dnT.setLineWrap(true);
         dnT.setPreferredSize(new Dimension(400, 250));
 

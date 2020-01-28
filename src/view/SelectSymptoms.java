@@ -1,6 +1,7 @@
 package view;
 
 import Actions.CbrApplication;
+import Actions.DaljaIspitivanjaProlog;
 import app.CalculationOfTopDisease;
 import app.RankingList;
 import model.Osoba;
@@ -159,21 +160,6 @@ public class SelectSymptoms extends JFrame {
             daljaPan.add(daljeIspitivanja);
             daljaPan.add(daljaIsBut);
             descPanel.add(daljaPan, BorderLayout.SOUTH);
-
-            daljaIsBut.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    // TODO Auto-generated method stub
-                    if (rbr) {
-                        mainFrame.dispose();
-                        FurtherTesting di = new FurtherTesting(o, sortedMapRBR, jmbg);
-                    } else {
-
-                    }
-                }
-            });
-
 
             checkPanel.setLayout(new BoxLayout(checkPanel, BoxLayout.Y_AXIS));
             JCheckBox dim_vi = new JCheckBox("Diminished vision");
@@ -637,6 +623,7 @@ public class SelectSymptoms extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     // TODO Auto-generated method stub
+                    DaljaIspitivanjaProlog.notes=new ArrayList<>();
                     simpto = new ArrayList<String>();
                     if (dim_vi.isSelected())
                         simpto.add("diminished vision");
@@ -698,6 +685,56 @@ public class SelectSymptoms extends JFrame {
                         e1.printStackTrace();
                     }
                     mainFrame.dispose();
+                }
+            });
+
+            daljaIsBut.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    // TODO Auto-generated method stub
+                    if (rbr) {
+                        mainFrame.dispose();
+                        simpto = new ArrayList<String>();
+                        if (dim_vi.isSelected())
+                            simpto.add("diminished vision");
+                        if (pain_eye.isSelected())
+                            simpto.add("pain in eye");
+                        if (redness.isSelected())
+                            simpto.add("eye redness");
+                        if (dob_vi.isSelected())
+                            simpto.add("double vision");
+                        if (lacr.isSelected())
+                            simpto.add("lacrimation");
+                        if (forig.isSelected())
+                            simpto.add("foreign body sensation in eye");
+                        if (swol.isSelected())
+                            simpto.add("swollen eye");
+                        if (clo.isSelected())
+                            simpto.add("cloudy eye");
+                        if (bli.isSelected())
+                            simpto.add("blindness");
+                        if (spots.isSelected())
+                            simpto.add("spots of clouds in vision");
+                        if (burn.isSelected())
+                            simpto.add("eye burns of stings");
+                        if (white.isSelected())
+                            simpto.add("white discharge from eye");
+                        if (itchi.isSelected())
+                            simpto.add("itchiness of eye");
+                        for (String simpton : simpto) {
+                            navedeniSimptomi += simpton;
+                            navedeniSimptomi += ", ";
+                        }
+                        try {
+                            navedeniSimptomi = navedeniSimptomi.substring(0, navedeniSimptomi.length() - 2);
+                            System.out.println(navedeniSimptomi);
+                        } catch (Exception e) {
+                        }
+                        FurtherTesting di = new FurtherTesting(o, sortedMapRBR, jmbg,navedeniSimptomi);
+                    } else {
+
+                    }
                 }
             });
             JPanel tug = new JPanel(new BorderLayout());
