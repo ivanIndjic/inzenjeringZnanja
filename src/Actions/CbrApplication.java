@@ -75,7 +75,15 @@ public class CbrApplication implements StandardCBRApplication {
                 disease = entry.getKey();
                 disease = disease.substring(0, 1).toUpperCase() + disease.substring(1);
                 disease = disease.replaceAll("_", " ");
-                print += disease + " : " + round(entry.getValue() * 100, 2) + " %" + "\n";
+                try {
+                    print += disease + " : " + round(entry.getValue() * 100, 2) + " %" + "\n";
+                } catch (Exception e) {
+                    if (entry.getValue().isNaN()) {
+                        print += disease + " : 0 %" + "\n";
+                    } else {
+                        print += disease + " : " + entry.getValue() + " %" + "\n";
+                    }
+                }
                 it++;
             }
             if (it >= 5) {
@@ -103,6 +111,30 @@ public class CbrApplication implements StandardCBRApplication {
         } else {
             return 8;
         }
+    }
+
+    public static boolean proveraRazlikeVerovatnocaZaDaljaIspitivanjaDouble(Map<String, Double> map) {
+        boolean povratna = true;
+        Double vrednost1 = 0d;
+        Double vrednost2 = 0d;
+        int brojac = 0;
+        for (Map.Entry<String, Double> entry : map.entrySet()) {
+            if (brojac == 0) {
+                SelectSymptoms.bolest1 = entry.getKey();
+                vrednost1 = entry.getValue();
+            } else if (brojac == 1) {
+                SelectSymptoms.bolest2 = entry.getKey();
+                vrednost2 = entry.getValue();
+            } else if (brojac == 2) {
+                SelectSymptoms.bolest3 = entry.getKey();
+            }
+            brojac++;
+        }
+        if (vrednost1 > vrednost2 + 0.3 || vrednost2 == 0.0) {
+            povratna = false;
+        }
+
+        return povratna;
     }
 
     /**
@@ -196,7 +228,6 @@ public class CbrApplication implements StandardCBRApplication {
                         min = d;
                     }
                 }
-                // System.out.println("ID " + k2 + " MAX " + max);
                 if (!idMin.containsKey(k2)) {
                     idMin.put(k2, min);
                 }
@@ -270,7 +301,6 @@ public class CbrApplication implements StandardCBRApplication {
             }
             bolestMaxVerovatnoca.put(bolest, max);
         }
-        //System.out.println("MAXIMALNA KONACNA VRV " + bolestMaxVerovatnoca);
         sortedFinalMap = sortByValue(bolestMaxVerovatnoca);
         System.out.println("SORTIRANO " + sortedFinalMap);
     }
@@ -315,30 +345,6 @@ public class CbrApplication implements StandardCBRApplication {
             }
 
         }
-    }
-
-    public static boolean proveraRazlikeVerovatnocaZaDaljaIspitivanjaDouble(Map<String, Double> map) {
-        boolean povratna = true;
-        Double vrednost1 = 0d;
-        Double vrednost2 = 0.0d;
-        int brojac = 0;
-        for (Map.Entry<String, Double> entry : map.entrySet()) {
-            if (brojac == 0) {
-                SelectSymptoms.bolest1 = entry.getKey();
-                vrednost1 = entry.getValue();
-            } else if (brojac == 1) {
-                SelectSymptoms.bolest2 = entry.getKey();
-                vrednost2 = entry.getValue();
-            } else if (brojac == 2) {
-                SelectSymptoms.bolest3 = entry.getKey();
-            }
-            brojac++;
-        }
-        if (vrednost1 > vrednost2 + 0.3) {
-            povratna = false;
-        }
-
-        return povratna;
     }
 
 }
