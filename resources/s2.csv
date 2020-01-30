@@ -1,4 +1,29 @@
-#simptom;ime;godina;pol;rasa;id;terapija;dalja_ispitivanja
-Bolest1;lacrimation,Blindness,swollen eye;2;Male;Black;1
-Bolest2;lacrimation,Blindness;3;Male;Black;2
-Bolest1;Blindness;1;Male;Black;3
+#simptom;ime;godina;pol;rasa;id
+conjunctivitis;itchiness of eye;23;Male;Black;1
+conjunctivitis;white discharge from eye;33;Male;Black;2
+conjunctivitis;eye burns or stings;20;Male;Black;3
+conjunctivitis;spots or clouds in vision;20;Male;White;4
+blepharitis;spots or clouds in vision;20;Male;White;5
+optic_neuritis;blindness;20;Male;Other;6
+conjunctivitis;cloudy eye;20;Male;Other;7
+conjunctivitis;swollen eye;26;Female;White;8
+conjunctivitis;lacrimation;22;Female;White;9
+conjunctivitis;diminished vision;40;Male;White;10
+conjunctivitis;pain in eye;40;Female;Hispanic;11
+conjunctivitis;eye redness;25;Male;Hispanic;12
+conjunctivitis;foreign body sensation in eye;33;Male;Hispanic;13
+conjunctivitis;foreign body sensation in eye,eye redness;33;Male;Hispanic;14
+conjunctivitis;itchiness of eye,blindness;21;Male;Black;15
+conjunctivitis;lacrimation,swollen eye;21;Female;White;16
+cornea_infection;lacrimation,foreign body sensation in eye;21;Female;White;17
+Other;spots or clouds in vision,eye redness,cloudy eye,lacrimation,foreign body sensation in eye;21;Female;White;18
+Other;spots or clouds in vision,eye redness,cloudy eye,foreign body sensation in eye;26;Male;Black;19
+
+
+
+
+
+
+
+
+

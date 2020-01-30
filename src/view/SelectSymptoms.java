@@ -1,9 +1,12 @@
 package view;
 
+import Actions.CBR2;
 import Actions.CbrApplication;
 import app.CalculationOfTopDisease;
 import app.RankingList;
 import model.Osoba;
+import model.Treatment;
+import ucm.gaia.jcolibri.exception.ExecutionException;
 import unbbayes.io.BaseIO;
 import unbbayes.io.NetIO;
 import unbbayes.io.exception.LoadException;
@@ -631,10 +634,20 @@ public class SelectSymptoms extends JFrame {
             Image newDoneImg = doneImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
             donIm = new ImageIcon(newDoneImg);
             JButton done = new JButton("Done", donIm);
+            CBR2 cbr2 = new CBR2();
+            Treatment t = new Treatment();
             done.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
+                    String finn = konacneVrv.getText();
+                    System.out.println("OVO PSIE: " + finn.split(":")[0]);
+                    t.setDisease(finn.split(":")[0]);
+                    try {
+                        cbr2.mainC(t);
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
                     // TODO Auto-generated method stub
                     simpto = new ArrayList<String>();
                     if (dim_vi.isSelected())
@@ -654,7 +667,7 @@ public class SelectSymptoms extends JFrame {
                     if (clo.isSelected())
                         simpto.add("cloudy eye");
                     if (bli.isSelected())
-                        simpto.add("blidness");
+                        simpto.add("blindness");
                     if (spots.isSelected())
                         simpto.add("spots of clouds in vision");
                     if (burn.isSelected())
@@ -673,10 +686,13 @@ public class SelectSymptoms extends JFrame {
                         System.out.println(navedeniSimptomi);
                     } catch (Exception e) {
                     }
-                    AddData addDataFrame = new AddData(navedeniSimptomi, jmbg);
+                    AddData addDataFrame = new AddData(navedeniSimptomi, jmbg,CBR2.ttret);
                     mainFrame.dispose();
-                }
+
+                  }
             });
+
+
             checkPanel.add(rbrBtn);
             checkPanel.add(cbrBtn);
             checkPanel.add(done);

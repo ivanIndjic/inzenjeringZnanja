@@ -10,6 +10,7 @@ import ucm.gaia.jcolibri.method.retrieve.NNretrieval.NNConfig;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
+import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import ucm.gaia.jcolibri.method.retrieve.RetrievalResult;
 import ucm.gaia.jcolibri.method.retrieve.selection.SelectCases;
 import view.SelectSymptoms;
@@ -68,7 +69,8 @@ public class CbrApplication implements StandardCBRApplication {
         String disease = "";
         int it = 0;
         Map<String, Double> mapOfScaledProbabilities = scalingOfSortedMap();
-        for (Map.Entry<String, Double> entry : mapOfScaledProbabilities.entrySet()) {
+        Map<String, Double>finalMap = sortByValue(mapOfScaledProbabilities);
+        for (Map.Entry<String, Double> entry : finalMap.entrySet()) {
             if (entry.getValue() != 0) {
                 disease = entry.getKey();
                 disease = disease.substring(0, 1).toUpperCase() + disease.substring(1);
@@ -117,13 +119,17 @@ public class CbrApplication implements StandardCBRApplication {
 //        ts.setSimilarity("blidness", "double vision", 0);
 
         simConfig.addMapping(new Attribute("simptom", DiseaseDesc.class), new Equal());
+        simConfig.setWeight(new Attribute("simptom", DiseaseDesc.class), 0.64);
+
         simConfig.addMapping(new Attribute("godine", DiseaseDesc.class), new Equal());
+        simConfig.setWeight(new Attribute("godine", DiseaseDesc.class), 0.12);
+
         simConfig.addMapping(new Attribute("rasa", DiseaseDesc.class), new Equal());
+        simConfig.setWeight(new Attribute("rasa", DiseaseDesc.class), 0.12);
+
         simConfig.addMapping(new Attribute("pol", DiseaseDesc.class), new Equal());
-        // simConfig.addMapping(new Attribute("ime",DiseaseDesc.class), ts);
-        // simConfig.addMapping(new Attribute("season", TravelDescription.class), new Equal());
-        // simConfig.addMapping(new Attribute("accommodation", TravelDescription.class), new Equal());
-        // simConfig.addMapping(new Attribute("hotel", TravelDescription.class), new Equal());
+        simConfig.setWeight(new Attribute("pol", DiseaseDesc.class), 0.12);
+
 
         // Equal - returns 1 if both individuals are equal, otherwise returns 0
         // Interval - returns the similarity of two number inside an interval: sim(x,y) = 1-(|x-y|/interval)
@@ -137,10 +143,12 @@ public class CbrApplication implements StandardCBRApplication {
     }
 
     public void cycle(CBRQuery query) throws ExecutionException {
-
         HashMap<String, HashMap<Integer, ArrayList<Double>>> mapaBolesi = new HashMap<>();
         Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
         eval = SelectCases.selectTopKRR(eval, 8);
+        System.out.println("OVO TRAZIMO");
+        for (RetrievalResult nse : eval)
+            System.out.println(nse.get_case().getDescription());
         String perc = "";
         String disea = "";
         Integer id = 0;
@@ -172,32 +180,57 @@ public class CbrApplication implements StandardCBRApplication {
                 mapaBolesi.put(disea, idVerovatnoce);
             }
             System.out.println(disea + " ID " + id + " " + perc);
+        } //posle ovoga imamo mapu sa id, nizom vrv koje se odnose na taj id
 
-//            String zasplit = nse.get_case().getDescription() + ";" + nse.getEval();
-//            String[] values = zasplit.split(";");
-//            if (a == 0) {
-//                prag = Float.parseFloat(values[2]);
-//                map.put(values[0], Float.parseFloat(values[1]));
-//                a++;
-//            } else {
-//
-//                if (prag == Float.parseFloat(values[2])) {
-//                    System.out.println(nse.getEval());
-//                    map.put(values[0], Float.parseFloat(values[1]));
-//                }
-//            }
-//        }
+        for (String k : mapaBolesi.keySet()) {
+            HashMap<Integer, ArrayList<Double>> idMax = new HashMap<>();
 
-//        for (String s : map.keySet()) {
-//            System.out.println(s + " " + map.get(s));
-//        }
-//        mapp.put("blidness", map);
-
-
+            for (Integer k2 : mapaBolesi.get(k).keySet()) {
+                Double max = mapaBolesi.get(k).get(k2).get(0);
+                Double min = mapaBolesi.get(k).get(k2).get(0);
+                for (Double d : mapaBolesi.get(k).get(k2)) {
+                    if (d > max) {
+                        max = d;
+                    }
+                    if (d < min) {
+                        min = d;
+                    }
+                }
+                // System.out.println("ID " + k2 + " MAX " + max);
+                if (!idMin.containsKey(k2)) {
+                    idMin.put(k2, min);
+                }
+                ArrayList<Double> maxVrv = new ArrayList<>();
+                maxVrv.add(max);
+                idMax.put(k2, maxVrv);
+            }
+            if (!mapaBolesiMax.containsKey(k)) {
+                mapaBolesiMax.put(k, idMax);
+            } else {
+                HashMap<Integer, ArrayList<Double>> temp = mapaBolesiMax.get(k);
+                for (Integer key : idMax.keySet()) {
+                    if (temp.containsKey(key)) {
+                        ArrayList<Double> tempVrv = temp.get(key);
+                        for (Double vrv : idMax.get(key)) {
+                            tempVrv.add(vrv);
+                        }
+                        temp.put(key, tempVrv);
+                    } else {
+                        temp.put(key, idMax.get(key));
+                    }
+                }
+            }
         }
+
+        for (String k : mapaBolesiMax.keySet()) {
+            for (Integer k2 : mapaBolesiMax.get(k).keySet()) {
+                System.out.println("NAJVECE VEROVATNOCE   " + k + " " + k2 + " " + mapaBolesiMax.get(k).get(k2));
+            }
+        } //mapa bolesti a vr je mapa id-max vrv
+
         HashMap<String, HashMap<Integer, Double>> mapaBolestIdSumaVrv = new HashMap<>();
         for (String bolest : mapaBolesi.keySet()) {
-            HashMap<Integer, ArrayList<Double>> idVrvLista = mapaBolesi.get(bolest);
+            HashMap<Integer, ArrayList<Double>> idVrvLista = mapaBolesiMax.get(bolest);
             HashMap<Integer, Double> idVrv = new HashMap<>();
             for (Integer idBol : idVrvLista.keySet()) {
                 ArrayList<Double> vrvLista = idVrvLista.get(idBol);
@@ -205,11 +238,41 @@ public class CbrApplication implements StandardCBRApplication {
                 for (Double vrv : vrvLista) {
                     sumaVerovatnoca += vrv;
                 }
-                idVrv.put(idBol, sumaVerovatnoca / vrvLista.size());
+                if (vrvLista.size() < CsvConnector.idBrSimp.get(idBol)) {
+                    int razlika = CsvConnector.idBrSimp.get(idBol) - vrvLista.size();
+                    int razlikaReplika = razlika;
+                    while (razlikaReplika > 0) { //ako ima manje simptoma kliknutih nego u slucaju da se taj manjak
+                        //oduzima od verovatnoce ukupne
+                        sumaVerovatnoca += idMin.get(idBol);
+                        razlikaReplika--;
+                    }
+                    idVrv.put(idBol, sumaVerovatnoca / (vrvLista.size() + razlika));
+                } else {
+                    idVrv.put(idBol, sumaVerovatnoca / vrvLista.size());
+                }
             }
             mapaBolestIdSumaVrv.put(bolest, idVrv);
         }
         System.out.println("MAPA " + mapaBolestIdSumaVrv);
+
+        //sada za svaki bolest treba da se nadje id sa najvecom verovatnocom
+        HashMap<String, Double> bolestMaxVerovatnoca = new HashMap<>();
+        for (String bolest : mapaBolestIdSumaVrv.keySet()) {
+            ArrayList<Double> maxVrv = new ArrayList<>();
+            for (Integer key : mapaBolestIdSumaVrv.get(bolest).keySet()) {
+                maxVrv.add(mapaBolestIdSumaVrv.get(bolest).get(key));
+            }
+            Double max = maxVrv.get(0);
+            for (Double vrv : maxVrv) {
+                if (max < vrv) {
+                    max = vrv;
+                }
+            }
+            bolestMaxVerovatnoca.put(bolest, max);
+        }
+        //System.out.println("MAXIMALNA KONACNA VRV " + bolestMaxVerovatnoca);
+        sortedFinalMap = sortByValue(bolestMaxVerovatnoca);
+        System.out.println("SORTIRANO " + sortedFinalMap);
     }
 
     public void postCycle() throws ExecutionException {
@@ -219,16 +282,18 @@ public class CbrApplication implements StandardCBRApplication {
     public CBRCaseBase preCycle() throws ExecutionException {
         _caseBase.init(_connector);
         java.util.Collection<CBRCase> cases = _caseBase.getCases();
+        System.out.println("VRACENO: \n");
         for (CBRCase c : cases)
             System.out.println(c.getDescription());
         return _caseBase;
     }
 
     public void mainS(Osoba o, ArrayList<String> simptomi) {
-        Integer duzina = simptomi.size();
+        mapaBolesiMax = new HashMap<>();
+        sortedFinalMap = new HashMap<>();
         StandardCBRApplication recommender = null;
         for (int i = 0; i < simptomi.size(); i++) {
-            System.out.println("SIMPTOMI " + simptomi.get(i));
+            System.out.println("SIMPTOM " + simptomi.get(i));
             try {
                 recommender = new CbrApplication();
                 recommender.configure();
@@ -241,7 +306,7 @@ public class CbrApplication implements StandardCBRApplication {
                 dd.setPol(o.getPol());
                 dd.setRasa(o.getRasa());
                 dd.setSimptom(simptomi.get(i));
-                System.out.println(dd.toString());
+                System.out.println("DISEASE DESCRIPTION " + dd.toString());
                 query.setDescription(dd);
                 recommender.cycle(query);
                 recommender.postCycle();

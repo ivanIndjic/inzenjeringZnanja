@@ -18,7 +18,9 @@ public class AddData {
     public JFrame mainF = new JFrame("Oftalmology");
     private IstorijaPregleda ip = new IstorijaPregleda();
 
-    public AddData(String navedeniSimptomi, String jmbg) {
+    public AddData(String navedeniSimptomi, String jmbg, String treatment) {
+        System.out.println("STATIC: "+treatment);
+        String finalT = treatment.replace("}","").replace("'","").split("=")[2];
         JPanel main = new JPanel();
         JButton canc = new JButton("Cancel");
         JButton ok = new JButton("Save");
@@ -38,9 +40,20 @@ public class AddData {
         nbT.setText(navedeniSimptomi);
         nbT.setPreferredSize(new Dimension(400, 50));
 
+
         JLabel tr = new JLabel("Tretment:                ");
         JTextArea trT = new JTextArea();
-        trT.setPreferredSize(new Dimension(400, 50));
+        trT.setPreferredSize(new Dimension(400, 70));
+        trT.setLineWrap(true);
+        trT.setAutoscrolls(true);
+        trT.setWrapStyleWord(true);
+        trT.setText(finalT);
+
+
+        JScrollPane scr = new JScrollPane(trT,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);// Add your text area to scroll pane
+
 
         JLabel dn = new JLabel("Additional notes:      ");
         JTextArea dnT = new JTextArea();
@@ -53,7 +66,8 @@ public class AddData {
         p1.add(nb);
         p1.add(nbT);
         p2.add(tr);
-        p2.add(trT);
+       // p2.add(trT);
+        p2.add(scr);
         p3.add(dn);
         p3.add(dnT);
         p4.add(dok);
