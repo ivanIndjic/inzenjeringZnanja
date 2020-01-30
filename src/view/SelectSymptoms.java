@@ -592,63 +592,11 @@ public class SelectSymptoms extends JFrame {
             checkPanel.add(pain_eye);
             checkPanel.add(redness);
             checkPanel.add(dob_vi);
-            ImageIcon donIm = new ImageIcon("./done.png");
-            Image doneImg = donIm.getImage(); // transform it
-            Image newDoneImg = doneImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-            donIm = new ImageIcon(newDoneImg);
-            JButton done = new JButton("Done", donIm);
-            done.addActionListener(new ActionListener() {
 
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    // TODO Auto-generated method stub
-                    DaljaIspitivanjaProlog.notes = new ArrayList<>();
-                    simpto = new ArrayList<String>();
-                    if (dim_vi.isSelected())
-                        simpto.add("diminished vision");
-                    if (pain_eye.isSelected())
-                        simpto.add("pain in eye");
-                    if (redness.isSelected())
-                        simpto.add("eye redness");
-                    if (dob_vi.isSelected())
-                        simpto.add("double vision");
-                    if (lacr.isSelected())
-                        simpto.add("lacrimation");
-                    if (forig.isSelected())
-                        simpto.add("foreign body sensation in eye");
-                    if (swol.isSelected())
-                        simpto.add("swollen eye");
-                    if (clo.isSelected())
-                        simpto.add("cloudy eye");
-                    if (bli.isSelected())
-                        simpto.add("blidness");
-                    if (spots.isSelected())
-                        simpto.add("spots of clouds in vision");
-                    if (burn.isSelected())
-                        simpto.add("eye burns of stings");
-                    if (white.isSelected())
-                        simpto.add("white discharge from eye");
-                    if (itchi.isSelected())
-                        simpto.add("itchiness of eye");
-                    navedeniSimptomi = "";
-                    for (String simpton : simpto) {
-                        navedeniSimptomi += simpton;
-                        navedeniSimptomi += ", ";
-                    }
-                    try {
-                        navedeniSimptomi = navedeniSimptomi.substring(0, navedeniSimptomi.length() - 2);
-                        System.out.println(navedeniSimptomi);
-                    } catch (Exception e) {
-                    }
-                    AddData addDataFrame = new AddData(navedeniSimptomi, jmbg);
-                    mainFrame.dispose();
-                }
-            });
             JPanel ispitivanja = new JPanel();
             ispitivanja.setLayout(new FlowLayout());
             ispitivanja.add(rbrBtn);
             ispitivanja.add(cbrBtn);
-            ispitivanja.add(done);
             checkPanel.add(ispitivanja);
             String[] diseaseStrings = {"conjunctivitis", "blepharitis", "chronic glaucoma", "cataract",
                     "macular degeneration", "dry eye of unknown cause", "eye alignment disorder", "corneal abrasion",
@@ -715,8 +663,8 @@ public class SelectSymptoms extends JFrame {
                         System.out.println(navedeniSimptomi);
                     } catch (Exception e) {
                     }
-                    //AddData addDataFrame = new AddData(navedeniSimptomi,jmbg);
-                    DiagnosisView dv = new DiagnosisView(diseaseList.getSelectedItem().toString());
+                    DiagnosisView dv = new DiagnosisView(diseaseList.getSelectedItem().toString(), navedeniSimptomi, jmbg);
+                    mainFrame.dispose();
                 }
             });
             checkPanel.add(combo);
@@ -786,7 +734,8 @@ public class SelectSymptoms extends JFrame {
                             System.out.println(navedeniSimptomi);
                         } catch (Exception e) {
                         }
-                        FurtherTesting di = new FurtherTesting(o, sortedMapRBR, jmbg, navedeniSimptomi, simpto);
+                        DaljaIspitivanjaProlog di = new DaljaIspitivanjaProlog(o, sortedMapRBR, simpto, jmbg, navedeniSimptomi);
+                        mainFrame.dispose();
                     } else {
 
                     }

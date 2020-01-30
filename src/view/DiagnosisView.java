@@ -13,10 +13,8 @@ import java.util.ArrayList;
 public class DiagnosisView {
     public ArrayList<String> notes = new ArrayList<>();
 
-    public DiagnosisView(String disease) {
+    public DiagnosisView(String disease,String navedeniSimptomi,String jmbg) {
         JFrame mainF = new JFrame(disease);
-        JPanel m = new JPanel();
-        m.setLayout(new BorderLayout());
         JPanel main = new JPanel();
         if (disease.equals("conjunctivitis")) {
             main = getConj();
@@ -47,9 +45,25 @@ public class DiagnosisView {
         } else if (disease.equals("eye alignment disorder")) {
             main = getEye();
         }
+        JPanel main2=new JPanel();
+        main2.setLayout(new BorderLayout());
+        main2.add(main,BorderLayout.NORTH);
+        ImageIcon donIm = new ImageIcon("./done.png");
+        Image doneImg = donIm.getImage(); // transform it
+        Image newDoneImg = doneImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        donIm = new ImageIcon(newDoneImg);
+        JButton done = new JButton("Done", donIm);
 
+        done.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+               AddData ad=new AddData(navedeniSimptomi,jmbg,disease);
+               mainF.dispose();
+            }
+        });
+        main2.add(done,BorderLayout.SOUTH);
         mainF.setSize(800, 560);
-        mainF.add(main);
+        mainF.add(main2);
         mainF.setVisible(true);
     }
 
@@ -208,11 +222,11 @@ public class DiagnosisView {
         JCheckBox l = new JCheckBox("sleep apnea");
         JCheckBox m = new JCheckBox("liver or kidney disease");
         JCheckBox o = new JCheckBox("overactive thyroid");
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -332,11 +346,11 @@ public class DiagnosisView {
         //phenylephrine --diabetes --heart problems --high blood pressure
         JCheckBox o = new JCheckBox("enlarged prostate or urination problems");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -466,11 +480,11 @@ public class DiagnosisView {
         JCheckBox p = new JCheckBox("multiple sclerosis");
 
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -596,11 +610,11 @@ public class DiagnosisView {
         //bimatoprost --eye surgery
 
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -701,11 +715,11 @@ public class DiagnosisView {
         JCheckBox n = new JCheckBox("heart attack");
         JCheckBox o = new JCheckBox("stomach or intestinal bleeding");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -827,11 +841,11 @@ public class DiagnosisView {
         JCheckBox i = new JCheckBox("metabolic disorder");
         JCheckBox j = new JCheckBox("astma");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -939,11 +953,11 @@ public class DiagnosisView {
         JCheckBox n = new JCheckBox("malaria;");
         JCheckBox o = new JCheckBox("depression");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -1070,11 +1084,11 @@ public class DiagnosisView {
         JCheckBox k = new JCheckBox("astma");
         //tropicamide
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -1188,11 +1202,11 @@ public class DiagnosisView {
         JCheckBox m = new JCheckBox("lung or breathing problems");
         JCheckBox n = new JCheckBox("bleeding or blood clotting disorder");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -1314,11 +1328,11 @@ public class DiagnosisView {
         JCheckBox i = new JCheckBox("heart rhythm disorder");
         JCheckBox j = new JCheckBox("liver or kidney disease");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -1443,11 +1457,11 @@ public class DiagnosisView {
         //Sulfacetamide ophthalmic
         JCheckBox n = new JCheckBox("astma");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -1573,11 +1587,11 @@ public class DiagnosisView {
         JCheckBox a = new JCheckBox("pregnancy");
         JCheckBox d = new JCheckBox("astma");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
@@ -1679,11 +1693,11 @@ public class DiagnosisView {
         JCheckBox b = new JCheckBox("shortness of breath");
         JCheckBox c = new JCheckBox("swelling of face");
 
-        ImageIcon done = new ImageIcon("./done.png");
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
         Image doneIm = done.getImage(); // transform it
         Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         done = new ImageIcon(doneimg);
-        JButton doneB = new JButton("Done", done);
+        JButton doneB = new JButton("Medicaments", done);
         JPanel right = new JPanel();
         JTextArea prolog = new JTextArea();
         prolog.setVisible(false);
