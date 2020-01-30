@@ -121,7 +121,6 @@ public class SelectSymptoms extends JFrame {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            //System.out.println(rasaIndex+" "+polIndex+" "+godIndex);
 
             List<Node> nodeList = net.getNodes();
 
@@ -162,6 +161,8 @@ public class SelectSymptoms extends JFrame {
             descPanel.add(daljaPan, BorderLayout.SOUTH);
 
             checkPanel.setLayout(new BoxLayout(checkPanel, BoxLayout.Y_AXIS));
+            checkPanel.setSize(new Dimension(500, 450));
+            checkPanel.setPreferredSize(new Dimension(500, 450));
             JCheckBox dim_vi = new JCheckBox("Diminished vision");
             JCheckBox pain_eye = new JCheckBox("Pain in eye");
             JCheckBox redness = new JCheckBox("Eye redness");
@@ -318,23 +319,6 @@ public class SelectSymptoms extends JFrame {
                     opSimptoma.setText(diOp);
                 }
             });
-            ////////////////////////////////////////////////////////////////////////////
-            JPanel pr = new JPanel();
-            //pr.setSize(new Dimension(300, 150));
-            //pr.setPreferredSize(new Dimension(300, 150));
-            Border blackline3 = BorderFactory.createLineBorder(Color.BLACK);
-            TitledBorder title3 = BorderFactory.createTitledBorder(blackline3, "Suggestion for better diagnosis");
-            title3.setTitleJustification(TitledBorder.CENTER);
-
-            JTextArea predlog = new JTextArea();
-            predlog.setBorder(title3);
-            predlog.setEditable(false);
-            predlog.setSize(new Dimension(780, 130));
-            predlog.setPreferredSize(new Dimension(780, 130));
-            predlog.setWrapStyleWord(true);
-            predlog.setLineWrap(true);
-            pr.add(predlog);
-            ///////////////////////////////////////////////////////////////////////////////
 
             rbrBtn.addActionListener(new ActionListener() {
                 @Override
@@ -516,7 +500,6 @@ public class SelectSymptoms extends JFrame {
 
 
                     }
-                    System.out.println("////////////////////////////////////////////////");
                     for (HashMap<String, Map<String, Float>> mapa : sveRangListe) {
                         for (String simptom : mapa.keySet()) {
                             System.out.println(simptom + "/n");
@@ -530,11 +513,8 @@ public class SelectSymptoms extends JFrame {
                     RankingList.printMap(sortedMapRBR);
                     konacneVrv.setText(calculationTop.printOfProbabilitiesRBR(sortedMapRBR));
 
-                    ///////////////////////////////////////////////////////////////////////////
-
-
                     RankingList rg = new RankingList();
-                    predlog.setText(rg.prve2Naziv(sortedMapRBR, selektovaniSimptomi));
+                    //predlog.setText(rg.prve2Naziv(sortedMapRBR, selektovaniSimptomi));
                     boolean daljaIspBol = rg.proveraRazlikeVerovatnocaZaDaljaIspitivanja(sortedMapRBR);
                     if (daljaIspBol == true) {
                         daljaIsBut.setVisible(true);
@@ -543,7 +523,6 @@ public class SelectSymptoms extends JFrame {
                         daljaIsBut.setVisible(false);
                         daljeIspitivanja.setVisible(false);
                     }
-                    //////////////////////////////////////////////////////////////////////////
                 }
             });
 
@@ -623,7 +602,7 @@ public class SelectSymptoms extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     // TODO Auto-generated method stub
-                    DaljaIspitivanjaProlog.notes=new ArrayList<>();
+                    DaljaIspitivanjaProlog.notes = new ArrayList<>();
                     simpto = new ArrayList<String>();
                     if (dim_vi.isSelected())
                         simpto.add("diminished vision");
@@ -651,7 +630,7 @@ public class SelectSymptoms extends JFrame {
                         simpto.add("white discharge from eye");
                     if (itchi.isSelected())
                         simpto.add("itchiness of eye");
-
+                    navedeniSimptomi = "";
                     for (String simpton : simpto) {
                         navedeniSimptomi += simpton;
                         navedeniSimptomi += ", ";
@@ -665,9 +644,83 @@ public class SelectSymptoms extends JFrame {
                     mainFrame.dispose();
                 }
             });
-            checkPanel.add(rbrBtn);
-            checkPanel.add(cbrBtn);
-            checkPanel.add(done);
+            JPanel ispitivanja = new JPanel();
+            ispitivanja.setLayout(new FlowLayout());
+            ispitivanja.add(rbrBtn);
+            ispitivanja.add(cbrBtn);
+            ispitivanja.add(done);
+            checkPanel.add(ispitivanja);
+            String[] diseaseStrings = {"conjunctivitis", "blepharitis", "chronic glaucoma", "cataract",
+                    "macular degeneration", "dry eye of unknown cause", "eye alignment disorder", "corneal abrasion",
+                    "cornea infection", "retinal detachment", "optic neuritis", "iridocyclitis",
+                    "subconjunctival hemorrhage", "floaters"
+            };
+            JPanel combo = new JPanel();
+            // combo.setLayout(new FlowLayout());
+            combo.setLayout(new BoxLayout(combo, BoxLayout.X_AXIS));
+            combo.setSize(new Dimension(400, 40));
+            combo.setPreferredSize(new Dimension(400, 40));
+            JComboBox diseaseList = new JComboBox(diseaseStrings);
+            diseaseList.setSize(new Dimension(250, 20));
+            diseaseList.setPreferredSize(new Dimension(250, 20));
+            diseaseList.setSelectedIndex(0);
+            JLabel diagnosis = new JLabel("      Diagnosis:   ");
+            combo.add(diagnosis);
+            combo.add(diseaseList);
+            ImageIcon done2 = new ImageIcon("./medicament.jpeg");
+            Image doneIm = done2.getImage(); // transform it
+            Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            done2 = new ImageIcon(doneimg);
+            JButton diagnose = new JButton("Medicaments", done2);
+            combo.add(diagnose);
+
+            diagnose.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    DaljaIspitivanjaProlog.notes = new ArrayList<>();
+                    simpto = new ArrayList<String>();
+                    if (dim_vi.isSelected())
+                        simpto.add("diminished vision");
+                    if (pain_eye.isSelected())
+                        simpto.add("pain in eye");
+                    if (redness.isSelected())
+                        simpto.add("eye redness");
+                    if (dob_vi.isSelected())
+                        simpto.add("double vision");
+                    if (lacr.isSelected())
+                        simpto.add("lacrimation");
+                    if (forig.isSelected())
+                        simpto.add("foreign body sensation in eye");
+                    if (swol.isSelected())
+                        simpto.add("swollen eye");
+                    if (clo.isSelected())
+                        simpto.add("cloudy eye");
+                    if (bli.isSelected())
+                        simpto.add("blidness");
+                    if (spots.isSelected())
+                        simpto.add("spots of clouds in vision");
+                    if (burn.isSelected())
+                        simpto.add("eye burns of stings");
+                    if (white.isSelected())
+                        simpto.add("white discharge from eye");
+                    if (itchi.isSelected())
+                        simpto.add("itchiness of eye");
+                    navedeniSimptomi = "";
+                    for (String simpton : simpto) {
+                        navedeniSimptomi += simpton;
+                        navedeniSimptomi += ", ";
+                    }
+                    try {
+                        navedeniSimptomi = navedeniSimptomi.substring(0, navedeniSimptomi.length() - 2);
+                        System.out.println(navedeniSimptomi);
+                    } catch (Exception e) {
+                    }
+                    //AddData addDataFrame = new AddData(navedeniSimptomi,jmbg);
+                    DiagnosisView dv = new DiagnosisView(diseaseList.getSelectedItem().toString());
+                }
+            });
+            checkPanel.add(combo);
+
             ImageIcon water = new ImageIcon("./eyeIcon.png");
             Image image = water.getImage(); // transform it
             Image newimg = image.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
@@ -694,35 +747,37 @@ public class SelectSymptoms extends JFrame {
                 public void actionPerformed(ActionEvent arg0) {
                     // TODO Auto-generated method stub
                     if (rbr) {
-                        mainFrame.dispose();
+                        //mainFrame.dispose();
                         simpto = new ArrayList<String>();
                         if (dim_vi.isSelected())
-                            simpto.add("diminished vision");
+                            simpto.add("diminished_vision");
                         if (pain_eye.isSelected())
-                            simpto.add("pain in eye");
+                            simpto.add("pain_in_eye");
                         if (redness.isSelected())
-                            simpto.add("eye redness");
+                            simpto.add("eye_redness");
                         if (dob_vi.isSelected())
-                            simpto.add("double vision");
+                            simpto.add("double_vision");
                         if (lacr.isSelected())
                             simpto.add("lacrimation");
                         if (forig.isSelected())
-                            simpto.add("foreign body sensation in eye");
+                            simpto.add("foreign_body_sensation_in_eye");
                         if (swol.isSelected())
-                            simpto.add("swollen eye");
+                            simpto.add("swollen_eye");
                         if (clo.isSelected())
-                            simpto.add("cloudy eye");
+                            simpto.add("cloudy_eye");
                         if (bli.isSelected())
                             simpto.add("blindness");
                         if (spots.isSelected())
-                            simpto.add("spots of clouds in vision");
+                            simpto.add("spots_of_clouds_in_vision");
                         if (burn.isSelected())
-                            simpto.add("eye burns of stings");
+                            simpto.add("eye_burns_of_stings");
                         if (white.isSelected())
-                            simpto.add("white discharge from eye");
+                            simpto.add("white_discharge_from_eye");
                         if (itchi.isSelected())
-                            simpto.add("itchiness of eye");
+                            simpto.add("itchiness_of_eye");
+                        navedeniSimptomi = "";
                         for (String simpton : simpto) {
+                            simpton = simpton.replaceAll("_", " ");
                             navedeniSimptomi += simpton;
                             navedeniSimptomi += ", ";
                         }
@@ -731,23 +786,22 @@ public class SelectSymptoms extends JFrame {
                             System.out.println(navedeniSimptomi);
                         } catch (Exception e) {
                         }
-                        FurtherTesting di = new FurtherTesting(o, sortedMapRBR, jmbg,navedeniSimptomi);
+                        FurtherTesting di = new FurtherTesting(o, sortedMapRBR, jmbg, navedeniSimptomi, simpto);
                     } else {
 
                     }
                 }
             });
             JPanel tug = new JPanel(new BorderLayout());
-            ///////////////////////////////////////////////tug.add(checkPanel,BorderLayout.WEST);
             tug.add(checkPanel, BorderLayout.WEST);
             tug.add(descPanel, BorderLayout.EAST);
             JPanel proba = new JPanel(new BorderLayout());
             proba.add(tug, BorderLayout.NORTH);
-            proba.add(pr, BorderLayout.SOUTH);
+            //proba.add(pr, BorderLayout.SOUTH);
             mainPanel.add(proba, BorderLayout.CENTER);
             mainPanel.add(back, BorderLayout.SOUTH);
             mainFrame.add(mainPanel);
-            mainFrame.setSize(800, 700);
+            mainFrame.setSize(1100, 600);
         } catch (LoadException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

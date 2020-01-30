@@ -6,6 +6,7 @@ import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPTerm;
 import com.ugos.jiprolog.engine.JIPVariable;
 import model.Osoba;
+import view.DiagnosisView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -20,14 +21,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DaljaIspitivanjaProlog {
+    public static ArrayList<String> notes = new ArrayList<>();
     public Map<String, Float> sortedMapRBR = new HashMap<>();
     public String bolest1 = "";
     public String bolest2 = "";
     public String bolest3 = "";
     public Osoba korisnik = new Osoba();
-    public static ArrayList<String> notes = new ArrayList<>();
+    public String jmbg;
+    public String navedeniSimptomi;
+    public ArrayList<String> symptoms = new ArrayList<>();
 
-    public DaljaIspitivanjaProlog(Osoba korisnik, Map<String, Float> sortedMapRBR) {
+    public DaljaIspitivanjaProlog(Osoba korisnik, Map<String, Float> sortedMapRBR, ArrayList<String> symptoms, String jmbg, String symptomsString) {
+        this.symptoms = symptoms;
+        this.jmbg = jmbg;
+        this.navedeniSimptomi = symptomsString;
         notes = new ArrayList<>();
         this.sortedMapRBR = sortedMapRBR;
         int it = 1;
@@ -81,7 +88,8 @@ public class DaljaIspitivanjaProlog {
             dodatak.add(getSubHem());
         }
 
-        dodatak.add(prolog(bolest1));
+        dodatak.add(prolog(bolest1, symptoms));
+
         JLabel prazan = new JLabel(" ");
         dodatak.add(prazan);
         String b2 = bolest2;
@@ -103,7 +111,8 @@ public class DaljaIspitivanjaProlog {
         } else if (bolest2.equals("subconjunctival_hemorrhage")) {
             dodatak.add(getSubHem());
         }
-        dodatak.add(prolog(bolest2));
+        dodatak.add(prolog(bolest2, symptoms));
+
         JLabel prazan2 = new JLabel(" ");
         dodatak.add(prazan2);
         String b3 = bolest3;
@@ -125,7 +134,8 @@ public class DaljaIspitivanjaProlog {
         } else if (bolest3.equals("subconjunctival_hemorrhage")) {
             dodatak.add(getSubHem());
         }
-        dodatak.add(prolog(bolest3));
+        dodatak.add(prolog(bolest3, symptoms));
+
         JLabel prazan3 = new JLabel(" ");
         dodatak.add(prazan3);
         ImageIcon med = new ImageIcon("./reload.png");
@@ -137,14 +147,45 @@ public class DaljaIspitivanjaProlog {
         title2.setTitleJustification(TitledBorder.CENTER);
         JTextArea konacneVrv = new JTextArea();
         konacneVrv.setBorder(title2);
-        konacneVrv.setSize(new Dimension(280, 200));
-        konacneVrv.setPreferredSize(new Dimension(280, 200));
+        konacneVrv.setSize(new Dimension(150, 150));
+        konacneVrv.setPreferredSize(new Dimension(150, 150));
         //konacneVrv.setVisible(true);
         JPanel vr = new JPanel();
         vr.setSize(new Dimension(300, 600));
         vr.setPreferredSize(new Dimension(300, 600));
+        vr.setLayout(new BoxLayout(vr, BoxLayout.Y_AXIS));
+////////////////////////////////////////////////////////////////////////////
+        String[] diseaseStrings = {"conjunctivitis", "blepharitis", "chronic glaucoma", "cataract",
+                "macular degeneration", "dry eye of unknown cause", "eye alignment disorder", "corneal abrasion",
+                "cornea infection", "retinal detachment", "optic neuritis", "iridocyclitis",
+                "subconjunctival hemorrhage", "floaters"
+        };
+        JPanel combo = new JPanel();
+        combo.setLayout(new FlowLayout());
+        combo.setSize(new Dimension(400, 40));
+        combo.setPreferredSize(new Dimension(400, 40));
+        JComboBox diseaseList = new JComboBox(diseaseStrings);
+        diseaseList.setSize(new Dimension(250, 20));
+        diseaseList.setPreferredSize(new Dimension(250, 20));
+        diseaseList.setSelectedIndex(0);
+        JLabel diagnosis = new JLabel("Diagnosis:   ");
+        combo.add(diagnosis);
+        combo.add(diseaseList);
+        ImageIcon done = new ImageIcon("./medicament.jpeg");
+        Image doneIm = done.getImage(); // transform it
+        Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        done = new ImageIcon(doneimg);
+        JButton diagnose = new JButton("Medicaments", done);
+
+        diagnose.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                DiagnosisView dv = new DiagnosisView(diseaseList.getSelectedItem().toString());
+            }
+        });
 
         vr.add(konacneVrv);
+
         JButton presaberi = new JButton("Reload", med);
 
         presaberi.addActionListener(new ActionListener() {
@@ -153,7 +194,6 @@ public class DaljaIspitivanjaProlog {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 vr.setVisible(true);
-                System.out.println("PROLOG SORTED " + sortedMapRBR);
                 Float sum = 0f;
                 for (String key : sortedMapRBR.keySet()) {
                     sum += sortedMapRBR.get(key);
@@ -168,7 +208,9 @@ public class DaljaIspitivanjaProlog {
 
             }
         });
+        combo.add(diagnose);
         dodatak.add(presaberi);
+        dodatak.add(combo);
         JPanel ceo = new JPanel(new BorderLayout());
         JScrollPane scrollPane = new JScrollPane(dodatak);
         ceo.add(scrollPane, BorderLayout.CENTER);
@@ -620,86 +662,98 @@ public class DaljaIspitivanjaProlog {
 
     }
 
-    public JPanel prolog(String bolest) {
+    public JPanel prolog(String bolest, ArrayList<String> symptoms) {
         JIPEngine engine = new JIPEngine();
+        ArrayList<String> tests = new ArrayList<>();
 
-        //DODAJ SIMPTOME
-        engine.assertz(engine.getTermParser().parseTerm("bolest(" + bolest + ")."));
-        //engine.assertz(engine.getTermParser().parseTerm("simptom(dim).")); spots; lacrimation , blood from eye
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(visual_acuity_test):- bolest(cataract),\\+ simptom(diminished_vision)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(slit_lamp_examination):- bolest(cataract)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(retinal_exam):- bolest(cataract)."));
+        for (String symptom : symptoms) {
+            engine.assertz(engine.getTermParser().parseTerm("bolest(" + bolest + ")."));
+            engine.assertz(engine.getTermParser().parseTerm("simptom(" + symptom + ")."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(visual_acuity_test):- bolest(cataract),\\+ simptom(diminished_vision)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(slit_lamp_examination):- bolest(cataract)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(retinal_exam):- bolest(cataract)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(measuring_intraocular_pressure):- bolest(chronic_glaucoma)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(testing_for_optic_nerve_damage_with_a_dilated_eye_examination_and_imaging_tests):- bolest(chronic_glaucoma)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(visual_field_test):- bolest(chronic_glaucoma),\\+ simptom(spots_or_clouds_in_vision)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(measuring_corneal_thickness):- bolest(chronic_glaucoma)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(inspecting_the_drainage_angle):- bolest(chronic_glaucoma)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(measuring_intraocular_pressure):- bolest(chronic_glaucoma)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(testing_for_optic_nerve_damage_with_a_dilated_eye_examination_and_imaging_tests):- bolest(chronic_glaucoma)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(visual_field_test):- bolest(chronic_glaucoma),\\+ simptom(spots_or_clouds_in_vision)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(measuring_corneal_thickness):- bolest(chronic_glaucoma)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(inspecting_the_drainage_angle):- bolest(chronic_glaucoma)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(laboratory_analysis_of_the_liquid_that_drains_from_eye):- bolest(conjunctivitis)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(laboratory_analysis_of_the_liquid_that_drains_from_eye):- bolest(conjunctivitis)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(examination_of_eyelids):- bolest(blepharitis)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(swabbing_skin_for_testing):- bolest(blepharitis)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(examination_of_eyelids):- bolest(blepharitis)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(swabbing_skin_for_testing):- bolest(blepharitis)."));
 
-        ///DODAJ BLEEDING FROM EYE U SLEDECE
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(examination_of_the_back_of_eye):- bolest(macular_degeneration),\\+ simptom(spots_or_clouds_in_vision)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(test_for_defects_in_the_center_of_vision):- bolest(macular_degeneration),\\+ simptom(spots_or_clouds_in_vision)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(fluorescein_angiography):- bolest(macular_degeneration)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(optical_coherence_tomography):- bolest(macular_degeneration)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(examination_of_the_back_of_eye):- bolest(macular_degeneration),\\+ simptom(spots_or_clouds_in_vision)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(test_for_defects_in_the_center_of_vision):- bolest(macular_degeneration),\\+ simptom(spots_or_clouds_in_vision)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(fluorescein_angiography):- bolest(macular_degeneration)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(optical_coherence_tomography):- bolest(macular_degeneration)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(comprehensive_eye_exam):- bolest(dry_eye_of_unknown_cause)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(measuring_the_volume_of_tears):- bolest(dry_eye_of_unknown_cause),\\+ simptom(lacrimation)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(determining_the_quality_of_tears):- bolest(dry_eye_of_unknown_cause)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(comprehensive_eye_exam):- bolest(dry_eye_of_unknown_cause)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(measuring_the_volume_of_tears):- bolest(dry_eye_of_unknown_cause),\\+ simptom(lacrimation)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(determining_the_quality_of_tears):- bolest(dry_eye_of_unknown_cause)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(referral_to_home_health_care_service):- bolest(eye_alignment_disorder)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(eye_alignment_disorder)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(referral_to_home_health_care_service):- bolest(eye_alignment_disorder)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(eye_alignment_disorder)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(wound_care_management):- bolest(corneal_abrasion)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(corneal_abrasion)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(wound_care_management):- bolest(corneal_abrasion)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(corneal_abrasion)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(cornea_infection)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmologic_and_otologic_diagnosis_and_treatment):- bolest(cornea_infection)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(cornea_infection)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmologic_and_otologic_diagnosis_and_treatment):- bolest(cornea_infection)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(retinal_examination):- bolest(retinal_detachment)."));
-        //////BLEEDING OVDE U SLEDECEM
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ultrasound_imaging):- bolest(retinal_detachment), simptom(spots_or_clouds_in_vision)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(retinal_examination):- bolest(retinal_detachment)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ultrasound_imaging):- bolest(retinal_detachment), simptom(spots_or_clouds_in_vision)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(optic_neuritis)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophthalmoscopy):- bolest(optic_neuritis)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(pupillary_light_reaction_test):- bolest(optic_neuritis)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(optic_neuritis)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophthalmoscopy):- bolest(optic_neuritis)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(pupillary_light_reaction_test):- bolest(optic_neuritis)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(iridocyclitis)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmologic_and_otologic_diagnosis_and_treatment):- bolest(iridocyclitis)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(iridocyclitis)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmologic_and_otologic_diagnosis_and_treatment):- bolest(iridocyclitis)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(subconjunctival_hemorrhage)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(blood_test):- bolest(subconjunctival_hemorrhage)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(ophtalmic_examination_and_evaluation):- bolest(subconjunctival_hemorrhage)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(blood_test):- bolest(subconjunctival_hemorrhage)."));
 
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(eye_dilation):- bolest(floaters)."));
-        engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(vitreous_examination):- bolest(floaters)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(eye_dilation):- bolest(floaters)."));
+            engine.assertz(engine.getTermParser().parseTerm("daljeIspitivanje(vitreous_examination):- bolest(floaters)."));
 
-        JIPQuery query2 = engine.openSynchronousQuery("daljeIspitivanje(X).");
+            JIPQuery query2 = engine.openSynchronousQuery("daljeIspitivanje(X).");
 
-        JIPTerm solution;
-        while ((solution = query2.nextSolution()) != null) {
-            System.out.println("solution: " + solution);
-            for (JIPVariable var : solution.getVariables()) {
-                System.out.println(var.getName() + "=" + var.getValue());
+            JIPTerm solution;
+            while ((solution = query2.nextSolution()) != null) {
+                System.out.println("solution: " + solution);
+                for (JIPVariable var : solution.getVariables()) {
+                    System.out.println(var.getName() + "=" + var.getValue());
+                }
+            }
+            JIPQuery query = engine.openSynchronousQuery("daljeIspitivanje(X).");
+            while ((solution = query.nextSolution()) != null) {
+                for (JIPVariable var : solution.getVariables()) {
+                    boolean found = false;
+                    for (String test : tests) {
+                        if (test.equals(var.getValue().toString())) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == false) {
+                        tests.add(var.getValue().toString());
+                    }
+                }
             }
         }
-        JIPQuery query = engine.openSynchronousQuery("daljeIspitivanje(X).");
+
         JPanel res = new JPanel();
         res.setLayout(new BoxLayout(res, BoxLayout.Y_AXIS));
         JLabel rec = new JLabel(" Possible additional tests are:");
         res.add(rec);
         int brojac = 1;
-        while ((solution = query.nextSolution()) != null) {
-            for (JIPVariable var : solution.getVariables()) {
-                String isp = var.getValue().toString();
-                isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
-                isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
-                JLabel res1 = new JLabel(isp);
-                res.add(res1);
-            }
+        for (String isp : tests) {
+            isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
+            isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
+            JLabel res1 = new JLabel(isp);
+            res.add(res1);
             brojac++;
         }
         return res;

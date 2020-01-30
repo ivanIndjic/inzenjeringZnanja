@@ -18,7 +18,7 @@ public class AddData {
 
     public JFrame mainF = new JFrame("Oftalmology");
     private IstorijaPregleda ip = new IstorijaPregleda();
-    private String notes="";
+    private String notes = "";
 
     public AddData(String navedeniSimptomi, String jmbg) {
         JPanel main = new JPanel();

@@ -75,10 +75,10 @@ public class CbrApplication implements StandardCBRApplication {
                 disease = disease.replaceAll("_", " ");
                 try {
                     print += disease + " : " + round(entry.getValue() * 100, 2) + " %" + "\n";
-                } catch(Exception e) {
-                    if(entry.getValue().isNaN()) {
+                } catch (Exception e) {
+                    if (entry.getValue().isNaN()) {
                         print += disease + " : 0 %" + "\n";
-                    }else {
+                    } else {
                         print += disease + " : " + entry.getValue() + " %" + "\n";
                     }
                 }
@@ -128,7 +128,7 @@ public class CbrApplication implements StandardCBRApplication {
             }
             brojac++;
         }
-        if (vrednost1 > vrednost2 + 0.3 || vrednost2==0.0) {
+        if (vrednost1 > vrednost2 + 0.3 || vrednost2 == 0.0) {
             povratna = false;
         }
 
