@@ -31,6 +31,8 @@ public class DaljaIspitivanjaProlog {
     public String navedeniSimptomi;
     public ArrayList<String> symptoms = new ArrayList<>();
 
+    private JFrame mainFrame = new JFrame("Ophthalmology");
+
     public DaljaIspitivanjaProlog(Osoba korisnik, Map<String, Float> sortedMapRBR, ArrayList<String> symptoms, String jmbg, String symptomsString) {
         this.symptoms = symptoms;
         this.jmbg = jmbg;
@@ -51,15 +53,6 @@ public class DaljaIspitivanjaProlog {
             it++;
         }
         this.korisnik = korisnik;
-    }
-
-    public static float round(float number, int decimalPlace) {
-        BigDecimal bd = new BigDecimal(number);
-        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-        return bd.floatValue();
-    }
-
-    public JPanel preporucenaDaljaIsp() {
 
         JPanel dodatak = new JPanel();
         dodatak.setLayout(new BoxLayout(dodatak, BoxLayout.Y_AXIS));
@@ -154,7 +147,6 @@ public class DaljaIspitivanjaProlog {
         vr.setSize(new Dimension(300, 600));
         vr.setPreferredSize(new Dimension(300, 600));
         vr.setLayout(new BoxLayout(vr, BoxLayout.Y_AXIS));
-////////////////////////////////////////////////////////////////////////////
         String[] diseaseStrings = {"conjunctivitis", "blepharitis", "chronic glaucoma", "cataract",
                 "macular degeneration", "dry eye of unknown cause", "eye alignment disorder", "corneal abrasion",
                 "cornea infection", "retinal detachment", "optic neuritis", "iridocyclitis",
@@ -180,7 +172,8 @@ public class DaljaIspitivanjaProlog {
         diagnose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                DiagnosisView dv = new DiagnosisView(diseaseList.getSelectedItem().toString());
+                DiagnosisView dv = new DiagnosisView(diseaseList.getSelectedItem().toString(), navedeniSimptomi, jmbg);
+                mainFrame.dispose();
             }
         });
 
@@ -216,8 +209,16 @@ public class DaljaIspitivanjaProlog {
         ceo.add(scrollPane, BorderLayout.CENTER);
         vr.setVisible(false);
         ceo.add(vr, BorderLayout.EAST);
+        mainFrame.add(ceo);
+        mainFrame.setSize(950, 700);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
+    }
 
-        return ceo;
+    public static float round(float number, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
     }
 
     public String printProbabilities(Map<String, Float> map) {

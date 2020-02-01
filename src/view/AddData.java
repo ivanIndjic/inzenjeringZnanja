@@ -20,9 +20,10 @@ public class AddData {
     private IstorijaPregleda ip = new IstorijaPregleda();
     private String notes = "";
 
-    public AddData(String navedeniSimptomi, String jmbg, String treatment) {
+    public AddData(String navedeniSimptomi, String jmbg, String diagnose, String treatment) {
         System.out.println("STATIC: "+treatment);
         String finalT = treatment;
+
         JPanel main = new JPanel();
         JButton canc = new JButton("Cancel");
         JButton ok = new JButton("Save");
@@ -41,6 +42,7 @@ public class AddData {
         p5.setLayout(new FlowLayout());
         JLabel nb = new JLabel("Symptoms:             ");
         JTextArea nbT = new JTextArea();
+        nbT.setEditable(false);
         nbT.setText(navedeniSimptomi);
         nbT.setPreferredSize(new Dimension(400, 50));
         nbT.setLineWrap(true);
@@ -81,7 +83,8 @@ public class AddData {
         dnT.setPreferredSize(new Dimension(400, 250));
 
         JLabel disease = new JLabel("Diagnosis:              ");
-        JTextArea diseaseT = new JTextArea();
+        JTextArea diseaseT = new JTextArea(diagnose);
+        diseaseT.setEditable(false);
         diseaseT.setPreferredSize(new Dimension(400, 30));
         diseaseT.setLineWrap(true);
 
