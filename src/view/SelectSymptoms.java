@@ -2,6 +2,7 @@ package view;
 
 import Actions.CbrApplication;
 import Actions.DaljaIspitivanjaProlog;
+import Actions.MissedSymptomsProlog;
 import app.CalculationOfTopDisease;
 import app.RankingList;
 import model.Osoba;
@@ -30,6 +31,7 @@ public class SelectSymptoms extends JFrame {
     public static String bolest1 = "";
     public static String bolest2 = "";
     public static String bolest3 = "";
+    public static ArrayList<String> selected = new ArrayList<>();
     public static boolean rbr = true;
     public Map<String, Float> sortedMapRBR = new HashMap<>();
     String navedeniSimptomi = "";
@@ -146,6 +148,7 @@ public class SelectSymptoms extends JFrame {
             descPanel.add(konacneVrv, BorderLayout.CENTER);
 
             JLabel daljeIspitivanja = new JLabel("Further tests are possible");
+
             daljeIspitivanja.setSize(new Dimension(60, 30));
             ImageIcon med = new ImageIcon("./medicalTest.png");
             Image medIm = med.getImage(); // transform it
@@ -155,9 +158,17 @@ public class SelectSymptoms extends JFrame {
             daljaIsBut.setSize(new Dimension(30, 50));
             daljeIspitivanja.setVisible(false);
             daljaIsBut.setVisible(false);
+
+            ImageIcon donIm = new ImageIcon("./questionmark.png");
+            Image doneImg = donIm.getImage(); // transform it
+            Image newDoneImg = doneImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            donIm = new ImageIcon(newDoneImg);
+            JButton question = new JButton(donIm);
+            question.setVisible(false);
             JPanel daljaPan = new JPanel(new FlowLayout());
             daljaPan.add(daljeIspitivanja);
             daljaPan.add(daljaIsBut);
+            daljaPan.add(question);
             descPanel.add(daljaPan, BorderLayout.SOUTH);
 
             checkPanel.setLayout(new BoxLayout(checkPanel, BoxLayout.Y_AXIS));
@@ -176,6 +187,35 @@ public class SelectSymptoms extends JFrame {
             JCheckBox burn = new JCheckBox("Eye burns or stings");
             JCheckBox white = new JCheckBox("White discharge from eye");
             JCheckBox itchi = new JCheckBox("Itchiness of eye");
+            for (String s : selected) {
+                if (s.equals("diminished_vision")) {
+                    dim_vi.setSelected(true);
+                } else if (s.equals("swollen_eye")) {
+                    swol.setSelected(true);
+                } else if (s.equals("cloudy_eye")) {
+                    clo.setSelected(true);
+                } else if (s.equals("blindness")) {
+                    bli.setSelected(true);
+                } else if (s.equals("spots_or_clouds_in_vision")) {
+                    spots.setSelected(true);
+                } else if (s.equals("eye_burns_or_stings")) {
+                    burn.setSelected(true);
+                } else if (s.equals("white_discharge_from_eye")) {
+                    white.setSelected(true);
+                } else if (s.equals("itchiness_of_eye")) {
+                    itchi.setSelected(true);
+                } else if (s.equals("pain_in_eye")) {
+                    pain_eye.setSelected(true);
+                } else if (s.equals("eye_redness")) {
+                    redness.setSelected(true);
+                } else if (s.equals("double_vision")) {
+                    dob_vi.setSelected(true);
+                } else if (s.equals("lacrimation")) {
+                    lacr.setSelected(true);
+                } else if (s.equals("foreign_body_sensation_in_eye")) {
+                    forig.setSelected(true);
+                }
+            }
 
             ImageIcon fin = new ImageIcon("./finish.png");
             Image finIm = fin.getImage(); // transform it
@@ -325,6 +365,7 @@ public class SelectSymptoms extends JFrame {
                 public void actionPerformed(ActionEvent arg0) {
                     // TODO Auto-generated method stub
                     rbr = true;
+                    question.setVisible(true);
                     Set<String> selektovaniSimptomi = new HashSet<String>();
                     sveRangListe = new ArrayList<>();
                     for (Node node : nodeList) {
@@ -533,6 +574,7 @@ public class SelectSymptoms extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     rbr = false;
+                    question.setVisible(false);
                     simpto = new ArrayList<String>();
                     if (dim_vi.isSelected())
                         simpto.add("diminished vision");
@@ -553,9 +595,9 @@ public class SelectSymptoms extends JFrame {
                     if (bli.isSelected())
                         simpto.add("Blindness");
                     if (spots.isSelected())
-                        simpto.add("spots of clouds in vision");
+                        simpto.add("spots or clouds in vision");
                     if (burn.isSelected())
-                        simpto.add("eye burns of stings");
+                        simpto.add("eye burns or stings");
                     if (white.isSelected())
                         simpto.add("white discharge from eye");
                     if (itchi.isSelected())
@@ -646,9 +688,9 @@ public class SelectSymptoms extends JFrame {
                     if (bli.isSelected())
                         simpto.add("blidness");
                     if (spots.isSelected())
-                        simpto.add("spots of clouds in vision");
+                        simpto.add("spots or clouds in vision");
                     if (burn.isSelected())
-                        simpto.add("eye burns of stings");
+                        simpto.add("eye burns or stings");
                     if (white.isSelected())
                         simpto.add("white discharge from eye");
                     if (itchi.isSelected())
@@ -716,9 +758,9 @@ public class SelectSymptoms extends JFrame {
                         if (bli.isSelected())
                             simpto.add("blindness");
                         if (spots.isSelected())
-                            simpto.add("spots_of_clouds_in_vision");
+                            simpto.add("spots_or_clouds_in_vision");
                         if (burn.isSelected())
-                            simpto.add("eye_burns_of_stings");
+                            simpto.add("eye_burns_or_stings");
                         if (white.isSelected())
                             simpto.add("white_discharge_from_eye");
                         if (itchi.isSelected())
@@ -735,6 +777,74 @@ public class SelectSymptoms extends JFrame {
                         } catch (Exception e) {
                         }
                         DaljaIspitivanjaProlog di = new DaljaIspitivanjaProlog(o, sortedMapRBR, simpto, jmbg, navedeniSimptomi);
+                        mainFrame.dispose();
+                    } else {
+
+                    }
+                }
+            });
+
+            question.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    if (rbr) {
+                        //mainFrame.dispose();
+                        simpto = new ArrayList<String>();
+                        if (dim_vi.isSelected())
+                            simpto.add("diminished_vision");
+                        if (pain_eye.isSelected())
+                            simpto.add("pain_in_eye");
+                        if (redness.isSelected())
+                            simpto.add("eye_redness");
+                        if (dob_vi.isSelected())
+                            simpto.add("double_vision");
+                        if (lacr.isSelected())
+                            simpto.add("lacrimation");
+                        if (forig.isSelected())
+                            simpto.add("foreign_body_sensation_in_eye");
+                        if (swol.isSelected())
+                            simpto.add("swollen_eye");
+                        if (clo.isSelected())
+                            simpto.add("cloudy_eye");
+                        if (bli.isSelected())
+                            simpto.add("blindness");
+                        if (spots.isSelected())
+                            simpto.add("spots_or_clouds_in_vision");
+                        if (burn.isSelected())
+                            simpto.add("eye_burns_or_stings");
+                        if (white.isSelected())
+                            simpto.add("white_discharge_from_eye");
+                        if (itchi.isSelected())
+                            simpto.add("itchiness_of_eye");
+                        for (String simpton : simpto) {
+                            simpton = simpton.replaceAll("_", " ");
+                        }
+                        MissedSymptomsProlog lsp = new MissedSymptomsProlog(bolest1, simpto);
+                        String[] missingSymptoms = lsp.getMissingSymptoms();
+                        lsp = new MissedSymptomsProlog(bolest2, simpto);
+                        String[] missingSymptoms2 = lsp.getMissingSymptoms();
+                        ArrayList<String> finalMissing = new ArrayList<>();
+                        for (String s : missingSymptoms) {
+                            finalMissing.add(s);
+                        }
+                        for (String s : missingSymptoms2) {
+                            boolean found = false;
+                            for (String miss : finalMissing) {
+                                if (miss.equals(s)) {
+                                    found = true;
+                                }
+                            }
+                            if (found == false) {
+                                finalMissing.add(s);
+                            }
+                        }
+                        for (String s : finalMissing) {
+                            if (s.equals("[]")) {
+                                finalMissing.remove(s);
+                                break;
+                            }
+                        }
+                        MissedSymptomsRBRView ms = new MissedSymptomsRBRView(finalMissing, simpto, o, jmbg);
                         mainFrame.dispose();
                     } else {
 

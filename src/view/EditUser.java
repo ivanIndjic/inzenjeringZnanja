@@ -36,10 +36,8 @@ public class EditUser {
 
         levi.setLayout(new BoxLayout(levi, BoxLayout.Y_AXIS));
         JPanel panel = new JPanel(new BorderLayout());
-        BufferedImage myPicture = ImageIO.read(new File("resources/us.jpg"));
         JPanel zasliku = new JPanel();
         zasliku.setLayout(new BoxLayout(zasliku, BoxLayout.Y_AXIS));
-        JLabel picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(200, 200, 1)));
         panel.add(dugmici, BorderLayout.SOUTH);
         panel.add(zasliku, BorderLayout.EAST);
         JLabel labela = new JLabel("                                                                                Patient's card"
