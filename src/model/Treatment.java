@@ -9,14 +9,32 @@ public class Treatment implements CaseComponent {
 
     private String disease;
     private String treatment;
+    private Integer age;
+
+    public Treatment(String disease, String treatment, Integer age) {
+        this.disease = disease;
+        this.treatment = treatment;
+        this.age = age;
+    }
+    public Treatment(){}
 
     @Override
-    public String   toString() {
+    public String toString() {
         return "Treatment{" +
                 "disease='" + disease + '\'' +
                 ", treatment='" + treatment + '\'' +
+                ", age=" + age +
                 '}';
     }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
 
     public String getDisease() {
         return disease;

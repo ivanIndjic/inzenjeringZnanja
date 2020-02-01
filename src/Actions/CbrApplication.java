@@ -177,7 +177,7 @@ public class CbrApplication implements StandardCBRApplication {
     public void cycle(CBRQuery query) throws ExecutionException {
         HashMap<String, HashMap<Integer, ArrayList<Double>>> mapaBolesi = new HashMap<>();
         Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
-        eval = SelectCases.selectTopKRR(eval, 8);
+        eval = SelectCases.selectTopKRR(eval, CsvConnector.lineCounterDisease);
         System.out.println("OVO TRAZIMO");
         for (RetrievalResult nse : eval)
             System.out.println(nse.get_case().getDescription());

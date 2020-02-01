@@ -10,6 +10,7 @@ import ucm.gaia.jcolibri.method.retrieve.NNretrieval.NNConfig;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
+import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import ucm.gaia.jcolibri.method.retrieve.RetrievalResult;
 import ucm.gaia.jcolibri.method.retrieve.selection.SelectCases;
 
@@ -34,6 +35,9 @@ public class CBR2 implements StandardCBRApplication {
         simConfig2= new NNConfig(); // KNN configuration
         simConfig2.setDescriptionSimFunction(new Average()); // global similarity function = average
         simConfig2.addMapping(new Attribute("disease", Treatment.class), new Equal());
+        simConfig2.addMapping(new Attribute("age", Treatment.class), new Interval(2));
+        simConfig2.setWeight(new Attribute("disease", Treatment.class), 0.70);
+        simConfig2.setWeight(new Attribute("age", Treatment.class), 0.30);
 
 
     }
@@ -48,13 +52,16 @@ public class CBR2 implements StandardCBRApplication {
     @Override
     public void cycle(CBRQuery cbrQuery) throws ExecutionException {
         Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase2.getCases(), cbrQuery, simConfig2);
-        eval = SelectCases.selectTopKRR(eval, 6);
+        eval = SelectCases.selectTopKRR(eval, 5);
         System.out.println("RETRIVED\n");
 
         for (RetrievalResult rr : eval){
-            System.out.println(rr.getEval() + rr.get_case().getDescription().toString());
-            ttret = rr.get_case().getDescription().toString();
+            System.out.println("Ovo je pronadjen tretman: " + rr.get_case().getDescription().toString() + " " + rr.getEval());
+            ttret = rr.get_case().getDescription().toString().replace("'","").split("\\{")[1].split("=")[2].split(",")[0];
             break;
+        }
+        for (RetrievalResult rr : eval){
+            System.out.println("Ovo je pronadjen tretman: " + rr.get_case().getDescription().toString() + " " + rr.getEval());
         }
     }
 

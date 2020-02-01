@@ -48,9 +48,7 @@ public class CsvConnector2 implements Connector {
                 if (line.startsWith("#") || (line.length() == 0))
                     continue;
                 String[] values = line.split(";");
-                Treatment t = new Treatment();
-                t.setDisease(values[0]);
-                t.setTreatment(values[1]);
+                Treatment t = new Treatment(values[0],values[2],Integer.parseInt(values[1]));
                 CBRCase cbrCase = new CBRCase();
                 cbrCase.setDescription(t);
                 cases2.add(cbrCase);

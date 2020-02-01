@@ -3,6 +3,7 @@ package view;
 import Actions.CBR2;
 import Actions.CbrApplication;
 import Actions.DaljaIspitivanjaProlog;
+import Actions.RDFParser;
 import app.CalculationOfTopDisease;
 import app.RankingList;
 import model.Osoba;
@@ -35,6 +36,7 @@ public class SelectSymptoms extends JFrame {
     public static String bolest3 = "";
     public static boolean rbr = true;
     public Map<String, Float> sortedMapRBR = new HashMap<>();
+    RDFParser parser = new RDFParser();
     String navedeniSimptomi = "";
     ArrayList<String> simpto = new ArrayList<>();
     private JFrame mainFrame = new JFrame("Ophthalmology");
@@ -147,6 +149,12 @@ public class SelectSymptoms extends JFrame {
             konacneVrv.setBorder(title2);
             konacneVrv.setEditable(false);
             descPanel.add(konacneVrv, BorderLayout.CENTER);
+            ImageIcon donIm = new ImageIcon("./done.png");
+            Image doneImg = donIm.getImage(); // transform it
+            Image newDoneImg = doneImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            donIm = new ImageIcon(newDoneImg);
+            JButton done = new JButton("DoneCBR", donIm);
+            done.setVisible(false);
 
             JLabel daljeIspitivanja = new JLabel("Further tests are possible");
             daljeIspitivanja.setSize(new Dimension(60, 30));
@@ -326,8 +334,10 @@ public class SelectSymptoms extends JFrame {
             rbrBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
+
                     // TODO Auto-generated method stub
                     rbr = true;
+                    done.setVisible(false);
                     Set<String> selektovaniSimptomi = new HashSet<String>();
                     sveRangListe = new ArrayList<>();
                     for (Node node : nodeList) {
@@ -529,12 +539,15 @@ public class SelectSymptoms extends JFrame {
                 }
             });
 
+
             JButton cbrBtn = new JButton("CBR ", fin);
             cbrBtn.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+
                     // TODO Auto-generated method stub
+                    done.setVisible(true);
                     rbr = false;
                     simpto = new ArrayList<String>();
                     if (dim_vi.isSelected())
@@ -573,6 +586,124 @@ public class SelectSymptoms extends JFrame {
                     if (daljaIspBol == true) {
                         daljaIsBut.setVisible(true);
                         daljeIspitivanja.setVisible(true);
+                        daljaIsBut.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent actionEvent) {
+                                simpto = new ArrayList<String>();
+                                if (dim_vi.isSelected())
+                                    simpto.add("diminished vision");
+                                if (pain_eye.isSelected())
+                                    simpto.add("pain in eye");
+                                if (redness.isSelected())
+                                    simpto.add("eye redness");
+                                if (dob_vi.isSelected())
+                                    simpto.add("double vision");
+                                if (lacr.isSelected())
+                                    simpto.add("lacrimation");
+                                if (forig.isSelected())
+                                    simpto.add("foreign body sensation in eye");
+                                if (swol.isSelected())
+                                    simpto.add("swollen eye");
+                                if (clo.isSelected())
+                                    simpto.add("cloudy eye");
+                                if (bli.isSelected())
+                                    simpto.add("Blindness");
+                                if (spots.isSelected())
+                                    simpto.add("spots of clouds in vision");
+                                if (burn.isSelected())
+                                    simpto.add("eye burns of stings");
+                                if (white.isSelected())
+                                    simpto.add("white discharge from eye");
+                                if (itchi.isSelected())
+                                    simpto.add("itchiness of eye");
+                                JLabel labelHeadline = new JLabel("Do You Have Any Of The Following Symptoms");
+                                Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+                                labelHeadline.setBorder(border);
+                                JFrame daljaIspitivanjaFrameCBR = new JFrame("Simptomi");
+                                JPanel daljaIspitivanjaPanelCBR = new JPanel();
+
+                                daljaIspitivanjaPanelCBR.setVisible(true);
+                                daljaIspitivanjaPanelCBR.setPreferredSize(new Dimension(400, 600));
+                                daljaIspitivanjaPanelCBR.setLayout(new BoxLayout(daljaIspitivanjaPanelCBR, BoxLayout.Y_AXIS));
+                                ArrayList<String> newSimptoms = RDFParser.doStuff(bolest1, simpto);
+                                ArrayList<JCheckBox> checkBoxes = new ArrayList<>();
+                                ArrayList<String> finalSimptoms = new ArrayList<>();
+                                daljaIspitivanjaPanelCBR.add(labelHeadline);
+                                for (String s : newSimptoms) {
+                                    JCheckBox box = new JCheckBox(s);
+                                    box.setBorder(border);
+                                    box.setName(s);
+                                    checkBoxes.add(box);
+                                    daljaIspitivanjaPanelCBR.add(box);
+                                }
+                                JButton buttonConfirmation = new JButton("Check again");
+                                buttonConfirmation.setBorder(border);
+                                buttonConfirmation.setBackground(Color.DARK_GRAY);
+                                buttonConfirmation.setForeground(Color.WHITE);
+                                daljaIspitivanjaPanelCBR.add(buttonConfirmation);
+                                daljaIspitivanjaPanelCBR.add(buttonConfirmation);
+                                buttonConfirmation.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent actionEvent) {
+                                        for (JCheckBox checkBox : checkBoxes) {
+                                            if (checkBox.isSelected()) {
+                                                System.out.println("Izabran: " + checkBox.getName());
+                                                finalSimptoms.add(checkBox.getName());
+                                            }
+                                        }
+
+
+                                        mainFrame.getContentPane().revalidate();
+                                        mainFrame.getContentPane().repaint();
+                                        a.mainS(o, finalSimptoms);
+                                        finalSimptoms.addAll(simpto);
+                                        if(!CbrApplication.printOfProbabilitiesCBR().equals(""))
+                                        konacneVrv.setText(CbrApplication.printOfProbabilitiesCBR());
+                                        checkPanel.revalidate();
+                                        checkPanel.repaint();
+                                        for (String simpt : finalSimptoms) {
+                                            final String replace = simpt.trim().toLowerCase().replace(" ", "_");
+                                            System.out.println("OVAKO IZGLEDA IME CHECK BOXA: "+replace);
+                                            if (replace.contains("diminished"))
+                                                dim_vi.setSelected(true);
+                                            if (replace.contains("pain_in_eye"))
+                                                pain_eye.setSelected(true);
+                                            if (replace.contains("redness"))
+                                                redness.setSelected(true);
+                                            if (replace.contains("double_vision"))
+                                                dob_vi.setSelected(true);
+                                            if (replace.contains("lacrim"))
+                                                lacr.setSelected(true);
+                                            if (replace.contains("foreign body"))
+                                                forig.setSelected(true);
+                                            if (replace.contains("swollen"))
+                                                swol.setSelected(true);
+                                            if (replace.contains("cloudy"))
+                                                clo.setSelected(true);
+                                            if (replace.contains("blindness"))
+                                                bli.setSelected(true);
+                                            if (replace.contains("spots"))
+                                                spots.setSelected(true);
+                                            if (replace.contains("eye_burns"))
+                                                burn.setSelected(true);
+                                            if (replace.contains("white"))
+                                                white.setSelected(true);
+                                            if (replace.contains("itchi"))
+                                                itchi.setSelected(true);
+                                        }
+                                        daljaIspitivanjaFrameCBR.dispose();
+
+                                    }
+                                });
+                                daljaIspitivanjaFrameCBR.add(daljaIspitivanjaPanelCBR);
+                                daljaIspitivanjaFrameCBR.setPreferredSize(new Dimension(400, 600));
+                                daljaIspitivanjaFrameCBR.setLocationRelativeTo(null);
+                                daljaIspitivanjaFrameCBR.setVisible(true);
+                                daljaIspitivanjaFrameCBR.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                                daljaIspitivanjaFrameCBR.pack();
+                            }
+                        });
                     } else {
                         daljaIsBut.setVisible(false);
                         daljeIspitivanja.setVisible(false);
@@ -595,20 +726,22 @@ public class SelectSymptoms extends JFrame {
             checkPanel.add(pain_eye);
             checkPanel.add(redness);
             checkPanel.add(dob_vi);
-            ImageIcon donIm = new ImageIcon("./done.png");
-            Image doneImg = donIm.getImage(); // transform it
-            Image newDoneImg = doneImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-            donIm = new ImageIcon(newDoneImg);
-            JButton done = new JButton("Done", donIm);
             CBR2 cbr2 = new CBR2();
             Treatment t = new Treatment();
             done.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
+
                     String finn = konacneVrv.getText();
-                    System.out.println("OVO PSIE: " + finn.split(":")[0]);
-                    t.setDisease(finn.split(":")[0]);
+                    if (!finn.split(":")[0].trim().equals("Other")) {
+                        System.out.println("OVO JE PROSLEDJENA BOLEST: " + finn.split(":")[0]);
+                        t.setDisease(finn.split(":")[0].trim().toLowerCase().replace(" ", "_"));
+                    } else {
+                        System.out.println("OVO JE PROSLEDJENA BOLEST: " + finn.split(":")[2]);
+                        t.setDisease(finn.split(":")[2].trim().toLowerCase().replace(" ", "_"));
+                    }
+                    t.setAge(o.getGodine());
                     try {
                         cbr2.mainC(t);
                     } catch (ExecutionException e) {
@@ -653,10 +786,10 @@ public class SelectSymptoms extends JFrame {
                         System.out.println(navedeniSimptomi);
                     } catch (Exception e) {
                     }
-                    AddData addDataFrame = new AddData(navedeniSimptomi, jmbg,CBR2.ttret);
+                    AddData addDataFrame = new AddData(navedeniSimptomi, jmbg, CBR2.ttret);
                     mainFrame.dispose();
 
-                  }
+                }
             });
 
             JPanel ispitivanja = new JPanel();

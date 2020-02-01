@@ -1,0 +1,170 @@
+@base <http://www.ftn.uns.ac.rs/simptom> .
+@prefix simptom: <http://www.ftn.uns.ac.rs/simptom#> .
+@prefix xsd: <http://w3.org/2001/XMLSchema#> .
+
+<#eye_redness>
+    a simptom:Simptom;
+	  simptom:ime "eye redness"^^xsd:string ;
+	  simptom:bolest1 "conjunctivitis"^^xsd:string;
+	  simptom:bolest2 "blepharitis"^^xsd:string;
+	  simptom:bolest3 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest4 "corneal_abrasion"^^xsd:string;
+	  simptom:bolest5 "cornea_infection"^^xsd:string;
+	  simptom:bolest6 "iridocyclitis"^^xsd:string;
+	  simptom:bolest7 "subconjunctival_hemorrhage"^^xsd:string.
+
+<#pain_in_eye>
+    a simptom:Simptom;
+	  simptom:ime "pain in eye"^^xsd:string;
+	  simptom:bolest1 "conjunctivitis"^^xsd:string;
+	  simptom:bolest2 "blepharitis"^^xsd:string;
+	  simptom:bolest3 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest4 "cataract"^^xsd:string;
+	  simptom:bolest5 "macular_degeneration"^^xsd:string;
+	  simptom:bolest6 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest7 "eye_alignment_disorder"^^xsd:string;
+	  simptom:bolest8 "corneal_abrasion"^^xsd:string;
+	  simptom:bolest9 "cornea_infection"^^xsd:string;
+	  simptom:bolest10 "retinal_detachment"^^xsd:string;
+	  simptom:bolest11 "optic_neuritis"^^xsd:string;
+	  simptom:bolest12 "iridocyclitis"^^xsd:string;
+	  simptom:bolest13 "subconjunctival_hemorrhage"^^xsd:string;
+	  simptom:bolest14 "floaters"^^xsd:string.
+
+<#itchiness_of_eye>
+	a simptom:Simptom;
+	  simptom:ime "itchiness_of_eye"^^xsd:string;
+	  simptom:bolest1 "conjunctivitis"^^xsd:string;
+	  simptom:bolest2 "blepharitis"^^xsd:string;
+	  simptom:bolest3 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest4 "cataract"^^xsd:string;
+	  simptom:bolest5 "macular_degeneration"^^xsd:string;
+	  simptom:bolest6 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest7 "corneal_abrasion"^^xsd:string;
+	  simptom:bolest8 "cornea_infection"^^xsd:string;
+	  simptom:bolest9 "retinal_detachment"^^xsd:string;
+	  simptom:bolest10 "iridocyclitis"^^xsd:string;
+	  simptom:bolest11 "floaters"^^xsd:string.
+
+<#swollen_eye>
+	a simptom:Simptom;
+	  simptom:ime "swollen eye"^^xsd:string;
+	  simptom:bolest1 "conjunctivitis"^^xsd:string;
+	  simptom:bolest2 "blepharitis"^^xsd:string;
+	  simptom:bolest3 "corneal_abrasion"^^xsd:string;
+	  simptom:bolest4 "cornea_infection"^^xsd:string;
+	  simptom:bolest5 "iridocyclitis"^^xsd:string;
+	  simptom:bolest6 "subconjunctival_hemorrhage"^^xsd:string.
+
+<#white_discharge_from_eye>
+	a simptom:Simptom;
+	  simptom:ime "white discharge from eye"^^xsd:string;
+	  simptom:bolest1 "conjunctivitis"^^xsd:string;
+	  simptom:bolest2 "blepharitis"^^xsd:string;
+	  simptom:bolest3 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest4 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest5 "corneal_abrasion"^^xsd:string.
+
+<#lacrimation>
+	a simptom:Simptom;
+	  simptom:ime "lacrimation"^^xsd:string;
+	  simptom:bolest1 "conjunctivitis"^^xsd:string;
+	  simptom:bolest2 "blepharitis"^^xsd:string;
+	  simptom:bolest3 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest4 "cataract"^^xsd:string;
+	  simptom:bolest5 "macular_degeneration"^^xsd:string;
+	  simptom:bolest6 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest7 "corneal_abrasion"^^xsd:string;
+	  simptom:bolest8 "cornea_infection"^^xsd:string;
+	  simptom:bolest9 "retinal_detachment"^^xsd:string;
+	  simptom:bolest10 "iridocyclitis"^^xsd:string;
+	  simptom:bolest11 "floaters"^^xsd:string.
+
+<#spots_or_clouds_in_vision>
+	a simptom:Simptom;
+	  simptom:ime "spots or clouds in vision"^^xsd:string;
+	  simptom:bolest1 "blepharitis"^^xsd:string;
+	  simptom:bolest2 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest3 "cataract"^^xsd:string;
+	  simptom:bolest4 "macular_degeneration"^^xsd:string;
+	  simptom:bolest5 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest6 "cornea_infection"^^xsd:string;
+	  simptom:bolest7 "retinal_detachment"^^xsd:string;
+	  simptom:bolest8 "optic_neuritis"^^xsd:string;
+	  simptom:bolest9 "iridocyclitis"^^xsd:string;
+	  simptom:bolest10 "floaters"^^xsd:string.
+
+<#diminished_vision>
+	a simptom:Simptom;
+	  simptom:ime "diminished vision"^^xsd:string;
+	  simptom:bolest1 "blepharitis"^^xsd:string;
+	  simptom:bolest2 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest3 "cataract"^^xsd:string;
+	  simptom:bolest4 "macular_degeneration"^^xsd:string;
+	  simptom:bolest5 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest6 "eye_alignment_disorder"^^xsd:string;
+	  simptom:bolest7 "corneal_abrasion"^^xsd:string;
+	  simptom:bolest8 "cornea_infection"^^xsd:string;
+	  simptom:bolest9 "retinal_detachment"^^xsd:string;
+	  simptom:bolest10 "optic_neuritis"^^xsd:string;
+	  simptom:bolest11 "iridocyclitis"^^xsd:string;
+	  simptom:bolest12 "subconjunctival_hemorrhage"^^xsd:string.
+
+<#eye_burns_or_stings>
+	a simptom:Simptom;
+	  simptom:ime "eye burns or stings"^^xsd:string;
+	  simptom:bolest1 "blepharitis"^^xsd:string;
+	  simptom:bolest2 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest3 "cataract"^^xsd:string;
+	  simptom:bolest4 "macular_degeneration"^^xsd:string;
+	  simptom:bolest5 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest6 "corneal_abrasion"^^xsd:string;
+	  simptom:bolest7 "cornea_infection"^^xsd:string;
+	  simptom:bolest8 "retinal_detachment"^^xsd:string;
+	  simptom:bolest9 "iridocyclitis"^^xsd:string;
+	  simptom:bolest10 "subconjunctival_hemorrhage"^^xsd:string;
+	  simptom:bolest11 "floaters"^^xsd:string.
+
+<#foreign_body_sensation_in_eye>
+	a simptom:Simptom;
+	  simptom:ime "foreign body sensation in eye"^^xsd:string;
+	  simptom:bolest1 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest2 "cataract"^^xsd:string;
+	  simptom:bolest3 "macular_degeneration"^^xsd:string;
+	  simptom:bolest4 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest5 "eye_alignment_disorder"^^xsd:string;
+	  simptom:bolest6 "corneal_abrasion"^^xsd:string;
+	  simptom:bolest7 "cornea_infection"^^xsd:string;
+	  simptom:bolest8 "iridocyclitis"^^xsd:string;
+	  simptom:bolest9 "subconjunctival_hemorrhage"^^xsd:string;
+	  simptom:bolest10 "floaters"^^xsd:string.
+
+<#blindness>
+	a simptom:Simptom;
+	  simptom:ime "blindness"^^xsd:string;
+	  simptom:bolest1 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest2 "cataract"^^xsd:string;
+	  simptom:bolest3 "macular_degeneration"^^xsd:string;
+	  simptom:bolest4 "retinal_detachment"^^xsd:string;
+	  simptom:bolest5 "optic_neuritis"^^xsd:string;
+	  simptom:bolest6 "subconjunctival_hemorrhage"^^xsd:string.
+
+
+<#double_vision>
+	a simptom:Simptom;
+	  simptom:ime "double vision"^^xsd:string;
+	  simptom:bolest1 "chronic_glaucoma"^^xsd:string;
+	  simptom:bolest2 "cataract"^^xsd:string;
+	  simptom:bolest3 "macular_degeneration"^^xsd:string;
+	  simptom:bolest4 "dry_eye_of_unknown_cause"^^xsd:string;
+	  simptom:bolest5 "eye_alignment_disorder"^^xsd:string;
+	  simptom:bolest6 "retinal_detachment"^^xsd:string.
+
+<#cloudy_eye>
+	a simptom:Simptom;
+	  simptom:ime "cloudy eye"^^xsd:string;
+	  simptom:bolest1 "cataract"^^xsd:string;
+	  simptom:bolest2 "retinal_detachment"^^xsd:string;
+	  simptom:bolest3 "iridocyclitis"^^xsd:string.
+
+

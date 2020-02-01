@@ -14,6 +14,7 @@ import java.util.*;
 
 public class CsvConnector implements Connector {
     static HashMap<Integer, Integer> idBrSimp = new HashMap<>();
+    public static Integer lineCounterDisease = 0;
 
     @Override
     public Collection<CBRCase> retrieveAllCases() {
@@ -29,6 +30,7 @@ public class CsvConnector implements Connector {
                 if (line.startsWith("#") || (line.length() == 0))
                     continue;
                 String[] values = line.split(";");
+                lineCounterDisease++;
                 String simptoms = values[1];
                 String[] parts = simptoms.split(",");
                 ArrayList<String> simp = new ArrayList<>();
@@ -46,6 +48,7 @@ public class CsvConnector implements Connector {
                     dd.setId(Integer.parseInt(values[5]));
                     cbrCase.setDescription(dd);
                     cases.add(cbrCase);
+
                 }
             }
             br.close();

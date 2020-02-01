@@ -22,7 +22,7 @@ public class AddData {
 
     public AddData(String navedeniSimptomi, String jmbg, String treatment) {
         System.out.println("STATIC: "+treatment);
-        String finalT = treatment.replace("}","").replace("'","").split("=")[2];
+        String finalT = treatment;
         JPanel main = new JPanel();
         JButton canc = new JButton("Cancel");
         JButton ok = new JButton("Save");
@@ -62,6 +62,7 @@ public class AddData {
 
 
         trT.setPreferredSize(new Dimension(400, 50));
+        trT.setText(finalT);
         trT.setLineWrap(true);
 
 
