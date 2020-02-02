@@ -589,6 +589,7 @@ public class SelectSymptoms extends JFrame {
                 public void actionPerformed(ActionEvent e) {
 
                     // TODO Auto-generated method stub
+
                     rbr = false;
                     done.setVisible(true);
                     question.setVisible(false);
