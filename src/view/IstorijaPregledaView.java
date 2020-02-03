@@ -40,7 +40,7 @@ public class IstorijaPregledaView {
         String sql = "SELECT * FROM IP WHERE JMBG='" + jmbg + "'";
 
         Connection conn;
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "root");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "password");
 
 
         PreparedStatement st = conn.prepareStatement(sql);

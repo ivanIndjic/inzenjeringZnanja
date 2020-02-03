@@ -371,6 +371,31 @@ public class SelectSymptoms extends JFrame {
                 }
             });
 
+            String[] diseaseStrings = {"conjunctivitis", "blepharitis", "chronic glaucoma", "cataract",
+                    "macular degeneration", "dry eye of unknown cause", "eye alignment disorder", "corneal abrasion",
+                    "cornea infection", "retinal detachment", "optic neuritis", "iridocyclitis",
+                    "subconjunctival hemorrhage", "floaters"
+            };
+            JPanel combo = new JPanel();
+            combo.setVisible(false);
+            // combo.setLayout(new FlowLayout());
+            combo.setLayout(new BoxLayout(combo, BoxLayout.X_AXIS));
+            combo.setSize(new Dimension(400, 40));
+            combo.setPreferredSize(new Dimension(400, 40));
+            JComboBox diseaseList = new JComboBox(diseaseStrings);
+            diseaseList.setSize(new Dimension(250, 20));
+            diseaseList.setPreferredSize(new Dimension(250, 20));
+            diseaseList.setSelectedIndex(0);
+            JLabel diagnosis = new JLabel("      Diagnosis:   ");
+            combo.add(diagnosis);
+            combo.add(diseaseList);
+            ImageIcon done2 = new ImageIcon("./medicament.jpeg");
+            Image doneIm = done2.getImage(); // transform it
+            Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            done2 = new ImageIcon(doneimg);
+            JButton diagnose = new JButton("Medicaments", done2);
+            combo.add(diagnose);
+
             rbrBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
@@ -378,6 +403,7 @@ public class SelectSymptoms extends JFrame {
                     // TODO Auto-generated method stub
                     rbr = true;
                     done.setVisible(false);
+                    combo.setVisible(true);
                     question.setVisible(true);
 
                     Set<String> selektovaniSimptomi = new HashSet<String>();
@@ -591,6 +617,7 @@ public class SelectSymptoms extends JFrame {
                     // TODO Auto-generated method stub
                     rbr = false;
                     done.setVisible(true);
+                    combo.setVisible(false);
                     question.setVisible(false);
                     simpto = new ArrayList<String>();
                     if (dim_vi.isSelected())
@@ -843,29 +870,6 @@ public class SelectSymptoms extends JFrame {
             ispitivanja.add(cbrBtn);
             ispitivanja.add(done);
             checkPanel.add(ispitivanja);
-            String[] diseaseStrings = {"conjunctivitis", "blepharitis", "chronic glaucoma", "cataract",
-                    "macular degeneration", "dry eye of unknown cause", "eye alignment disorder", "corneal abrasion",
-                    "cornea infection", "retinal detachment", "optic neuritis", "iridocyclitis",
-                    "subconjunctival hemorrhage", "floaters"
-            };
-            JPanel combo = new JPanel();
-            // combo.setLayout(new FlowLayout());
-            combo.setLayout(new BoxLayout(combo, BoxLayout.X_AXIS));
-            combo.setSize(new Dimension(400, 40));
-            combo.setPreferredSize(new Dimension(400, 40));
-            JComboBox diseaseList = new JComboBox(diseaseStrings);
-            diseaseList.setSize(new Dimension(250, 20));
-            diseaseList.setPreferredSize(new Dimension(250, 20));
-            diseaseList.setSelectedIndex(0);
-            JLabel diagnosis = new JLabel("      Diagnosis:   ");
-            combo.add(diagnosis);
-            combo.add(diseaseList);
-            ImageIcon done2 = new ImageIcon("./medicament.jpeg");
-            Image doneIm = done2.getImage(); // transform it
-            Image doneimg = doneIm.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-            done2 = new ImageIcon(doneimg);
-            JButton diagnose = new JButton("Medicaments", done2);
-            combo.add(diagnose);
 
             diagnose.addActionListener(new ActionListener() {
                 @Override

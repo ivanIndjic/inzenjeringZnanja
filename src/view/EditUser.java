@@ -185,7 +185,7 @@ public class EditUser {
                 } else {
                     try {
                         //otvaranje konekcije
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "root");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
 
                         String rasa = "White";
                         String pol = "Male";

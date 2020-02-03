@@ -18,7 +18,7 @@ public class RDFParser {
         try {
             InputStream is = null;
 
-            is = new FileInputStream("/home/ivan/Desktop/inzFromGit/resources/rdfFurtherTests.ttl");
+            is = new FileInputStream("resources/rdfFurtherTests.ttl");
             RDFDataMgr.read(model, is, Lang.TURTLE);
             Property name = model.getProperty("http://www.ftn.uns.ac.rs/simptom", "#ime");
 

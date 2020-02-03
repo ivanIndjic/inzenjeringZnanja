@@ -29,9 +29,9 @@ public class MainFrame extends JFrame {
                 "Name", "Last name", "Age", "Address", "Phone", "Mail", "Subscribed doctor", "JMBG", "Gender", "Race"
         };
 
-        String sql = "SELECT * FROM karton";
+        String sql = "SELECT * FROM Karton";
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "root");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
 
         PreparedStatement st = conn.prepareStatement(sql);
         DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
@@ -128,7 +128,7 @@ public class MainFrame extends JFrame {
                 } else {
                     String podatak = (String) table.getValueAt(sel, getColumnByName(table, "JMBG"));
                     try {
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "root");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "password");
 
                         //za kolone koje nisu navedene bice iskoriscena default vrednost
                         String sql = "DELETE FROM Karton WHERE JMBG = '" + podatak + "';";
