@@ -1,5 +1,7 @@
 package view;
 
+import app.MyApp;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -177,7 +179,7 @@ public class AddUser {
                 } else {
                     try {
                         //otvaranje konekcije
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "password");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", MyApp.username, MyApp.password);
                         String poll = "";
                         String ss = "";
                         if (b1.isSelected())
@@ -192,7 +194,7 @@ public class AddUser {
                             poll = "Male";
                         if (b22.isSelected())
                             poll = "Female";
-                        String sql = "insert into Karton (Ime, Prezime,Godina,Adresa,Telefon,Mail,zaduzeniLekar,JMBG,Pol,Rasa) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        String sql = "insert into karton (Ime, Prezime,Godina,Adresa,Telefon,Mail,zaduzeniLekar,JMBG,Pol,Rasa) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                         PreparedStatement pstmt = conn.prepareStatement(sql);
 

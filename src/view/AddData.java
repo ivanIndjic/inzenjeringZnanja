@@ -1,6 +1,7 @@
 package view;
 
 import Actions.DaljaIspitivanjaProlog;
+import app.MyApp;
 import model.IstorijaPregleda;
 import model.Osoba;
 import ucm.gaia.jcolibri.util.FileIO;
@@ -153,7 +154,7 @@ public class AddData {
 
                     Connection conn;
                     try {
-                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
+                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", MyApp.username, MyApp.password);
 
                         String sql2 = "insert into IP (JMBG,Simptomi,Tretman,Doktor,Datum,DN,Disease) values (?, ?, ?, ?, ?, ?, ?)";
                         PreparedStatement pstmt2 = conn.prepareStatement(sql2);

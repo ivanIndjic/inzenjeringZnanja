@@ -1,5 +1,7 @@
 package view;
 
+import app.MyApp;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -96,7 +98,7 @@ public class ConcreteMedicalRecord {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     //otvaranje konekcije
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", MyApp.username, MyApp.password);
 
                     String sql = "update IP set Simptomi='" + nbT.getText() + "',Tretman='" + trT.getText() + "',Doktor='" + doktor.getText() + "',Datum='" + datumT.getText() + "',DN='" + dnT.getText() + "',Disease='" + diseaseT.getText() + "' where IdPregleda='" + id + "'";
                     PreparedStatement pstmt = conn.prepareStatement(sql);

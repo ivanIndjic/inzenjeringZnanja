@@ -5,6 +5,8 @@ import view.MainFrame;
 import java.sql.SQLException;
 
 public class MyApp {
+    public static String username = "root";
+    public static String password = "root";
     private static MyApp instance = null;
 
     public static MyApp getInstance() {

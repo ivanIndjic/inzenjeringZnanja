@@ -1,5 +1,7 @@
 package view;
 
+import app.MyApp;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -185,7 +187,7 @@ public class EditUser {
                 } else {
                     try {
                         //otvaranje konekcije
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", MyApp.username, MyApp.password);
 
                         String rasa = "White";
                         String pol = "Male";
@@ -201,7 +203,7 @@ public class EditUser {
                             pol = "Male";
                         if (b22.isSelected())
                             pol = "Female";
-                        String sql = "update Karton set Ime='" + imeT.getText() + "',Prezime='" + prezimeT.getText() + "',Godina='" + (String) jComboBox1.getSelectedItem() + "',Adresa='" + adresaT.getText() + "',Telefon='" + telT.getText() + "',Mail='" + mailT.getText() + "',zaduzeniLekar='" + (String) doktori.getSelectedItem() + "',Pol='" + pol + "',Rasa='" + rasa + "' where JMBG='" + jmbgT.getText() + "'";
+                        String sql = "update karton set Ime='" + imeT.getText() + "',Prezime='" + prezimeT.getText() + "',Godina='" + (String) jComboBox1.getSelectedItem() + "',Adresa='" + adresaT.getText() + "',Telefon='" + telT.getText() + "',Mail='" + mailT.getText() + "',zaduzeniLekar='" + (String) doktori.getSelectedItem() + "',Pol='" + pol + "',Rasa='" + rasa + "' where JMBG='" + jmbgT.getText() + "'";
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         int updated = pstmt.executeUpdate();
 

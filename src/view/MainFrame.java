@@ -3,6 +3,7 @@ package view;
 
 import Actions.PreventiveExaminationsProlog;
 import Actions.RDFParser;
+import app.MyApp;
 import model.Osoba;
 
 import javax.swing.*;
@@ -34,9 +35,9 @@ public class MainFrame extends JFrame {
                 "Name", "Last name", "Age", "Address", "Phone", "Mail", "Subscribed doctor", "JMBG", "Gender", "Race"
         };
 
-        String sql = "SELECT * FROM Karton";
+        String sql = "SELECT * FROM karton";
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", MyApp.username, MyApp.password);
 
         PreparedStatement st = conn.prepareStatement(sql);
         DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
@@ -133,10 +134,10 @@ public class MainFrame extends JFrame {
                 } else {
                     String podatak = (String) table.getValueAt(sel, getColumnByName(table, "JMBG"));
                     try {
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "password");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", MyApp.username, MyApp.password);
 
                         //za kolone koje nisu navedene bice iskoriscena default vrednost
-                        String sql = "DELETE FROM Karton WHERE JMBG = '" + podatak + "';";
+                        String sql = "DELETE FROM karton WHERE JMBG = '" + podatak + "';";
                         String sql2 = "DELETE FROM IP WHERE JMBG = '" + podatak + "';";
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         PreparedStatement pstmt2 = conn.prepareStatement(sql2);
@@ -148,10 +149,10 @@ public class MainFrame extends JFrame {
                     }
                     if (JOptionPane.showConfirmDialog(null, "Delete this user?") == JOptionPane.YES_OPTION) {
                         try {
-                            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "password");
+                            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", MyApp.username, MyApp.password);
 
                             //za kolone koje nisu navedene bice iskoriscena default vrednost
-                            String sql = "DELETE FROM Karton WHERE JMBG = '" + podatak + "';";
+                            String sql = "DELETE FROM karton WHERE JMBG = '" + podatak + "';";
                             String sql2 = "DELETE FROM IP WHERE JMBG = '" + podatak + "';";
                             PreparedStatement pstmt = conn.prepareStatement(sql);
                             PreparedStatement pstmt2 = conn.prepareStatement(sql2);
@@ -243,7 +244,7 @@ public class MainFrame extends JFrame {
                     String sqlHistory = "select * from IP where JMBG=\"" + jmbg + "\"";
                     Connection connection = null;
                     try {
-                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
+                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", MyApp.username, MyApp.password);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -271,7 +272,7 @@ public class MainFrame extends JFrame {
                     o.setGodine(god);
                     o.setRasa(race);
                     o.setPol(gender);
-                   // ArrayList<String> rizicneBolesti = RDFParser.riskGroup(o, oldDiseases);
+                    ArrayList<String> rizicneBolesti = RDFParser.riskGroup(o, oldDiseases);
 
                     PreventiveCBR cbr = new PreventiveCBR();
                     cbr.drawFrame();

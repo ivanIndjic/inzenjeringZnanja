@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PreventiveCBR {
+public class PreventiveRBR {
 
-    public void drawFrame(){
+    public void drawPanel(ArrayList<String> diseases){
 
         JLabel labelHeadline = new JLabel("High risk for following diseases based on patient's disease history, gender,age or race");
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
@@ -42,12 +42,12 @@ public class PreventiveCBR {
         daljaIspitivanjaFrameCBR.pack();
 
         int counter = 1;
-        for (Map.Entry<String,String> entry : RDFParser.diseasesAndTests.entrySet()) {
-            JLabel lab = new JLabel(entry.getKey());
-            lab.setText(counter+". "+entry.getKey().substring(0, 1).toUpperCase() + entry.getKey().substring(1).replace("_"," "));
-            JTextArea textT = new JTextArea(entry.getValue());
+        for (String bolest : diseases) {
+            JLabel lab = new JLabel(bolest);
+            lab.setText(counter+". "+bolest.substring(0, 1).toUpperCase() + bolest.substring(1).replace("_"," "));
+            JTextArea textT = new JTextArea(PreventiveExaminationsProlog.diseasesAndTests.get(bolest));
             StringBuilder content = new StringBuilder();
-            String []niz = entry.getValue().split("\\.");
+            String []niz = PreventiveExaminationsProlog.diseasesAndTests.get(bolest).split("\\.");
             for(String s : niz){
                 content.append(s).append("\n");
             }
@@ -62,7 +62,7 @@ public class PreventiveCBR {
             daljaIspitivanjaPanelCBR.add(Box.createVerticalStrut(10));
             counter++;
         }
-        PreventiveExaminationsProlog.unique = new ArrayList<>();
+        RDFParser.diseasesAndTests = new HashMap<>();
         JButton doneP = new JButton("Done");
         doneP.addActionListener(new ActionListener() {
             @Override
@@ -71,6 +71,7 @@ public class PreventiveCBR {
             }
         });
         daljaIspitivanjaPanelCBR.add(doneP);
+
 
     }
 }

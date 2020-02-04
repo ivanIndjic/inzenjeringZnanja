@@ -1,5 +1,8 @@
 package view;
 
+import app.Main;
+import app.MyApp;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -40,7 +43,7 @@ public class IstorijaPregledaView {
         String sql = "SELECT * FROM IP WHERE JMBG='" + jmbg + "'";
 
         Connection conn;
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "password");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", MyApp.username, MyApp.password);
 
 
         PreparedStatement st = conn.prepareStatement(sql);
