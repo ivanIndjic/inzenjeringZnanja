@@ -3,7 +3,6 @@ package view;
 
 import Actions.RDFParser;
 import model.Osoba;
-import org.apache.jena.base.Sys;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -130,27 +130,29 @@ public class MainFrame extends JFrame {
                     JOptionPane.showMessageDialog(null,
                             "Select user first!");
                 } else {
-                    String podatak = (String) table.getValueAt(sel, getColumnByName(table, "JMBG"));
-                    try {
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "root");
+                    if (JOptionPane.showConfirmDialog(null, "Delete this user?") == JOptionPane.YES_OPTION) {
+                        String podatak = (String) table.getValueAt(sel, getColumnByName(table, "JMBG"));
+                        try {
+                            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", "root", "root");
 
-                        //za kolone koje nisu navedene bice iskoriscena default vrednost
-                        String sql = "DELETE FROM Karton WHERE JMBG = '" + podatak + "';";
-                        String sql2 = "DELETE FROM IP WHERE JMBG = '" + podatak + "';";
-                        PreparedStatement pstmt = conn.prepareStatement(sql);
-                        PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-                        int updated = pstmt.executeUpdate();
-                        int updated2 = pstmt2.executeUpdate();
-                        pstmt.close();
-                    } catch (Exception ee) {
-                        ee.printStackTrace();
+                            //za kolone koje nisu navedene bice iskoriscena default vrednost
+                            String sql = "DELETE FROM Karton WHERE JMBG = '" + podatak + "';";
+                            String sql2 = "DELETE FROM IP WHERE JMBG = '" + podatak + "';";
+                            PreparedStatement pstmt = conn.prepareStatement(sql);
+                            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+                            int updated = pstmt.executeUpdate();
+                            int updated2 = pstmt2.executeUpdate();
+                            pstmt.close();
+                        } catch (Exception ee) {
+                            ee.printStackTrace();
+                        }
+
+                        ((DefaultTableModel) table.getModel()).removeRow(sel);
+                        table.repaint();
+                        table.revalidate();
+                        pacijent.repaint();
+                        pacijent.revalidate();
                     }
-
-                    ((DefaultTableModel) table.getModel()).removeRow(sel);
-                    table.repaint();
-                    table.revalidate();
-                    pacijent.repaint();
-                    pacijent.revalidate();
                 }
             }
         });
@@ -211,7 +213,7 @@ public class MainFrame extends JFrame {
         java.awt.Image prevImg = preventivno.getImage(); // transform it
         java.awt.Image prev = prevImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         preventivno = new ImageIcon(prev);
-        JButton prevButton = new JButton("    Preventive     ", preventivno);
+        JButton prevButton = new JButton("PreventiveCBR  ", preventivno);
 
         prevButton.addActionListener(new ActionListener() {
             @Override
@@ -219,13 +221,12 @@ public class MainFrame extends JFrame {
                 if (sel == -500) {
                     JOptionPane.showMessageDialog(null,
                             "Select user first!");
-                }
-                else{
-                    ArrayList<String>oldDiseases = new ArrayList<>();
+                } else {
+                    ArrayList<String> oldDiseases = new ArrayList<>();
                     int index = table.getSelectedRow();
-                    String jmbg = (String)table.getValueAt(index,7);
+                    String jmbg = (String) table.getValueAt(index, 7);
                     System.out.println(jmbg);
-                    String sqlHistory = "select * from IP where JMBG=\"" +jmbg+ "\"";
+                    String sqlHistory = "select * from IP where JMBG=\"" + jmbg + "\"";
                     Connection connection = null;
                     try {
                         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "root");
@@ -237,11 +238,11 @@ public class MainFrame extends JFrame {
                     ResultSet rs = null;
                     try {
                         assert connection != null;
-                         st = connection.prepareStatement(sqlHistory);
-                         rs = st.executeQuery(sqlHistory);
-                        while (rs.next()){
-                            if(rs.getString("Disease")!=null)
-                            oldDiseases.add(rs.getString("Disease"));
+                        st = connection.prepareStatement(sqlHistory);
+                        rs = st.executeQuery(sqlHistory);
+                        while (rs.next()) {
+                            if (rs.getString("Disease") != null)
+                                oldDiseases.add(rs.getString("Disease"));
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -256,54 +257,13 @@ public class MainFrame extends JFrame {
                     o.setGodine(god);
                     o.setRasa(race);
                     o.setPol(gender);
-                    ArrayList<String> rizicneBolesti = RDFParser.riskGroup(o,oldDiseases);
+                    ArrayList<String> rizicneBolesti = RDFParser.riskGroup(o, oldDiseases);
 
-                    //TODO staviti u posebnu klasu u View
-                    JLabel labelHeadline = new JLabel("High risk for following diseases based on your disease history, gender,age,race");
-                    Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-                    labelHeadline.setBorder(border);
-                    JFrame daljaIspitivanjaFrameCBR = new JFrame("Preventive tests");
-                    JPanel daljaIspitivanjaPanelCBR = new JPanel();
-                    daljaIspitivanjaPanelCBR.setVisible(true);
-                    daljaIspitivanjaPanelCBR.setPreferredSize(new Dimension(900, 750));
-                    daljaIspitivanjaPanelCBR.setLayout(new BoxLayout(daljaIspitivanjaPanelCBR, BoxLayout.Y_AXIS));
-                    daljaIspitivanjaPanelCBR.add(labelHeadline);
-                    daljaIspitivanjaPanelCBR.add(Box.createVerticalStrut(10));
-                    JButton buttonConfirmation = new JButton("Check again");
-                    buttonConfirmation.setBorder(border);
-                    buttonConfirmation.setBackground(Color.DARK_GRAY);
-                    buttonConfirmation.setForeground(Color.WHITE);
-          //          daljaIspitivanjaPanelCBR.add(buttonConfirmation);
-            //        daljaIspitivanjaPanelCBR.add(buttonConfirmation);
-                    daljaIspitivanjaFrameCBR.add(daljaIspitivanjaPanelCBR);
-                    daljaIspitivanjaFrameCBR.setPreferredSize(new Dimension(900, 750));
-                    daljaIspitivanjaFrameCBR.setLocationRelativeTo(null);
-                    daljaIspitivanjaFrameCBR.setVisible(true);
-                    daljaIspitivanjaFrameCBR.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                    daljaIspitivanjaFrameCBR.pack();
-                    int counter = 1;
-                    for (Map.Entry<String,String> entry : RDFParser.diseasesAndTests.entrySet()) {
-                        JLabel lab = new JLabel(entry.getKey());
-                        lab.setText(counter+". "+entry.getKey().substring(0, 1).toUpperCase() + entry.getKey().substring(1).replace("_"," "));
-                        JTextArea textT = new JTextArea(entry.getValue());
-                        textT.setText(entry.getValue());
-                        textT.setLineWrap(true);
-                        textT.setEnabled(false);
-                        JScrollPane pane = new JScrollPane(textT);
-                        pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-                        pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                        daljaIspitivanjaPanelCBR.add(lab);
-                        daljaIspitivanjaPanelCBR.add(pane);
-                        daljaIspitivanjaPanelCBR.add(Box.createVerticalStrut(10));
-                        counter++;
-                    }
+                    PreventiveCBR cbr = new PreventiveCBR();
+                    cbr.drawFrame();
                 }
             }
         });
-
-
-
-
 
 
         gl.add(user);
@@ -312,7 +272,6 @@ public class MainFrame extends JFrame {
         gl.add(simptomi);
         gl.add(karton);
         gl.add(prevButton);
-
 
         pacijent.add(gl, BorderLayout.WEST);
         pacijent.add(scrollPane, BorderLayout.CENTER);

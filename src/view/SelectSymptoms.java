@@ -831,7 +831,7 @@ public class SelectSymptoms extends JFrame {
                         System.out.println(navedeniSimptomi);
                     } catch (Exception e) {
                     }
-                    AddData addDataFrame = new AddData(navedeniSimptomi, jmbg,bolest1,CBR2.ttret);
+                    AddData addDataFrame = new AddData(navedeniSimptomi, jmbg,bolest1,CBR2.ttret,o);
                     mainFrame.dispose();
 
                 }
