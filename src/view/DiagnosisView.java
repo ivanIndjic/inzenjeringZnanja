@@ -57,7 +57,7 @@ public class DiagnosisView {
         done.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-               AddData ad=new AddData(navedeniSimptomi,jmbg,disease,"");
+               AddData ad=new AddData(navedeniSimptomi,jmbg,disease,"",null);
                mainF.dispose();
             }
         });

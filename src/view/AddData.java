@@ -2,11 +2,14 @@ package view;
 
 import Actions.DaljaIspitivanjaProlog;
 import model.IstorijaPregleda;
+import model.Osoba;
+import ucm.gaia.jcolibri.util.FileIO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,7 +23,34 @@ public class AddData {
     private IstorijaPregleda ip = new IstorijaPregleda();
     private String notes = "";
 
-    public AddData(String navedeniSimptomi, String jmbg, String diagnose, String treatment) {
+    public AddData(String navedeniSimptomi, String jmbg, String diagnose, String treatment, Osoba o) {
+    ///dodao
+        if (o!=null) {
+            BufferedReader br = null;
+            FileWriter pw = null;
+            FileWriter pw2 = null;
+
+            int counter = 0;
+            String line = "";
+            try {
+                br = new BufferedReader(new InputStreamReader(FileIO.openFile("resources/disease.csv")));
+                pw = new FileWriter("resources/disease.csv", true);
+                pw2 = new FileWriter("resources/treatment.csv", true);
+                while ((line = br.readLine()) != null) {
+                    counter++;
+                }
+                System.out.println("SIMSSS: " + navedeniSimptomi);
+                String newLineInput = diagnose + ";" + navedeniSimptomi.replace(", ", ",") + ";" + String.valueOf(o.getGodine()) + ";" + o.getPol() + ";" + o.getRasa() + ";" + String.valueOf(counter) + "\n";
+                String newTreatment = diagnose + ";" + String.valueOf(o.getGodine()) + ";" + treatment + "\n";
+                pw.append(newLineInput);
+                pw.flush();
+                pw2.append(newTreatment);
+                pw2.flush();
+            } catch (Exception f) {
+                f.printStackTrace();
+            }
+        }
+
         System.out.println("STATIC: "+treatment);
         String finalT = treatment;
 
@@ -50,18 +80,6 @@ public class AddData {
 
         JLabel tr = new JLabel("Tretment:                ");
         JTextArea trT = new JTextArea();
-
-//        trT.setPreferredSize(new Dimension(400, 70));
-//        trT.setLineWrap(true);
-//        trT.setAutoscrolls(true);
-//        trT.setWrapStyleWord(true);
-//        trT.setText(finalT);
-//
-//
-//        JScrollPane scr = new JScrollPane(trT,
-//                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-//                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);// Add your text area to scroll pane
-
 
         trT.setPreferredSize(new Dimension(400, 50));
         trT.setText(finalT);

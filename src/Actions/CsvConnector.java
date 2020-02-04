@@ -21,7 +21,7 @@ public class CsvConnector implements Connector {
         LinkedList<CBRCase> cases = new LinkedList<CBRCase>();
 
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile("resources/s2.csv")));
+            BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile("resources/disease.csv")));
             if (br == null)
                 throw new Exception("Error opening file");
 
