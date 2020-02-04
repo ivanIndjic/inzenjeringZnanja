@@ -1,9 +1,9 @@
 package view;
 
 
+import Actions.PreventiveExaminationsProlog;
 import Actions.RDFParser;
 import model.Osoba;
-import org.apache.jena.base.Sys;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -219,16 +219,15 @@ public class MainFrame extends JFrame {
                 if (sel == -500) {
                     JOptionPane.showMessageDialog(null,
                             "Select user first!");
-                }
-                else{
-                    ArrayList<String>oldDiseases = new ArrayList<>();
+                } else {
+                    ArrayList<String> oldDiseases = new ArrayList<>();
                     int index = table.getSelectedRow();
-                    String jmbg = (String)table.getValueAt(index,7);
+                    String jmbg = (String) table.getValueAt(index, 7);
                     System.out.println(jmbg);
-                    String sqlHistory = "select * from IP where JMBG=\"" +jmbg+ "\"";
+                    String sqlHistory = "select * from IP where JMBG=\"" + jmbg + "\"";
                     Connection connection = null;
                     try {
-                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "root");
+                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", "root", "password");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -237,11 +236,11 @@ public class MainFrame extends JFrame {
                     ResultSet rs = null;
                     try {
                         assert connection != null;
-                         st = connection.prepareStatement(sqlHistory);
-                         rs = st.executeQuery(sqlHistory);
-                        while (rs.next()){
-                            if(rs.getString("Disease")!=null)
-                            oldDiseases.add(rs.getString("Disease"));
+                        st = connection.prepareStatement(sqlHistory);
+                        rs = st.executeQuery(sqlHistory);
+                        while (rs.next()) {
+                            if (rs.getString("Disease") != null)
+                                oldDiseases.add(rs.getString("Disease"));
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -256,7 +255,7 @@ public class MainFrame extends JFrame {
                     o.setGodine(god);
                     o.setRasa(race);
                     o.setPol(gender);
-                    ArrayList<String> rizicneBolesti = RDFParser.riskGroup(o,oldDiseases);
+                    ArrayList<String> rizicneBolesti = RDFParser.riskGroup(o, oldDiseases);
 
                     //TODO staviti u posebnu klasu u View
                     JLabel labelHeadline = new JLabel("High risk for following diseases based on your disease history, gender,age,race");
@@ -273,8 +272,8 @@ public class MainFrame extends JFrame {
                     buttonConfirmation.setBorder(border);
                     buttonConfirmation.setBackground(Color.DARK_GRAY);
                     buttonConfirmation.setForeground(Color.WHITE);
-          //          daljaIspitivanjaPanelCBR.add(buttonConfirmation);
-            //        daljaIspitivanjaPanelCBR.add(buttonConfirmation);
+                    //          daljaIspitivanjaPanelCBR.add(buttonConfirmation);
+                    //        daljaIspitivanjaPanelCBR.add(buttonConfirmation);
                     daljaIspitivanjaFrameCBR.add(daljaIspitivanjaPanelCBR);
                     daljaIspitivanjaFrameCBR.setPreferredSize(new Dimension(900, 750));
                     daljaIspitivanjaFrameCBR.setLocationRelativeTo(null);
@@ -282,9 +281,9 @@ public class MainFrame extends JFrame {
                     daljaIspitivanjaFrameCBR.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                     daljaIspitivanjaFrameCBR.pack();
                     int counter = 1;
-                    for (Map.Entry<String,String> entry : RDFParser.diseasesAndTests.entrySet()) {
+                    for (Map.Entry<String, String> entry : RDFParser.diseasesAndTests.entrySet()) {
                         JLabel lab = new JLabel(entry.getKey());
-                        lab.setText(counter+". "+entry.getKey().substring(0, 1).toUpperCase() + entry.getKey().substring(1).replace("_"," "));
+                        lab.setText(counter + ". " + entry.getKey().substring(0, 1).toUpperCase() + entry.getKey().substring(1).replace("_", " "));
                         JTextArea textT = new JTextArea(entry.getValue());
                         textT.setText(entry.getValue());
                         textT.setLineWrap(true);
@@ -301,9 +300,28 @@ public class MainFrame extends JFrame {
             }
         });
 
+        JButton prevRBR = new JButton(" PreventiveRBR ",preventivno);
 
+        prevRBR.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (sel == -500) {
+                    JOptionPane.showMessageDialog(null,
+                            "Select user first!");
+                } else {
+                    ArrayList<String> oldDiseases = new ArrayList<>();
+                    int index = table.getSelectedRow();
+                    String jmbg = (String) table.getValueAt(index, 7);
 
-
+                    Vector<String> selectedRow = (Vector<String>) ((DefaultTableModel) table.getModel()).getDataVector().elementAt(table.getSelectedRow());
+                    String godString = selectedRow.get(2);
+                    int god = Integer.parseInt(godString);
+                    String race = selectedRow.get(9);
+                    String gender = selectedRow.get(8);
+                    PreventiveExaminationsProlog pr = new PreventiveExaminationsProlog(race, gender, god);
+                }
+            }
+        });
 
 
         gl.add(user);
@@ -312,6 +330,7 @@ public class MainFrame extends JFrame {
         gl.add(simptomi);
         gl.add(karton);
         gl.add(prevButton);
+        gl.add(prevRBR);
 
 
         pacijent.add(gl, BorderLayout.WEST);
