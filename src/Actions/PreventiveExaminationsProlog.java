@@ -13,7 +13,6 @@ public class PreventiveExaminationsProlog {
         engine.assertz(engine.getTermParser().parseTerm("years(" + years + ")."));
         engine.assertz(engine.getTermParser().parseTerm("sex(" + sex + ")."));
         engine.assertz(engine.getTermParser().parseTerm("race(" + race + ")."));
-        //postavi brojeve za stringove i poredi jesu li ti brojevi
         engine.assertz(engine.getTermParser().parseTerm("bolest(cataract):- years(" + years + ")," + years + ">=60."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(conjunctivitis):- years(" + years + ")," + years + "<15."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(chronic_glaucoma):- years(" + years + ")," + years + ">=60; race(" + race + ")," + race + "==Black."));

@@ -271,7 +271,7 @@ public class MainFrame extends JFrame {
                     o.setGodine(god);
                     o.setRasa(race);
                     o.setPol(gender);
-                    ArrayList<String> rizicneBolesti = RDFParser.riskGroup(o, oldDiseases);
+                   // ArrayList<String> rizicneBolesti = RDFParser.riskGroup(o, oldDiseases);
 
                     PreventiveCBR cbr = new PreventiveCBR();
                     cbr.drawFrame();
