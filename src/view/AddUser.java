@@ -11,10 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class AddUser {
@@ -172,11 +169,15 @@ public class AddUser {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
+
                 // TODO Auto-generated method stub
                 if (jmbgT.getText().equals("") || (!b1.isSelected() && !b2.isSelected() && !b3.isSelected() && !b4.isSelected()) || (!b11.isSelected() && !b22.isSelected())) {
                     JOptionPane.showMessageDialog(null, "JMBG, Race and Gender must not be empty");
                     jmbgT.setBackground(Color.RED);
                 } else {
+
                     try {
                         //otvaranje konekcije
                         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", MyApp.username, MyApp.password);
@@ -225,7 +226,10 @@ public class AddUser {
 
                         pstmt.close();
                     } catch (Exception ee) {
-                        ee.printStackTrace();
+                        JOptionPane.showInternalMessageDialog(null,"JMBG already exists");
+                        mainF.revalidate();
+                        mainF.repaint();
+                        return;
                     }
                     try {
                         MainFrame mf = new MainFrame();

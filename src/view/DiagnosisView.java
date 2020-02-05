@@ -12,8 +12,9 @@ import java.util.ArrayList;
 
 public class DiagnosisView {
     public ArrayList<String> notes = new ArrayList<>();
+    public String treatment = "";
 
-    public DiagnosisView(String disease,String navedeniSimptomi,String jmbg) {
+    public DiagnosisView(String disease, String navedeniSimptomi, String jmbg) {
         JFrame mainF = new JFrame(disease);
         JPanel main = new JPanel();
         if (disease.equals("conjunctivitis")) {
@@ -45,9 +46,9 @@ public class DiagnosisView {
         } else if (disease.equals("eye alignment disorder")) {
             main = getEye();
         }
-        JPanel main2=new JPanel();
+        JPanel main2 = new JPanel();
         main2.setLayout(new BorderLayout());
-        main2.add(main,BorderLayout.NORTH);
+        main2.add(main, BorderLayout.NORTH);
         ImageIcon donIm = new ImageIcon("./done.png");
         Image doneImg = donIm.getImage(); // transform it
         Image newDoneImg = doneImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
@@ -57,11 +58,12 @@ public class DiagnosisView {
         done.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-               AddData ad=new AddData(navedeniSimptomi,jmbg,disease,"",null);
-               mainF.dispose();
+                treatment=treatment.replaceAll("_"," ");
+                AddData ad = new AddData(navedeniSimptomi, jmbg, disease, treatment, null);
+                mainF.dispose();
             }
         });
-        main2.add(done,BorderLayout.SOUTH);
+        main2.add(done, BorderLayout.SOUTH);
         mainF.setSize(800, 560);
         mainF.add(main2);
         mainF.setVisible(true);
@@ -160,6 +162,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -281,10 +286,14 @@ public class DiagnosisView {
                     notes.add("overactive_thyroid");
                 }
                 MedicationsProlog mp = new MedicationsProlog();
+
                 ArrayList<String> medicaments = mp.prolog("dry_eye_of_unknown_cause", notes);
                 String med = "    Possible medications are:    \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -415,6 +424,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -552,6 +564,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -661,6 +676,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -785,6 +803,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -896,6 +917,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -1026,6 +1050,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -1145,6 +1172,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -1268,6 +1298,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -1395,6 +1428,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -1530,6 +1566,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -1639,6 +1678,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
@@ -1757,6 +1799,9 @@ public class DiagnosisView {
                 String med = "     Possible medications are:     \n";
                 int brojac = 1;
                 for (String isp : medicaments) {
+                    if (brojac == 1) {
+                        treatment = isp;
+                    }
                     isp = isp.substring(0, 1).toUpperCase() + isp.substring(1);
                     isp = "        " + brojac + ". " + isp.replaceAll("_", " ");
                     med += isp + "\n";
