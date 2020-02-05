@@ -203,7 +203,7 @@ public class EditUser {
                             pol = "Male";
                         if (b22.isSelected())
                             pol = "Female";
-                        String sql = "update karton set Ime='" + imeT.getText() + "',Prezime='" + prezimeT.getText() + "',Godina='" + (String) jComboBox1.getSelectedItem() + "',Adresa='" + adresaT.getText() + "',Telefon='" + telT.getText() + "',Mail='" + mailT.getText() + "',zaduzeniLekar='" + (String) doktori.getSelectedItem() + "',Pol='" + pol + "',Rasa='" + rasa + "' where JMBG='" + jmbgT.getText() + "'";
+                        String sql = "update Karton set Ime='" + imeT.getText() + "',Prezime='" + prezimeT.getText() + "',Godina='" + (String) jComboBox1.getSelectedItem() + "',Adresa='" + adresaT.getText() + "',Telefon='" + telT.getText() + "',Mail='" + mailT.getText() + "',zaduzeniLekar='" + (String) doktori.getSelectedItem() + "',Pol='" + pol + "',Rasa='" + rasa + "' where JMBG='" + jmbgT.getText() + "'";
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         int updated = pstmt.executeUpdate();
 

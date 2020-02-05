@@ -32,8 +32,6 @@ public class PreventiveCBR {
         buttonConfirmation.setBorder(border);
         buttonConfirmation.setBackground(Color.DARK_GRAY);
         buttonConfirmation.setForeground(Color.WHITE);
-        //          daljaIspitivanjaPanelCBR.add(buttonConfirmation);
-        //        daljaIspitivanjaPanelCBR.add(buttonConfirmation);
         daljaIspitivanjaFrameCBR.add(daljaIspitivanjaPanelCBR);
         daljaIspitivanjaFrameCBR.setPreferredSize(new Dimension(900, 750));
         daljaIspitivanjaFrameCBR.setLocationRelativeTo(null);
@@ -62,7 +60,7 @@ public class PreventiveCBR {
             daljaIspitivanjaPanelCBR.add(Box.createVerticalStrut(10));
             counter++;
         }
-        PreventiveExaminationsProlog.unique = new ArrayList<>();
+        RDFParser.diseasesAndTests = new HashMap<>();
         JButton doneP = new JButton("Done");
         doneP.addActionListener(new ActionListener() {
             @Override

@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
                 "Name", "Last name", "Age", "Address", "Phone", "Mail", "Subscribed doctor", "JMBG", "Gender", "Race"
         };
 
-        String sql = "SELECT * FROM karton";
+        String sql = "SELECT * FROM Karton";
 
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering?useSSL=false", MyApp.username, MyApp.password);
 
@@ -137,7 +137,7 @@ public class MainFrame extends JFrame {
                         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", MyApp.username, MyApp.password);
 
                         //za kolone koje nisu navedene bice iskoriscena default vrednost
-                        String sql = "DELETE FROM karton WHERE JMBG = '" + podatak + "';";
+                        String sql = "DELETE FROM Karton WHERE JMBG = '" + podatak + "';";
                         String sql2 = "DELETE FROM IP WHERE JMBG = '" + podatak + "';";
                         PreparedStatement pstmt = conn.prepareStatement(sql);
                         PreparedStatement pstmt2 = conn.prepareStatement(sql2);
@@ -152,7 +152,7 @@ public class MainFrame extends JFrame {
                             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inzenjering", MyApp.username, MyApp.password);
 
                             //za kolone koje nisu navedene bice iskoriscena default vrednost
-                            String sql = "DELETE FROM karton WHERE JMBG = '" + podatak + "';";
+                            String sql = "DELETE FROM Karton WHERE JMBG = '" + podatak + "';";
                             String sql2 = "DELETE FROM IP WHERE JMBG = '" + podatak + "';";
                             PreparedStatement pstmt = conn.prepareStatement(sql);
                             PreparedStatement pstmt2 = conn.prepareStatement(sql2);
@@ -197,6 +197,7 @@ public class MainFrame extends JFrame {
                     o.setGodine(god);
                     o.setRasa(race);
                     o.setPol(gender);
+                    SelectSymptoms.selected=new ArrayList<>();
                     SelectSymptoms mw = new SelectSymptoms(o, (String) table.getValueAt(sel, getColumnByName(table, "JMBG")));
                     mainFr.dispose();
                 }

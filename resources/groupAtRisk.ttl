@@ -7,14 +7,14 @@
     a risk:Risk;
     risk:ime "conjunctivitis"^^xsd:string;
     risk:godine "0-14"^^xsd:string;
-    risk:tretman "Patients with conjunctivitis often receive ophthalmic examination and evaluation, influenzavirus antibody assay. Nonoperative removal of foreign body, other or therapeutic nervous system procedures. Other therapeutic ear procedures, other extraocular muscle and orbit therapeutic procedures and other non-or therapeutic procedures on nose, mouth and pharynx."^^xsd:string;
-    risk:rasa "Black"^^xsd:string.
-
+    risk:tretman "Patients with conjunctivitis often receive ophthalmic examination and evaluation, influenzavirus antibody assay. Nonoperative removal of foreign body, other or therapeutic nervous system procedures. Other therapeutic ear procedures, other extraocular muscle and orbit therapeutic procedures and other non-or therapeutic procedures on nose, mouth and pharynx."^^xsd:string.
 
 <#blepharitis>
     a risk:Risk;
+      risk:ime "blepharitis"^^xsd:string;
       risk:tretman "Patients with blepharitis often receive ophthalmic examination and evaluation. Other therapeutic procedures on eyelids, conjunctiva and cornea. Ophthalmologic and otologic diagnosis and treatment, lens and cataract procedures. Diagnostic procedures on eye and physical therapy exercises, manipulation and other procedures."^^xsd:string;
       risk:godine "60-110"^^xsd:string.
+
 
 <#chronic_glaucoma>
     a risk:Risk;
@@ -62,7 +62,7 @@
    a risk:Risk;
      risk:tretman "Patients with retinal detachment often receive ophthalmic examination and evaluation, repair of retinal tear and detachment. Other therapeutic procedures on eyelids, conjunctiva, cornea and excision. Other intraocular therapeutic procedures, ophthalmologic and otologic diagnosis and treatment. Wound care management and other extraocular muscle and orbit therapeutic procedures."^^xsd:string;
      risk:ime "retinal_detachment"^^xsd:string;
-     risk:godine "60-74"^^xsd:string.
+     risk:godine "45-74"^^xsd:string.
 
 <#optic_neuritis>
    a risk:Risk;
@@ -83,7 +83,7 @@
      risk:pol "Male"^^xsd:string;
      risk:godine "5-14"^^xsd:string.
 
-        <#floaters>
+<#floaters>
    a risk:Risk;
      risk:tretman "Patients with floaters often receive ophthalmic examination and evaluation, other intraocular therapeutic procedures, other therapeutic procedures on eyelids, conjunctiva and cornea. Ophthalmologic and otologic diagnosis and treatment, biopsy and diagnostic procedures on eye."^^xsd:string;
      risk:ime "floaters"^^xsd:string;

@@ -28,12 +28,6 @@ public class PreventiveRBR {
         daljaIspitivanjaPanelCBR.setLayout(new BoxLayout(daljaIspitivanjaPanelCBR, BoxLayout.Y_AXIS));
         daljaIspitivanjaPanelCBR.add(labelHeadline);
         daljaIspitivanjaPanelCBR.add(Box.createVerticalStrut(10));
-        JButton buttonConfirmation = new JButton("Check again");
-        buttonConfirmation.setBorder(border);
-        buttonConfirmation.setBackground(Color.DARK_GRAY);
-        buttonConfirmation.setForeground(Color.WHITE);
-        //          daljaIspitivanjaPanelCBR.add(buttonConfirmation);
-        //        daljaIspitivanjaPanelCBR.add(buttonConfirmation);
         daljaIspitivanjaFrameCBR.add(daljaIspitivanjaPanelCBR);
         daljaIspitivanjaFrameCBR.setPreferredSize(new Dimension(900, 750));
         daljaIspitivanjaFrameCBR.setLocationRelativeTo(null);
@@ -62,7 +56,6 @@ public class PreventiveRBR {
             daljaIspitivanjaPanelCBR.add(Box.createVerticalStrut(10));
             counter++;
         }
-        RDFParser.diseasesAndTests = new HashMap<>();
         JButton doneP = new JButton("Done");
         doneP.addActionListener(new ActionListener() {
             @Override

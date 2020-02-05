@@ -6,14 +6,13 @@ import com.ugos.jiprolog.engine.JIPTerm;
 import com.ugos.jiprolog.engine.JIPVariable;
 import view.PreventiveRBR;
 
-import javax.naming.ldap.HasControls;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PreventiveExaminationsProlog {
     public static Map<String,String> diseasesAndTests= new HashMap<>();
-    public static ArrayList<String> unique = new ArrayList<>();
+    public ArrayList<String> unique = new ArrayList<>();
     public PreventiveExaminationsProlog(String race, String sex, Integer years) {
         diseasesAndTests.put("cataract", "Patients with cataract often receive lens and cataract procedures, ophthalmic examination and evaluation. Ophthalmologic and otologic diagnosis and treatment. Other therapeutic procedures on eyelids, conjunctiva and cornea. Diagnostic procedures on eye, other intraocular therapeutic procedures, glaucoma procedures and destruction of lesion of retina and choroid.");
         diseasesAndTests.put("conjunctivitis","Patients with conjunctivitis often receive ophthalmic examination and evaluation, influenzavirus antibody assay. Nonoperative removal of foreign body, other or therapeutic nervous system procedures. Other therapeutic ear procedures, other extraocular muscle and orbit therapeutic procedures and other non-or therapeutic procedures on nose, mouth and pharynx.");
@@ -32,18 +31,18 @@ public class PreventiveExaminationsProlog {
         engine.assertz(engine.getTermParser().parseTerm("years(" + years + ")."));
         engine.assertz(engine.getTermParser().parseTerm("sex(" + sex + ")."));
         engine.assertz(engine.getTermParser().parseTerm("race(" + race + ")."));
-        engine.assertz(engine.getTermParser().parseTerm("bolest(cataract):- years(" + years + ")," + years + ">=60."));
+        engine.assertz(engine.getTermParser().parseTerm("bolest(cataract):- years(" + years + ")," + years + ">60."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(conjunctivitis):- years(" + years + ")," + years + "<15."));
-        engine.assertz(engine.getTermParser().parseTerm("bolest(chronic_glaucoma):- years(" + years + ")," + years + ">=60; race(" + race + ")," + race + "==Black."));
-        engine.assertz(engine.getTermParser().parseTerm("bolest(blepharitis):- years(" + years + ")," + years + ">=60."));
-        engine.assertz(engine.getTermParser().parseTerm("bolest(macular_degeneration):- years(" + years + ")," + years + ">=60."));
+        engine.assertz(engine.getTermParser().parseTerm("bolest(chronic_glaucoma):- years(" + years + ")," + years + ">60; race(" + race + ")," + race + "==Black."));
+        engine.assertz(engine.getTermParser().parseTerm("bolest(blepharitis):- years(" + years + ")," + years + ">60."));
+        engine.assertz(engine.getTermParser().parseTerm("bolest(macular_degeneration):- years(" + years + ")," + years + ">60."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(eye_alignment_disorder):- years(" + years + ")," + years + "<15; race(" + race + ")," + race + "==Other."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(optic_neuritis):- years(" + years + ")," + years + ">29," + years + "<45."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(iridocyclitis):- race(" + race + ")," + race + "==Black."));
-        engine.assertz(engine.getTermParser().parseTerm("bolest(floaters):- years(" + years + ")," + years + ">=60."));
+        engine.assertz(engine.getTermParser().parseTerm("bolest(floaters):- years(" + years + ")," + years + ">60."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(subconjunctival_hemorrhage):- years(" + years + ")," + years + ">4," + years + "<15; sex(" + sex + ")," + sex + "==Male."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(retinal_detachment):- years(" + years + ")," + years + ">44," + years + "<75."));
-        engine.assertz(engine.getTermParser().parseTerm("bolest(dry_eye_of_unknown_cause):- years(" + years + ")," + years + ">=60."));
+        engine.assertz(engine.getTermParser().parseTerm("bolest(dry_eye_of_unknown_cause):- years(" + years + ")," + years + ">60."));
         engine.assertz(engine.getTermParser().parseTerm("bolest(corneal_abrasion):- years(" + years + ")," + years + ">29," + years + "<45."));
 
         JIPQuery query = engine.openSynchronousQuery("bolest(X).");
@@ -68,6 +67,6 @@ public class PreventiveExaminationsProlog {
             }
         }
         PreventiveRBR rbr = new PreventiveRBR();
-        rbr.drawPanel(diseases);
+        rbr.drawPanel(unique);
     }
 }

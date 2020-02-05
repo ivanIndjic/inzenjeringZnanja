@@ -194,7 +194,7 @@ public class AddUser {
                             poll = "Male";
                         if (b22.isSelected())
                             poll = "Female";
-                        String sql = "insert into karton (Ime, Prezime,Godina,Adresa,Telefon,Mail,zaduzeniLekar,JMBG,Pol,Rasa) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        String sql = "insert into Karton (Ime, Prezime,Godina,Adresa,Telefon,Mail,zaduzeniLekar,JMBG,Pol,Rasa) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                         PreparedStatement pstmt = conn.prepareStatement(sql);
 

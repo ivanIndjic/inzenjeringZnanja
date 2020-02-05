@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class MyApp {
     public static String username = "root";
-    public static String password = "root";
+    public static String password = "password";
     private static MyApp instance = null;
 
     public static MyApp getInstance() {

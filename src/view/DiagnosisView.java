@@ -52,7 +52,7 @@ public class DiagnosisView {
         Image doneImg = donIm.getImage(); // transform it
         Image newDoneImg = doneImg.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         donIm = new ImageIcon(newDoneImg);
-        JButton done = new JButton("DoneCBR", donIm);
+        JButton done = new JButton("DoneRBR", donIm);
 
         done.addActionListener(new ActionListener() {
             @Override
